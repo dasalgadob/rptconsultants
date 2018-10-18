@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180803023631) do
+ActiveRecord::Schema.define(version: 20181018230226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,14 @@ ActiveRecord::Schema.define(version: 20180803023631) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["grupo_id"], name: "index_accounts_on_grupo_id", using: :btree
+  end
+
+  create_table "areas", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_areas_on_company_id", using: :btree
   end
 
   create_table "auxiliars", force: :cascade do |t|
@@ -50,6 +58,12 @@ ActiveRecord::Schema.define(version: 20180803023631) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "companies", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "cost_centres", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -59,6 +73,24 @@ ActiveRecord::Schema.define(version: 20180803023631) do
   create_table "countries", force: :cascade do |t|
     t.integer  "code"
     t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "criteria", force: :cascade do |t|
+    t.string   "criteria_type"
+    t.integer  "score"
+    t.integer  "degree_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["degree_id"], name: "index_criteria_on_degree_id", using: :btree
+  end
+
+  create_table "degrees", force: :cascade do |t|
+    t.integer  "number"
+    t.integer  "minimum"
+    t.integer  "median"
+    t.integer  "maximun"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -103,6 +135,14 @@ ActiveRecord::Schema.define(version: 20180803023631) do
     t.index ["person_id"], name: "index_invoices_on_person_id", using: :btree
   end
 
+  create_table "job_titles", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "area_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["area_id"], name: "index_job_titles_on_area_id", using: :btree
+  end
+
   create_table "locations", force: :cascade do |t|
     t.integer  "person_id"
     t.integer  "city_id"
@@ -136,6 +176,22 @@ ActiveRecord::Schema.define(version: 20180803023631) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["person_id"], name: "index_phone_numbers_on_person_id", using: :btree
+  end
+
+  create_table "position_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "degree_id"
+    t.integer  "position_type_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["degree_id"], name: "index_roles_on_degree_id", using: :btree
+    t.index ["position_type_id"], name: "index_roles_on_position_type_id", using: :btree
   end
 
   create_table "services", force: :cascade do |t|
@@ -183,6 +239,32 @@ ActiveRecord::Schema.define(version: 20180803023631) do
     t.index ["person_id"], name: "index_users_on_person_id", using: :btree
   end
 
+  create_table "valuations", force: :cascade do |t|
+    t.integer  "job_title_id"
+    t.integer  "position_type_id"
+    t.integer  "knowledge_id"
+    t.integer  "skill_id"
+    t.integer  "definition_supervision_id"
+    t.integer  "risk_decision_id"
+    t.integer  "sustainability_id"
+    t.integer  "area_impact_id"
+    t.integer  "influence_id"
+    t.integer  "score"
+    t.integer  "degree_id"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["area_impact_id"], name: "index_valuations_on_area_impact_id", using: :btree
+    t.index ["definition_supervision_id"], name: "index_valuations_on_definition_supervision_id", using: :btree
+    t.index ["degree_id"], name: "index_valuations_on_degree_id", using: :btree
+    t.index ["influence_id"], name: "index_valuations_on_influence_id", using: :btree
+    t.index ["job_title_id"], name: "index_valuations_on_job_title_id", using: :btree
+    t.index ["knowledge_id"], name: "index_valuations_on_knowledge_id", using: :btree
+    t.index ["position_type_id"], name: "index_valuations_on_position_type_id", using: :btree
+    t.index ["risk_decision_id"], name: "index_valuations_on_risk_decision_id", using: :btree
+    t.index ["skill_id"], name: "index_valuations_on_skill_id", using: :btree
+    t.index ["sustainability_id"], name: "index_valuations_on_sustainability_id", using: :btree
+  end
+
   create_table "withholding_tax_locations", force: :cascade do |t|
     t.integer  "city_id"
     t.integer  "person_id"
@@ -193,16 +275,21 @@ ActiveRecord::Schema.define(version: 20180803023631) do
   end
 
   add_foreign_key "accounts", "grupos"
+  add_foreign_key "areas", "companies"
   add_foreign_key "auxiliars", "subaccounts"
   add_foreign_key "cities", "states"
+  add_foreign_key "criteria", "degrees"
   add_foreign_key "grupos", "clases"
   add_foreign_key "invoice_services", "invoices"
   add_foreign_key "invoice_services", "services"
   add_foreign_key "invoices", "people"
+  add_foreign_key "job_titles", "areas"
   add_foreign_key "locations", "cities"
   add_foreign_key "locations", "people"
   add_foreign_key "people", "document_types"
   add_foreign_key "phone_numbers", "people"
+  add_foreign_key "roles", "degrees"
+  add_foreign_key "roles", "position_types"
   add_foreign_key "services", "auxiliars"
   add_foreign_key "services", "auxiliars", column: "account_IVA_id"
   add_foreign_key "services", "auxiliars", column: "account_withholding_tax_ICA_id"
@@ -211,6 +298,16 @@ ActiveRecord::Schema.define(version: 20180803023631) do
   add_foreign_key "states", "countries"
   add_foreign_key "subaccounts", "accounts"
   add_foreign_key "users", "people"
+  add_foreign_key "valuations", "criteria", column: "area_impact_id"
+  add_foreign_key "valuations", "criteria", column: "definition_supervision_id"
+  add_foreign_key "valuations", "criteria", column: "influence_id"
+  add_foreign_key "valuations", "criteria", column: "knowledge_id"
+  add_foreign_key "valuations", "criteria", column: "risk_decision_id"
+  add_foreign_key "valuations", "criteria", column: "skill_id"
+  add_foreign_key "valuations", "criteria", column: "sustainability_id"
+  add_foreign_key "valuations", "degrees"
+  add_foreign_key "valuations", "job_titles"
+  add_foreign_key "valuations", "position_types"
   add_foreign_key "withholding_tax_locations", "cities"
   add_foreign_key "withholding_tax_locations", "people"
 end

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @degree.number %>
+</p>
+
+<p>
+  <strong>Minimum:</strong>
+  <%= @degree.minimum %>
+</p>
+
+<p>
+  <strong>Median:</strong>
+  <%= @degree.median %>
+</p>
+
+<p>
+  <strong>Maximun:</strong>
+  <%= @degree.maximun %>
+</p>
+
+<%= link_to 'Edit', edit_degree_path(@degree) %> |
+<%= link_to 'Back', degrees_path %>
