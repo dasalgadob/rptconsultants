@@ -10,18 +10,21 @@ class StaticPagesController < ApplicationController
   end
 
   def about
-    
+
   end
 
   def contact
-    
+
   end
 
   def menu
-    
+
   end
 
   def settings
 
+  end
+
+  def references_tables
   end
 end

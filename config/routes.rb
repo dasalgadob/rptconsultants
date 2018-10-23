@@ -45,6 +45,7 @@ Rails.application.routes.draw do
   get '/about', to: 'static_pages#about'
   get '/contact',  to: 'static_pages#contact'
   get '/settings', to: 'static_pages#settings'
+  get '/references_tables', to: 'static_pages#references_tables'
   get '/menu', to: 'static_pages#menu'
 
   ##The shallow nesting allows to avoid complex urls in the app

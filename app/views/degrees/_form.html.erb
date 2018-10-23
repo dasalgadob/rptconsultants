@@ -11,27 +11,27 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :number %>
-    <%= f.number_field :number %>
+    <%= f.number_field :number, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :minimum %>
-    <%= f.number_field :minimum %>
+    <%= f.number_field :minimum, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :median %>
-    <%= f.number_field :median %>
+    <%= f.number_field :median, class: 'form-control' %>
   </div>
 
-  <div class="field">
+  <div class="field form-group">
     <%= f.label :maximun %>
-    <%= f.number_field :maximun %>
+    <%= f.number_field :maximun , class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-success'%>
   </div>
 <% end %>

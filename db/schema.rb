@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181018230226) do
+ActiveRecord::Schema.define(version: 20181019014813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,9 +81,12 @@ ActiveRecord::Schema.define(version: 20181018230226) do
     t.string   "criteria_type"
     t.integer  "score"
     t.integer  "degree_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "description"
+    t.integer  "position_type_id"
     t.index ["degree_id"], name: "index_criteria_on_degree_id", using: :btree
+    t.index ["position_type_id"], name: "index_criteria_on_position_type_id", using: :btree
   end
 
   create_table "degrees", force: :cascade do |t|
@@ -190,6 +193,7 @@ ActiveRecord::Schema.define(version: 20181018230226) do
     t.integer  "position_type_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "abbreviation"
     t.index ["degree_id"], name: "index_roles_on_degree_id", using: :btree
     t.index ["position_type_id"], name: "index_roles_on_position_type_id", using: :btree
   end
@@ -279,6 +283,7 @@ ActiveRecord::Schema.define(version: 20181018230226) do
   add_foreign_key "auxiliars", "subaccounts"
   add_foreign_key "cities", "states"
   add_foreign_key "criteria", "degrees"
+  add_foreign_key "criteria", "position_types"
   add_foreign_key "grupos", "clases"
   add_foreign_key "invoice_services", "invoices"
   add_foreign_key "invoice_services", "services"

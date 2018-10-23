@@ -1,21 +1,22 @@
 <p id="notice"><%= notice %></p>
 
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path]]%>
 <h1>Degrees</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
-    <tr>
-      <th>Number</th>
-      <th>Minimum</th>
-      <th>Median</th>
-      <th>Maximun</th>
+    <tr class="row">
+      <th>Numero</th>
+      <th>Minimo</th>
+      <th>Medio</th>
+      <th>Maximo</th>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @degrees.each do |degree| %>
-      <tr>
+      <tr class="row">
         <td><%= degree.number %></td>
         <td><%= degree.minimum %></td>
         <td><%= degree.median %></td>
