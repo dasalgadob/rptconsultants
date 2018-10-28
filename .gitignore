@@ -26,4 +26,4 @@
 #Ignore files that are generated to run the app
 /public/assets/*
 
-/test/xlsx/*
+#/test/xlsx/*
