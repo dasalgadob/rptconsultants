@@ -1,10 +1,15 @@
 class PositionTypesController < ApplicationController
+  include SortParams
   before_action :set_position_type, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
 
+  SORTABLE_FIELDS = [:updated_at, :created_at, :name]
   # GET /position_types
   # GET /position_types.json
   def index
-    @position_types = PositionType.all
+    @position_types = PositionType.all.order(sort_column + " " + sort_direction)
+    #@search = PositionType.search(params[:search])
+    #@position_types = @search.all
   end
 
   # GET /position_types/1
@@ -70,5 +75,17 @@ class PositionTypesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def position_type_params
       params.require(:position_type).permit(:name)
+    end
+
+    def sort_params
+      SortParams.sorted_fields(params[:sort], SORTABLE_FIELDS)
+    end
+    ##New sorted functions
+    def sort_column
+      PositionType.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end
