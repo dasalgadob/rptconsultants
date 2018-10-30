@@ -74,3 +74,4 @@ gem "font-awesome-rails"
 gem "roo", "~> 2.7.1"
 
 #gem 'searchlogic'
+gem 'has_scope'
