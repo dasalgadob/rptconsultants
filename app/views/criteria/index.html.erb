@@ -1,15 +1,27 @@
 <p id="notice"><%= notice %></p>
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path]]%>
 
+<%= form_tag(criteria_path, method: :get) do %>
+  <div class="form-group">
+  <%= label_tag "Score:" %>
+  <%= text_field_tag :score,params[:score], class: "form-control" %>
+  </div>
+  <div class="form-group">
+  <%= label_tag "Degree:" %>
+  <%= text_field_tag :degree,params[:degree], class: "form-control" %>
+  </div>
+  <%= submit_tag 'Buscar', class: 'btn btn-success' %>
+<% end %>
+
 <h1>Criteria</h1>
 
-<table class="table table-hover">
+<table class="pretty table table-hover">
   <thead>
     <tr>
-      <th>Tipo de criterio</th>
-      <th>Puntaje</th>
-      <th>Grado</th>
-      <th>Descripción</th>
+      <th><%= sortable "criteria_type", "Tipo de criterio ", params%></th>
+      <th><%= sortable "score", "Puntaje", params%></th>
+      <th><%= sortable "degree_id", "Grado", params%></th>
+      <th><%= sortable "description", "Descripción", params %></th>
       <th colspan="3"></th>
     </tr>
   </thead>

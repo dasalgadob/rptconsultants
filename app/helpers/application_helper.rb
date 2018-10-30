@@ -1,8 +1,17 @@
 module ApplicationHelper
-  def sortable(column, title = nil)
+  def sortable(column, title = nil, params= nil)
   title ||= column.titleize
+  logger.debug "sortable helper. Column: " + column + " sort_column: " + sort_column
   css_class = column == sort_column ? "current #{sort_direction}" : nil
   direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
-  link_to title, {:sort => column, :direction => direction}, {:class => css_class}
+  logger.debug "Params: "
+  logger.debug params
+  parameters = {:sort => column, :direction => direction}
+  params.each do |key, value|
+    if key != 'sort' && key != 'direction'
+        parameters[key]= value
+    end
+  end
+  link_to title, parameters, {:class => css_class}
 end
 end

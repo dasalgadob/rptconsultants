@@ -1,10 +1,11 @@
 class CriteriaController < ApplicationController
   before_action :set_criterium, only: [:show, :edit, :update, :destroy]
-
+  helper_method :sort_column, :sort_direction
+  has_scope :score, :degree
   # GET /criteria
   # GET /criteria.json
   def index
-    @criteria = Criterium.all
+    @criteria = apply_scopes(Criterium).order(sort_column + " " + sort_direction).load_criteria(params[:page], params[:per_page])
   end
 
   # GET /criteria/1
@@ -69,6 +70,14 @@ class CriteriaController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def criterium_params
-      params.require(:criterium).permit(:criteria_type, :score, :degree_id)
+      params.require(:criterium).permit(:criteria_type, :score, :degree_id, :degree)
+    end
+
+    def sort_column
+      Criterium.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

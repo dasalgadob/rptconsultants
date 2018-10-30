@@ -9,7 +9,7 @@ class PositionTypesController < ApplicationController
   # GET /position_types
   # GET /position_types.json
   def index
-    @position_types = apply_scopes(PositionType).all.order(sort_column + " " + sort_direction)
+    @position_types = apply_scopes(PositionType).order(sort_column + " " + sort_direction)
     #@search = PositionType.search(params[:search])
     #@position_types = @search.all
   end
