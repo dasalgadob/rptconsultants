@@ -18,7 +18,7 @@
 
   <div class="field form-group">
     <%= f.label :position_type_id %>
-    <%= f.text_field :position_type_id, class: 'form-control' %>
+    <%= f.select :position_type_id, options_for_select(@position_types.map{ |pt| [pt.name.upcase, pt.id]}),{ :include_blank => false },{ class: 'form-control'} %>
   </div>
 
   <div class="field form-group">

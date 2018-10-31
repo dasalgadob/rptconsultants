@@ -165,7 +165,7 @@ end
 #### Import of Criteria
 hoja = xlsx.sheet('criterio')
 
-hoja.each( score: 'puntaje', tipo: 'tipo', degree: 'degree',description: 'description', position_type: 'position_type') do |hash|
+hoja.each( score: 'puntaje', tipo: 'tipo', degree: 'degree',description: 'description', position_type: 'position_type', tipo_id: 'tipo_id') do |hash|
   if hash[:score] == "puntaje"
     next
   end
@@ -175,7 +175,7 @@ hoja.each( score: 'puntaje', tipo: 'tipo', degree: 'degree',description: 'descri
     tipo_posicion = PositionType.find_by_name(hash[:position_type].downcase)
     puts grado.number.to_s + " " + tipo_posicion.id.to_s
     puts  hash[:score].to_s + " " + hash[:tipo].to_s + " " + hash[:description].to_s + " " + hash[:position_type].to_s
-    Criterium.create(criteria_type: hash[:tipo], score: hash[:score], degree_id: grado.id, description: hash[:description], position_type_id: tipo_posicion.id)
+    Criterium.create(criteria_type: hash[:tipo], criteria_type_id: hash[:tipo_id], score: hash[:score], degree_id: grado.id, description: hash[:description], position_type_id: tipo_posicion.id)
   end
 
 end

@@ -18,6 +18,7 @@
 <table class="pretty table table-hover">
   <thead>
     <tr>
+      <th><%= sortable "position_type_id", "Tipo de posición ", params%></th>
       <th><%= sortable "criteria_type", "Tipo de criterio ", params%></th>
       <th><%= sortable "score", "Puntaje", params%></th>
       <th><%= sortable "degree_id", "Grado", params%></th>
@@ -29,6 +30,7 @@
   <tbody>
     <% @criteria.each do |criterium| %>
       <tr>
+        <td><%= criterium.position_type.name.upcase %></td>
         <td><%= criterium.criteria_type %></td>
         <td><%= criterium.score %></td>
         <td><%= criterium.degree.number %></td>

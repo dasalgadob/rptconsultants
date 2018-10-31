@@ -7,9 +7,11 @@ module ApplicationHelper
   logger.debug "Params: "
   logger.debug params
   parameters = {:sort => column, :direction => direction}
-  params.each do |key, value|
-    if key != 'sort' && key != 'direction'
-        parameters[key]= value
+  if params != nil
+    params.each do |key, value|
+      if key != 'sort' && key != 'direction'
+          parameters[key]= value
+      end
     end
   end
   link_to title, parameters, {:class => css_class}

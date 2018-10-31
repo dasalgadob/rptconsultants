@@ -15,6 +15,8 @@ class ValuationsController < ApplicationController
   # GET /valuations/new
   def new
     @valuation = Valuation.new
+    #@knowledge = Criterium.where()
+    @position_types = PositionType.all
   end
 
   # GET /valuations/1/edit
