@@ -75,3 +75,5 @@ gem "roo", "~> 2.7.1"
 
 #gem 'searchlogic'
 gem 'has_scope'
+#Gem for serialization to be able to use the objets through an API
+gem 'fast_jsonapi'

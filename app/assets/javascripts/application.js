@@ -15,7 +15,7 @@
 //= require bootstrap-sprockets
 //= require jquery-ui/widgets/autocomplete
 //= require autocomplete-rails
-
+//= require valuations
 
 //code to enable input fields to modifiy in a list
 
@@ -44,11 +44,14 @@ $(document).ready(function(){
         var $bar = $(this);
         $bar.find('a, .current, span').wrapAll('<ul class="pagination">');
         $bar.find('a, .current, span').wrap('<li>');
-    
+
         $bar.find('em').each(function () {
           $(this).parent().addClass('disabled');
           $(this).replaceWith('<a href="#">' + $(this).text() + '</a>');
         });
     });
+
+
+    
 });
 //= require_tree .

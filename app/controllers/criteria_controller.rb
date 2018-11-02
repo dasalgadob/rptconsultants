@@ -1,16 +1,26 @@
 class CriteriaController < ApplicationController
   before_action :set_criterium, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
-  has_scope :score, :degree
+  has_scope :score, :degree, :criteria_type_id, :position_type_id
   # GET /criteria
   # GET /criteria.json
   def index
-    @criteria = apply_scopes(Criterium).order(sort_column + " " + sort_direction).load_criteria(params[:page], params[:per_page])
+    respond_to do |format|
+      @criteria = apply_scopes(Criterium).order(sort_column + " " + sort_direction).load_criteria(params[:page], params[:per_page])
+      format.html
+      json_string = CriteriaSerializer.new(@criteria).serialized_json
+      format.json {render json: json_string}
+    end
+    #render json: @criteria, root: "data"
   end
 
   # GET /criteria/1
   # GET /criteria/1.json
   def show
+    respond_to do |format|
+      format.html
+      format.json {render json: @criterium}
+    end
   end
 
   # GET /criteria/new

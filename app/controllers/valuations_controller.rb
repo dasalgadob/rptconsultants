@@ -15,7 +15,7 @@ class ValuationsController < ApplicationController
   # GET /valuations/new
   def new
     @valuation = Valuation.new
-    #@knowledge = Criterium.where()
+    #@knowledge = Criterium.where(criteria_type_id: 1, position_type_id: params[:position_type_id])
     @position_types = PositionType.all
   end
 
