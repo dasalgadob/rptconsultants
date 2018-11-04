@@ -4,7 +4,12 @@ class DegreesController < ApplicationController
   # GET /degrees
   # GET /degrees.json
   def index
-    @degrees = Degree.all
+    respond_to do |format|
+      @degrees = Degree.all
+      format.html
+      json_string = DegreeSerializer.new(@degrees).serialized_json
+      format.json {render json: json_string}
+    end
   end
 
   # GET /degrees/1

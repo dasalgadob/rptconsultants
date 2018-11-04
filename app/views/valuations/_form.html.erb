@@ -65,12 +65,12 @@
 
   <div class="field form-group">
     <%= f.label :score %>
-    <%= f.number_field :score, class: 'form-control' %>
+    <%= f.number_field :score, {class: 'form-control', disabled: 'disabled'} %>
   </div>
 
   <div class="field form-group">
     <%= f.label :degree_id %>
-    <%= f.text_field :degree_id, class: 'form-control' %>
+    <%= f.select :degree_id,options_for_select(@degrees.map{ |d| [d.number, d.id]}),{ :include_blank => true },{ class: 'form-control'} %>
   </div>
 
   <div class="actions">
