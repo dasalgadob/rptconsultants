@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
 
   resources :valuations
-  resources :job_titles
-  resources :areas
+
+
   resources :roles
   resources :position_types
   resources :criteria
   resources :degrees
-  resources :companies
+  resources :companies do
+    resources :areas, shallow: true do
+      resources :job_titles, shallow: true
+    end
+  end
+
   get    '/login',   to: 'session#new'
   post   '/login',   to: 'session#create'
   delete '/logout',  to: 'session#destroy'

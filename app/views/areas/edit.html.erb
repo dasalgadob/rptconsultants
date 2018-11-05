@@ -3,5 +3,5 @@
 
 <%= render 'form', area: @area %>
 
-<%= link_to 'Show', @area %> |
-<%= link_to 'Back', areas_path %>
+<%= link_to 'Show', area_path(@area) %> |
+<%= link_to 'Back', company_areas_path(@area.company) %>

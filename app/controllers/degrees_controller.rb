@@ -1,6 +1,6 @@
 class DegreesController < ApplicationController
   before_action :set_degree, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
   # GET /degrees
   # GET /degrees.json
   def index

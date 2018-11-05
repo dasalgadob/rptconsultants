@@ -3,7 +3,7 @@ class PositionTypesController < ApplicationController
   before_action :set_position_type, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
   has_scope :by_name
-
+  load_and_authorize_resource
 
   SORTABLE_FIELDS = [:updated_at, :created_at, :name]
   # GET /position_types

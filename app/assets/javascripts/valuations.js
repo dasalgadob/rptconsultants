@@ -6,7 +6,7 @@
 var descriptions = {}
 var totalScore=0;
 var currentValuation = {};
-var degree = {};
+var degree = [];
 
 $(function(){
 
@@ -50,7 +50,7 @@ $(function(){
     //alert($('#valuation_score').val());
   }).change();
 
-  //Cuando se cambia algunos de los criterios
+  //Cuando se cambia algunos de los criterios de forma individual
   $('.valuation_criteria').change(function(){
     //console.log("valuation_criteria: " );
     if($(this) != null && $(this).val() != ""){// make changes on the other selects
@@ -72,6 +72,9 @@ $(function(){
       totalScore+=currentValuation[criteriaType];
       //console.log("totalScore:" + totalScore);
       $('#valuation_score').val(totalScore).trigger('change');
+      //Al igual que se cambia el score total se cambia el grado
+      updateDegree();
+
     }else{
       console.log("No cambios.");
     }
@@ -81,6 +84,7 @@ $(function(){
 
 });
 
+//Funcion llamada por cada criterio para alteral sus valores posibles
 function changeCriteriaValues(position_type_id, criteria_type_id, criteria_html_id){
   //console.log("change knowledge:" + position_type_id);
   //console.log("criteria_type_id:" + criteria_type_id);
@@ -106,6 +110,8 @@ function changeCriteriaValues(position_type_id, criteria_type_id, criteria_html_
           if(i==0){
             totalScore+= descriptions[id_criteria]['score'];
             $('#valuation_score').val(totalScore).trigger('change');
+            //Cambiar el valor del grado con el nuevo totalScore
+            updateDegree();
             //console.log("Total parcial:"+ totalScore);
             currentValuation[criteria_type_id]= descriptions[id_criteria]['score'];
           }
@@ -134,3 +140,21 @@ function loadDegreesValues(){
         }
       });//End done
 }//End loadDegreesValues()
+
+function updateDegree(){
+  console.log("update Degree");
+  //iterate through all ranges
+  console.log("Total Score:" + totalScore);
+  console.log("Degree:" + degree.length);
+
+  for(var i=0; i<degree.length; i++){
+    console.log("minimum:" + degree[i]['minimum']);
+    console.log("maximun:" + degree[i]['maximun']);
+    //Si se encuentra en el rango correcto
+    if(totalScore>= degree[i]['minimum'] && totalScore<= degree[i]['maximun'] ){
+      //Encontro condicion
+      console.log("Encontro condicion");
+      $("#valuation_degree_id").val(degree[i]['id']);
+    }// End condition
+  }//End for
+}//End update degree

@@ -1,9 +1,10 @@
 class AreasController < ApplicationController
   before_action :set_area, only: [:show, :edit, :update, :destroy]
-
+  load_and_authorize_resource
   # GET /areas
   # GET /areas.json
   def index
+    @company = Company.find(params[:company_id])
     @areas = Area.all
   end
 
@@ -14,6 +15,7 @@ class AreasController < ApplicationController
 
   # GET /areas/new
   def new
+    @company = Company.find(params[:company_id])
     @area = Area.new
   end
 
@@ -24,11 +26,13 @@ class AreasController < ApplicationController
   # POST /areas
   # POST /areas.json
   def create
+    @company = Company.find(params[:company_id])
     @area = Area.new(area_params)
+    @area.company = @company
 
     respond_to do |format|
       if @area.save
-        format.html { redirect_to @area, notice: 'Area was successfully created.' }
+        format.html { redirect_to company_areas_path, notice: 'Area was successfully created.' }
         format.json { render :show, status: :created, location: @area }
       else
         format.html { render :new }
@@ -56,7 +60,7 @@ class AreasController < ApplicationController
   def destroy
     @area.destroy
     respond_to do |format|
-      format.html { redirect_to areas_url, notice: 'Area was successfully destroyed.' }
+      format.html { redirect_to company_areas_path(@area.company), notice: 'Area was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

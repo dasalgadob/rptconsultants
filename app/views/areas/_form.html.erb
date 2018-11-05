@@ -1,4 +1,4 @@
-<%= form_for(area) do |f| %>
+<%= form_for([@company, @area]) do |f| %>
   <% if area.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(area.errors.count, "error") %> prohibited this area from being saved:</h2>
@@ -14,11 +14,6 @@
   <div class="field form-group">
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>
-  </div>
-
-  <div class="field form-group">
-    <%= f.label :company_id %>
-    <%= f.text_field :company_id, class: 'form-control' %>
   </div>
 
   <div class="actions">

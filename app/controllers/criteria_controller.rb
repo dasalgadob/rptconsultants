@@ -2,6 +2,7 @@ class CriteriaController < ApplicationController
   before_action :set_criterium, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
   has_scope :score, :degree, :criteria_type_id, :position_type_id
+  load_and_authorize_resource
   # GET /criteria
   # GET /criteria.json
   def index

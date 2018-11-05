@@ -9,3 +9,25 @@
 
 <%= link_to 'Edit', edit_company_path(@company) %> |
 <%= link_to 'Back', companies_path %>
+
+<div class="bs-glyphicons">
+  <ul class="bs-glyphicons-list">
+    <li>
+      <a href='<%= company_areas_path(@company) %>' class="">
+
+        <i class="fa fa-address-card fa-5x icon-black" aria-hidden="true"></i>
+        <h4><span class="glyphicon-class icon-black">Areas</span></h4>
+      </a>
+    </li>
+
+    <li>
+      <a href="areas/" class="">
+
+        <i class="fa fa-cubes fa-5x icon-green" ></i>
+        <h4><span class="glyphicon-class icon-green">Posiciones</span></h4>
+      </a>
+    </li>
+  </ul>
+
+
+</div>
