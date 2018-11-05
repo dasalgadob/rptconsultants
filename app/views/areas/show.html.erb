@@ -1,4 +1,4 @@
-<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path]]%>
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Companies', companies_path], [@area.company.name, company_path(@area.company)],['Areas', company_areas_path(@area.company)]]%>
 <p id="notice"><%= notice %></p>
 
 <p>

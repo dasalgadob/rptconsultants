@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Companies',companies_path],[@company.name,company_path(@company)]]%>
 <h1>Areas</h1>
 
 <p><b>Empresa:</b> <%= @company.name%></p>

@@ -1,14 +1,10 @@
-<p id="notice"><%= notice %></p>
-
-<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path]]%>
 
 <h1>Job Titles</h1>
 
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Area</th>
+      <th>name</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,7 +13,6 @@
     <% job_titles.each do |job_title| %>
       <tr>
         <td><%= job_title.name %></td>
-        <td><%= job_title.area %></td>
         <td><%= link_to 'Show', job_title %></td>
         <td><%= link_to 'Edit', edit_job_title_path(job_title) %></td>
         <td><%= link_to 'Destroy', job_title, method: :delete, data: { confirm: 'Are you sure?' } %></td>

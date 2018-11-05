@@ -14,6 +14,7 @@ class JobTitlesController < ApplicationController
 
   # GET /job_titles/new
   def new
+    @area = Area.find(params[:area_id])
     @job_title = JobTitle.new
   end
 
@@ -24,11 +25,12 @@ class JobTitlesController < ApplicationController
   # POST /job_titles
   # POST /job_titles.json
   def create
+    @area = Area.find(params[:area_id])
     @job_title = JobTitle.new(job_title_params)
-
+    @job_title.area = @area
     respond_to do |format|
       if @job_title.save
-        format.html { redirect_to @job_title, notice: 'Job title was successfully created.' }
+        format.html { redirect_to @area, notice: 'Job title was successfully created.' }
         format.json { render :show, status: :created, location: @job_title }
       else
         format.html { render :new }
@@ -42,7 +44,7 @@ class JobTitlesController < ApplicationController
   def update
     respond_to do |format|
       if @job_title.update(job_title_params)
-        format.html { redirect_to @job_title, notice: 'Job title was successfully updated.' }
+        format.html { redirect_to @job_title.area, notice: 'Job title was successfully updated.' }
         format.json { render :show, status: :ok, location: @job_title }
       else
         format.html { render :edit }
@@ -54,9 +56,10 @@ class JobTitlesController < ApplicationController
   # DELETE /job_titles/1
   # DELETE /job_titles/1.json
   def destroy
+    @area = @job_title.area
     @job_title.destroy
     respond_to do |format|
-      format.html { redirect_to job_titles_url, notice: 'Job title was successfully destroyed.' }
+      format.html { redirect_to @area, notice: 'Job title was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
