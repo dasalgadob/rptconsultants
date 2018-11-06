@@ -11,7 +11,7 @@ class SessionController < ApplicationController
       redirect_to "/menu"
     else
       # Create an error message.
-      flash.now[:danger] = 'Invalid email/password combination'
+      flash.now[:danger] = 'Invalido usuario o contraseña.'
       render 'new'
     end
   end

@@ -38,7 +38,7 @@ class ValuationsController < ApplicationController
     puts @valuation
     respond_to do |format|
       if @valuation.save
-        format.html { redirect_to company_valuations_path(@company), notice: 'Valuation was successfully created.' }
+        format.html { redirect_to company_valuations_path(@company), notice: 'Valoración fue creada exitosamente.' }
         format.json { render :show, status: :created, location: @valuation }
       else
         @areas = @company.areas
@@ -57,7 +57,7 @@ class ValuationsController < ApplicationController
   def update
     respond_to do |format|
       if @valuation.update(valuation_params)
-        format.html { redirect_to @valuation, notice: 'Valuation was successfully updated.' }
+        format.html { redirect_to @valuation, notice: 'Valoración fue actualizada exitosamente.' }
         format.json { render :show, status: :ok, location: @valuation }
       else
         format.html { render :edit }
@@ -71,7 +71,7 @@ class ValuationsController < ApplicationController
   def destroy
     @valuation.destroy
     respond_to do |format|
-      format.html { redirect_to valuations_url, notice: 'Valuation was successfully destroyed.' }
+      format.html { redirect_to valuations_url, notice: 'Valoración fue eliminada exitosamente.' }
       format.json { head :no_content }
     end
   end

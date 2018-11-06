@@ -36,7 +36,7 @@ class JobTitlesController < ApplicationController
     @job_title.area = @area
     respond_to do |format|
       if @job_title.save
-        format.html { redirect_to @area, notice: 'Job title was successfully created.' }
+        format.html { redirect_to @area, notice: 'Cargo fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @job_title }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ class JobTitlesController < ApplicationController
   def update
     respond_to do |format|
       if @job_title.update(job_title_params)
-        format.html { redirect_to @job_title.area, notice: 'Job title was successfully updated.' }
+        format.html { redirect_to @job_title.area, notice: 'Cargo fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @job_title }
       else
         format.html { render :edit }
@@ -65,7 +65,7 @@ class JobTitlesController < ApplicationController
     @area = @job_title.area
     @job_title.destroy
     respond_to do |format|
-      format.html { redirect_to @area, notice: 'Job title was successfully destroyed.' }
+      format.html { redirect_to @area, notice: 'Cargo fue eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end

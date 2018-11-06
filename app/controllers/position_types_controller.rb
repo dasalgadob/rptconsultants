@@ -35,7 +35,7 @@ class PositionTypesController < ApplicationController
 
     respond_to do |format|
       if @position_type.save
-        format.html { redirect_to @position_type, notice: 'Position type was successfully created.' }
+        format.html { redirect_to @position_type, notice: 'Tipo de posición fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @position_type }
       else
         format.html { render :new }
@@ -49,7 +49,7 @@ class PositionTypesController < ApplicationController
   def update
     respond_to do |format|
       if @position_type.update(position_type_params)
-        format.html { redirect_to @position_type, notice: 'Position type was successfully updated.' }
+        format.html { redirect_to @position_type, notice: 'Tipo de posición fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @position_type }
       else
         format.html { render :edit }
@@ -63,7 +63,7 @@ class PositionTypesController < ApplicationController
   def destroy
     @position_type.destroy
     respond_to do |format|
-      format.html { redirect_to position_types_url, notice: 'Position type was successfully destroyed.' }
+      format.html { redirect_to position_types_url, notice: 'Tipo de posición fue eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end

@@ -33,7 +33,7 @@ class DegreesController < ApplicationController
 
     respond_to do |format|
       if @degree.save
-        format.html { redirect_to @degree, notice: 'Degree was successfully created.' }
+        format.html { redirect_to @degree, notice: 'Grado fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @degree }
       else
         format.html { render :new }
@@ -47,7 +47,7 @@ class DegreesController < ApplicationController
   def update
     respond_to do |format|
       if @degree.update(degree_params)
-        format.html { redirect_to @degree, notice: 'Degree was successfully updated.' }
+        format.html { redirect_to @degree, notice: 'Grado fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @degree }
       else
         format.html { render :edit }
@@ -61,7 +61,7 @@ class DegreesController < ApplicationController
   def destroy
     @degree.destroy
     respond_to do |format|
-      format.html { redirect_to degrees_url, notice: 'Degree was successfully destroyed.' }
+      format.html { redirect_to degrees_url, notice: 'Grado fue eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end
