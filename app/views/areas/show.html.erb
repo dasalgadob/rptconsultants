@@ -1,8 +1,8 @@
-<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Companies', companies_path], [@area.company.name, company_path(@area.company)],['Areas', company_areas_path(@area.company)]]%>
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Empresas', companies_path], [@area.company.name, company_path(@area.company)],['Areas', company_areas_path(@area.company)]]%>
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Nombre:</strong>
   <%= @area.name %>
 </p>
 
@@ -11,8 +11,8 @@
   <%= @area.company.name %>
 </p>
 
-<%= link_to 'Edit', edit_area_path(@area) %> |
-<%= link_to 'Back', company_areas_path(@area.company) %>
+<%= link_to 'Editar', edit_area_path(@area) %> |
+<%= link_to 'Volver', company_areas_path(@area.company) %>
 
 
 <%= render 'job_titles/index', job_titles: @area.job_titles %>

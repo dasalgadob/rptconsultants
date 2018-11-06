@@ -1,6 +1,6 @@
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path]]%>
-<h1>New Area</h1>
+<h1>Nueva Area</h1>
 
-<%= render 'form', area: @area %>
+<%= render 'form', area: @area, locals: { submit_string: 'Crear'} %>
 
-<%= link_to 'Back', company_areas_path %>
+<%= link_to 'Volver', company_areas_path %>

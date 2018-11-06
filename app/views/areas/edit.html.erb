@@ -1,7 +1,7 @@
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path]]%>
-<h1>Editing Area</h1>
+<h1>Editando Area</h1>
 
-<%= render 'form', area: @area %>
+<%= render 'form', area: @area, locals: { submit_string: 'Editar'} %>
 
-<%= link_to 'Show', area_path(@area) %> |
-<%= link_to 'Back', company_areas_path(@area.company) %>
+<%= link_to 'Ver', area_path(@area) %> |
+<%= link_to 'Volver', company_areas_path(@area.company) %>

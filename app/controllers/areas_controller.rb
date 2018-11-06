@@ -5,7 +5,7 @@ class AreasController < ApplicationController
   # GET /areas.json
   def index
     @company = Company.find(params[:company_id])
-    @areas = Area.all
+    @areas = Area.where(company_id: @company.id)
   end
 
   # GET /areas/1
