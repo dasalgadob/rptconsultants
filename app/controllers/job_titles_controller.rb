@@ -4,7 +4,13 @@ class JobTitlesController < ApplicationController
   # GET /job_titles
   # GET /job_titles.json
   def index
-    @job_titles = JobTitle.all
+    respond_to do |format|
+      @job_titles = JobTitle.where(area_id: params[:area_id])
+      format.html
+      json_string = JobTitleSerializer.new(@job_titles).serialized_json
+      format.json {render json: json_string}
+    end
+
   end
 
   # GET /job_titles/1

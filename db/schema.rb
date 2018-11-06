@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181031221507) do
+ActiveRecord::Schema.define(version: 20181106202458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -258,7 +258,9 @@ ActiveRecord::Schema.define(version: 20181031221507) do
     t.integer  "degree_id"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "company_id"
     t.index ["area_impact_id"], name: "index_valuations_on_area_impact_id", using: :btree
+    t.index ["company_id"], name: "index_valuations_on_company_id", using: :btree
     t.index ["definition_supervision_id"], name: "index_valuations_on_definition_supervision_id", using: :btree
     t.index ["degree_id"], name: "index_valuations_on_degree_id", using: :btree
     t.index ["influence_id"], name: "index_valuations_on_influence_id", using: :btree
@@ -304,6 +306,7 @@ ActiveRecord::Schema.define(version: 20181031221507) do
   add_foreign_key "states", "countries"
   add_foreign_key "subaccounts", "accounts"
   add_foreign_key "users", "people"
+  add_foreign_key "valuations", "companies"
   add_foreign_key "valuations", "criteria", column: "area_impact_id"
   add_foreign_key "valuations", "criteria", column: "definition_supervision_id"
   add_foreign_key "valuations", "criteria", column: "influence_id"

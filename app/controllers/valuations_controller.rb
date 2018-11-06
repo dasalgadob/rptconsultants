@@ -4,6 +4,7 @@ class ValuationsController < ApplicationController
   # GET /valuations
   # GET /valuations.json
   def index
+    @company = Company.find(params[:company_id])
     @valuations = Valuation.all
   end
 
@@ -14,6 +15,9 @@ class ValuationsController < ApplicationController
 
   # GET /valuations/new
   def new
+    #@areas = Company.find()
+    @company = Company.find(params[:company_id])
+    @areas = @company.areas
     @valuation = Valuation.new
     #@knowledge = Criterium.where(criteria_type_id: 1, position_type_id: params[:position_type_id])
     @position_types = PositionType.all
@@ -27,13 +31,21 @@ class ValuationsController < ApplicationController
   # POST /valuations
   # POST /valuations.json
   def create
+    @company = Company.find(params[:company_id])
     @valuation = Valuation.new(valuation_params)
-
+    puts "Valuation:"
+    puts valuation_params
+    puts @valuation
     respond_to do |format|
       if @valuation.save
-        format.html { redirect_to @valuation, notice: 'Valuation was successfully created.' }
+        format.html { redirect_to company_valuations_path(@company), notice: 'Valuation was successfully created.' }
         format.json { render :show, status: :created, location: @valuation }
       else
+        @areas = @company.areas
+        @position_types = PositionType.all
+        @degrees = Degree.all
+        puts "No se logro guardar."
+        #puts
         format.html { render :new }
         format.json { render json: @valuation.errors, status: :unprocessable_entity }
       end

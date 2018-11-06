@@ -1,10 +1,10 @@
-<%= form_for(valuation) do |f| %>
-  <% if valuation.errors.any? %>
+<%= form_for([@company, @valuation]) do |f| %>
+  <% if @valuation.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(valuation.errors.count, "error") %> prohibited this valuation from being saved:</h2>
+      <h2><%= pluralize(@valuation.errors.count, "error") %> prohibited this valuation from being saved:</h2>
 
       <ul>
-      <% valuation.errors.full_messages.each do |message| %>
+      <% @valuation.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -12,8 +12,14 @@
   <% end %>
 
   <div class="field form-group">
+    <%= f.label "Area" %>
+    <%= select_tag "area", options_from_collection_for_select(@areas, "id", "name"), options = {:include_blank => true, class: 'form-control'} %>
+  </div>
+
+
+  <div class="field form-group">
     <%= f.label :job_title_id %>
-    <%= f.text_field :job_title_id , class: 'form-control'%>
+    <%= f.select :job_title_id , options_for_select([]),{ :include_blank => true },{ class: 'form-control'} %>
   </div>
 
   <div class="field form-group">
@@ -65,12 +71,12 @@
 
   <div class="field form-group">
     <%= f.label :score %>
-    <%= f.number_field :score, {class: 'form-control', disabled: 'disabled'} %>
+    <%= f.number_field :score, {class: 'form-control', readonly: 'true'} %>
   </div>
 
   <div class="field form-group">
     <%= f.label :degree_id %>
-    <%= f.select :degree_id,options_for_select(@degrees.map{ |d| [d.number, d.id]}),{ :include_blank => true },{ class: 'form-control', disabled: 'disabled'} %>
+    <%= f.select :degree_id,options_for_select(@degrees.map{ |d| [d.number, d.id]}),{ :include_blank => true },{ class: 'form-control', readonly: 'true'} %>
   </div>
 
   <div class="actions">

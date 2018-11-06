@@ -24,17 +24,17 @@
   <tbody>
     <% @valuations.each do |valuation| %>
       <tr>
-        <td><%= valuation.job_title %></td>
-        <td><%= valuation.position_type %></td>
-        <td><%= valuation.knowledge %></td>
-        <td><%= valuation.skill %></td>
-        <td><%= valuation.definition_supervision %></td>
-        <td><%= valuation.risk_decision %></td>
-        <td><%= valuation.sustainability %></td>
-        <td><%= valuation.area_impact %></td>
-        <td><%= valuation.influence %></td>
+        <td><%= valuation.job_title.name %></td>
+        <td><%= valuation.position_type.name %></td>
+        <td><%= valuation.knowledge.score %></td>
+        <td><%= valuation.skill.score %></td>
+        <td><%= valuation.definition_supervision.score %></td>
+        <td><%= valuation.risk_decision.score %></td>
+        <td><%= valuation.sustainability.score %></td>
+        <td><%= valuation.area_impact.score %></td>
+        <td><%= valuation.influence.score %></td>
         <td><%= valuation.score %></td>
-        <td><%= valuation.degree %></td>
+        <td><%= valuation.degree.number %></td>
         <td><%= link_to 'Show', valuation %></td>
         <td><%= link_to 'Edit', edit_valuation_path(valuation) %></td>
         <td><%= link_to 'Destroy', valuation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -45,4 +45,4 @@
 
 <br>
 
-<%= link_to 'New Valuation', new_valuation_path %>
+<%= link_to 'New Valuation', new_company_valuation_path(params[:company_id]) %>

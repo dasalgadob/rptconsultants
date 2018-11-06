@@ -7,11 +7,17 @@ var descriptions = {}
 var totalScore=0;
 var currentValuation = {};
 var degree = [];
-
+var area = [];
 $(function(){
 
   //On Ready se cargan los datos de degrees
   loadDegreesValues();
+
+  /*Funcion para actualizar las posiciones de acuerdo al area escogida */
+  $('#area').change(function(){
+    changeJobTitlesByArea();
+  }).change();
+
 
 
 
@@ -158,3 +164,23 @@ function updateDegree(){
     }// End condition
   }//End for
 }//End update degree
+
+
+function changeJobTitlesByArea(){
+  console.log("Url:" + "/areas/" + $('#area').val()+ "/job_titles.json");
+  $.get( "/areas/" + $('#area').val()+ "/job_titles.json")
+      .done(function( data ) {
+        area = [];
+        console.log("loading JobTitles values...");
+        $('#'+ "valuation_job_title_id").empty();
+        for(var i=0; i<data['data'].length; i++){
+          area[i] = data['data'][i]['attributes'];
+          $('#'+ "valuation_job_title_id").append($('<option>', {
+            value: area[i]['id'],
+            text: area[i]['name']
+          }));
+          console.log(data['data'][i]);
+        }
+        //Cambiar valores de area
+      });//End done
+}//End function
