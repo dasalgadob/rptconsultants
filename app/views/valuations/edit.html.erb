@@ -1,6 +1,6 @@
-<h1>Editing Valuation</h1>
+<h1>Editando valoración</h1>
 
-<%= render 'form', valuation: @valuation %>
+<%= render 'form', valuation: @valuation, locals: { submit_string: 'Editar'} %>
 
-<%= link_to 'Show', @valuation %> |
-<%= link_to 'Back', valuations_path %>
+<%= link_to 'Ver', @valuation %> |
+<%= link_to 'Volver', valuations_path %>

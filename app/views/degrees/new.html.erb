@@ -1,7 +1,7 @@
 
-<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path]]%>
-<h1>New Degree</h1>
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path], ["Grados", degrees_path]]%>
+<h1>Nuevo grado</h1>
 
-<%= render 'form', degree: @degree %>
+<%= render 'form', degree: @degree, locals: { submit_string: 'Crear'} %>
 
-<%= link_to 'Back', degrees_path %>
+<%= link_to 'Volver', degrees_path %>

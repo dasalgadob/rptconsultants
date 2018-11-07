@@ -1,9 +1,9 @@
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path]]%>
 
 
-<h1>Editing Position Type</h1>
+<h1>Editando tipo de posición</h1>
 
-<%= render 'form', position_type: @position_type %>
+<%= render 'form', position_type: @position_type, locals: { submit_string: 'Editar'} %>
 
-<%= link_to 'Show', @position_type %> |
-<%= link_to 'Back', position_types_path %>
+<%= link_to 'Ver', @position_type %> |
+<%= link_to 'Volver', position_types_path %>

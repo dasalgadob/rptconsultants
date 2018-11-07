@@ -2,9 +2,9 @@
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path]]%>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Nombre:</strong>
   <%= @position_type.name %>
 </p>
 
-<%= link_to 'Edit', edit_position_type_path(@position_type) %> |
-<%= link_to 'Back', position_types_path %>
+<%= link_to 'Editar', edit_position_type_path(@position_type) %> |
+<%= link_to 'Volver', position_types_path %>

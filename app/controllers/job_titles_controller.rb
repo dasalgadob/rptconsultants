@@ -21,6 +21,7 @@ class JobTitlesController < ApplicationController
   # GET /job_titles/new
   def new
     @area = Area.find(params[:area_id])
+    @company = @area.company
     @job_title = JobTitle.new
   end
 

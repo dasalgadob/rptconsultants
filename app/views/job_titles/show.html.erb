@@ -1,14 +1,13 @@
 
-<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path]]%>
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Companies',companies_path],[@job_title.area.company.name,company_path(@job_title.area.company)], ['Areas', company_areas_path(@job_title.area.company)], [@job_title.area.name, area_path(@job_title.area)]]%>
 
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Nombre:</strong>
   <%= @job_title.name %>
 </p>
 
 
-<%= link_to 'Edit', edit_job_title_path(@job_title) %> |
-<%= link_to 'Back', area_path(@job_title.area.id) %>
+<%= link_to 'Editar', edit_job_title_path(@job_title) %> |
+<%= link_to 'Volver', area_path(@job_title.area.id) %>

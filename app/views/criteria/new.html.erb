@@ -1,7 +1,7 @@
-<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path]]%>
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path], ["Criterios", criteria_path]]%>
 
-<h1>New Criterium</h1>
+<h1>Nuevo criterio</h1>
 
-<%= render 'form', criterium: @criterium %>
+<%= render 'form', criterium: @criterium, locals: { submit_string: 'Crear'} %>
 
-<%= link_to 'Back', criteria_path %>
+<%= link_to 'Volver', criteria_path %>

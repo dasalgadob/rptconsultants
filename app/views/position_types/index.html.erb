@@ -9,7 +9,7 @@
   <%= submit_tag 'Buscar', class: 'btn btn-success' %>
 <% end %>
 
-<h1>Position Types</h1>
+<h1>Tipo de posiciones</h1>
 
 <table class="table table-hover pretty">
   <thead>
@@ -23,9 +23,9 @@
     <% @position_types.each do |position_type| %>
       <tr>
         <td><%= position_type.name.upcase %></td>
-        <td><%= link_to 'Show', position_type %></td>
-        <td><%= link_to 'Edit', edit_position_type_path(position_type) %></td>
-        <td><%= link_to 'Destroy', position_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', position_type %></td>
+        <td><%= link_to 'Editar', edit_position_type_path(position_type) %></td>
+        <td><%= link_to 'Eliminar', position_type, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -33,4 +33,4 @@
 
 <br>
 
-<%= link_to 'New Position Type', new_position_type_path %>
+<%= link_to 'Nuevo tipo de posición', new_position_type_path %>

@@ -1,8 +1,8 @@
-<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path]]%>
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path], ["Grados", degrees_path]]%>
 
-<h1>Editing Degree</h1>
+<h1>Editando Grado</h1>
 
-<%= render 'form', degree: @degree %>
+<%= render 'form', degree: @degree, locals: { submit_string: 'Editar'} %>
 
-<%= link_to 'Show', @degree %> |
-<%= link_to 'Back', degrees_path %>
+<%= link_to 'Ver', @degree %> |
+<%= link_to 'Volver', degrees_path %>

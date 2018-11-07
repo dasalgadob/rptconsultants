@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path]]%>
-<h1>Degrees</h1>
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path], ["Grados", degrees_path]]%>
+<h1>Grados</h1>
 
 <table class="table table-hover">
   <thead>
@@ -21,9 +21,9 @@
         <td><%= degree.minimum %></td>
         <td><%= degree.median %></td>
         <td><%= degree.maximun %></td>
-        <td><%= link_to 'Show', degree %></td>
-        <td><%= link_to 'Edit', edit_degree_path(degree) %></td>
-        <td><%= link_to 'Destroy', degree, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', degree %></td>
+        <td><%= link_to 'Editar', edit_degree_path(degree) %></td>
+        <td><%= link_to 'Eliminar', degree, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -31,4 +31,4 @@
 
 <br>
 
-<%= link_to 'New Degree', new_degree_path %>
+<%= link_to 'Nuevo grado', new_degree_path %>

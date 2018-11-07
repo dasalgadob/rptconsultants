@@ -1,8 +1,8 @@
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path]]%>
 
-<h1>Editing Role</h1>
+<h1>Editando rol</h1>
 
-<%= render 'form', role: @role %>
+<%= render 'form', role: @role, locals: { submit_string: 'Editar'} %>
 
-<%= link_to 'Show', @role %> |
-<%= link_to 'Back', roles_path %>
+<%= link_to 'Ver', @role %> |
+<%= link_to 'Volver', roles_path %>

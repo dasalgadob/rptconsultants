@@ -1,8 +1,8 @@
-<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path]]%>
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path], ["Criterios", criteria_path]]%>
 
-<h1>Editing Criterium</h1>
+<h1>Editando Criterio</h1>
 
-<%= render 'form', criterium: @criterium %>
+<%= render 'form', criterium: @criterium, locals: { submit_string: 'Editar'} %>
 
-<%= link_to 'Show', @criterium %> |
-<%= link_to 'Back', criteria_path %>
+<%= link_to 'Ver', @criterium %> |
+<%= link_to 'Volver', criteria_path %>

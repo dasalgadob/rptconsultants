@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
-<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path]]%>
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path], ["Criterios", criteria_path]]%>
 
 <%= form_tag(criteria_path, method: :get) do %>
   <div class="form-group">
-  <%= label_tag "Score:" %>
+  <%= label_tag "Puntaje:" %>
   <%= text_field_tag :score,params[:score], class: "form-control" %>
   </div>
   <div class="form-group">
-  <%= label_tag "Degree:" %>
+  <%= label_tag "Grado:" %>
   <%= text_field_tag :degree,params[:degree], class: "form-control" %>
   </div>
   <%= submit_tag 'Buscar', class: 'btn btn-success' %>
@@ -35,9 +35,9 @@
         <td><%= criterium.score %></td>
         <td><%= criterium.degree.number %></td>
         <td><%= criterium.description %></td>
-        <td><%= link_to 'Show', criterium %></td>
-        <td><%= link_to 'Edit', edit_criterium_path(criterium) %></td>
-        <td><%= link_to 'Destroy', criterium, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Ver', criterium %></td>
+        <td><%= link_to 'Editar', edit_criterium_path(criterium) %></td>
+        <td><%= link_to 'Eliminar', criterium, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -45,4 +45,4 @@
 
 <br>
 
-<%= link_to 'New Criterium', new_criterium_path %>
+<%= link_to 'Nuevo criterio', new_criterium_path %>
