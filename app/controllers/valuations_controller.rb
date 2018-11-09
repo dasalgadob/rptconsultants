@@ -26,6 +26,14 @@ class ValuationsController < ApplicationController
 
   # GET /valuations/1/edit
   def edit
+    @company = @valuation.job_title.area.company
+    @area = @valuation.job_title.area
+    @areas = @company.areas
+    @job_title = @valuation.job_title
+    @job_titles = @valuation.job_title.area.job_titles
+    @position_type = @valuation.position_type
+    @position_types = PositionType.all
+    @degrees = Degree.all
   end
 
   # POST /valuations

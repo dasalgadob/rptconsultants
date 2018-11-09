@@ -8,7 +8,7 @@
   </div>
   <div class="form-group">
   <%= label_tag "Grado:" %>
-  <%= text_field_tag :degree,params[:degree], class: "form-control" %>
+  <%= select_tag :degree,  options_from_collection_for_select(@degrees, "id", "number",params[:degree]), options = {:include_blank => true, class: 'form-control'} %>
   </div>
   <%= submit_tag 'Buscar', class: 'btn btn-success' %>
 <% end %>
@@ -42,7 +42,10 @@
     <% end %>
   </tbody>
 </table>
+<nav>
+<%= will_paginate @posts %>
 
+</nav>
 <br>
 
 <%= link_to 'Nuevo criterio', new_criterium_path %>

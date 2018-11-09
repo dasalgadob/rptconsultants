@@ -1,4 +1,29 @@
-<%= form_for([@company, @valuation]) do |f| %>
+
+    <% case locals[:submit_string] %>
+    <% when "Crear"%>
+    <% form_var = [@company, @valuation] %>
+    <% when "Editar"%>
+    <% form_var = @valuation %>
+    <% end %>
+
+
+<% if locals[:submit_string] == 'Editar' %>
+<script type="text/javascript">
+    //console.log("Antes de actualizar");
+    $.get( "/valuations/<%= @valuation.id%>.json")
+        .done(function( data ) {
+          console.log("loading Valuation...");
+          valuation = data;
+          //$('#valuation_position_type_id').val(position_type['id']).trigger('change');
+          //Luego del cambio de options escoger las debidas
+
+        });
+    //console.log("Despues de actualizar");
+</script>
+  <% end %>
+
+
+<%= form_for(form_var) do |f| %>
   <% if @valuation.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@valuation.errors.count, "error", plural="errores") %> impidieron a esta valoración de ser guaradada:</h2>
@@ -13,19 +38,55 @@
 
   <div class="field form-group">
     <%= f.label "Area" %>
-    <%= select_tag "area", options_from_collection_for_select(@areas, "id", "name"), options = {:include_blank => true, class: 'form-control'} %>
+    <%= select_tag "area", options_from_collection_for_select(@areas, "id", "name", !@valuation.new_record? ? @valuation.job_title.area.id: ""), options = {:include_blank => true, class: 'form-control'} %>
   </div>
 
 
   <div class="field form-group">
     <%= f.label "Cargo" %>
     <%= f.select :job_title_id , options_for_select([]),{ :include_blank => true },{ class: 'form-control'} %>
+    <% if locals[:submit_string] == 'Editar' %>
+    <script type="text/javascript">
+      var job_title= null;
+      $.get( "/job_titles/<%= @job_title.id%>.json")
+          .done(function( data ) {
+            console.log("loading Job Title...");
+            job_title = data;
+          });
+    </script>
+    <% end %>
+
   </div>
+
+
 
   <div class="field form-group">
     <%= f.label "Tipo de posición" %>
-    <%= f.select :position_type_id, options_for_select(@position_types.map{ |pt| [pt.name.upcase, pt.id]}),{ :include_blank => true },{ class: 'form-control'} %>
+    <%= f.select :position_type_id, options_for_select(@position_types.map{ |pt| [pt.name.upcase, pt.id]}),{ :include_blank => true, selected: @valuation.position_type },{ class: 'form-control'} %>
   </div>
+  <% if locals[:submit_string] == 'Editar' %>
+  <script type="text/javascript">
+    var position_type= null;
+    $.get( "/position_types/<%= @position_type.id%>.json")
+        .done(function( data ) {
+          console.log("loading Position Type...");
+          position_type = data;
+          $('#valuation_position_type_id').val(position_type['id']).trigger('change');
+          //Luego del cambio de options escoger las debidas
+
+        });
+    //console.log("Antes de actualizar");
+    $.get( "/valuations/<%= @valuation.id%>.json")
+        .done(function( data ) {
+          console.log("loading Valuation...");
+          valuation = data;
+          //$('#valuation_position_type_id').val(position_type['id']).trigger('change');
+          //Luego del cambio de options escoger las debidas
+
+        });
+    //console.log("Despues de actualizar");
+  </script>
+  <% end %>
 
   <div class="field form-group">
     <%= f.label "Amplitud y profundidad del conocimiento aplicado" %>
@@ -80,6 +141,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit locals[:submit_string], class: 'btn btn-success'%>
+    <%= f.submit locals[:submit_string], class: 'btn btn-success', id: 'submit'%>
   </div>
 <% end %>

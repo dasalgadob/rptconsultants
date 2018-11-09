@@ -6,6 +6,7 @@ class CriteriaController < ApplicationController
   # GET /criteria
   # GET /criteria.json
   def index
+    @degrees = Degree.all
     respond_to do |format|
       @criteria = apply_scopes(Criterium).order(sort_column + " " + sort_direction).load_criteria(params[:page], params[:per_page])
       format.html

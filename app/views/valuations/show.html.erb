@@ -2,47 +2,47 @@
 
 <p>
   <strong>Cargo:</strong>
-  <%= @valuation.job_title %>
+  <%= @valuation.job_title.name %>
 </p>
 
 <p>
   <strong>Tipo de posición:</strong>
-  <%= @valuation.position_type %>
+  <%= @valuation.position_type.name %>
 </p>
 
 <p>
   <strong>Amplitud y profundidad del conocimiento aplicado:</strong>
-  <%= @valuation.knowledge %>
+  <%= @valuation.knowledge.degree.number %>
 </p>
 
 <p>
   <strong>Actuación (Habilidades):</strong>
-  <%= @valuation.skill %>
+  <%= @valuation.skill.degree.number %>
 </p>
 
 <p>
   <strong>Definiciones y Supervisión:</strong>
-  <%= @valuation.definition_supervision %>
+  <%= @valuation.definition_supervision.degree.number %>
 </p>
 
 <p>
   <strong>Riesgos asumidos y nivel de decisiones:</strong>
-  <%= @valuation.risk_decision %>
+  <%= @valuation.risk_decision.degree.number %>
 </p>
 
 <p>
   <strong>Sostenibilidad (Tiempo):</strong>
-  <%= @valuation.sustainability %>
+  <%= @valuation.sustainability.degree.number %>
 </p>
 
 <p>
   <strong>Area de Responsabilidad:</strong>
-  <%= @valuation.area_impact %>
+  <%= @valuation.area_impact.degree.number %>
 </p>
 
 <p>
   <strong>Influencia en los resultados:</strong>
-  <%= @valuation.influence %>
+  <%= @valuation.influence.degree.number %>
 </p>
 
 <p>
@@ -52,8 +52,8 @@
 
 <p>
   <strong>Grado:</strong>
-  <%= @valuation.degree %>
+  <%= @valuation.degree.number %>
 </p>
 
 <%= link_to 'Editar', edit_valuation_path(@valuation) %> |
-<%= link_to 'Volver', valuations_path %>
+<%= link_to 'Volver', company_valuations_path(@valuation.job_title.area.company) %>

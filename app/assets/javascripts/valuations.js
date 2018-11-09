@@ -8,6 +8,7 @@ var totalScore=0;
 var currentValuation = {};
 var degree = [];
 var area = [];
+var valuation = null;
 $(function(){
 
   //On Ready se cargan los datos de degrees
@@ -133,6 +134,11 @@ function changeCriteriaValues(position_type_id, criteria_type_id, criteria_html_
             $('#'+criteria_html_id+ "_text" ).text(data['data'][i]['attributes']['description']);
           }
         }//end for
+        //Se debe cambiar el elemento seleccionado
+        if(valuation != null){
+          attribute = criteria_html_id.substring(10, criteria_html_id.length );
+          $('#'+ criteria_html_id).val(valuation[attribute]).trigger('change');
+        }
   });//End GET Request
 }//End changeCriteriaValues
 

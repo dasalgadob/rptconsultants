@@ -3,4 +3,8 @@
 <%= render 'form', valuation: @valuation, locals: { submit_string: 'Editar'} %>
 
 <%= link_to 'Ver', @valuation %> |
-<%= link_to 'Volver', valuations_path %>
+<%= link_to 'Volver', company_valuations_path(@valuation.job_title.area.company) %>
+<script type="text/javascript">
+    var job_titles = null;
+    job_titles = <%= JobTitleSerializer.new(@job_titles).serialized_json %>;
+</script>
