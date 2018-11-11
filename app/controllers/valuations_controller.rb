@@ -5,7 +5,7 @@ class ValuationsController < ApplicationController
   # GET /valuations.json
   def index
     @company = Company.find(params[:company_id])
-    @valuations = Valuation.all
+    @valuations = Valuation.where(company_id: @company)
   end
 
   # GET /valuations/1
@@ -41,6 +41,7 @@ class ValuationsController < ApplicationController
   def create
     @company = Company.find(params[:company_id])
     @valuation = Valuation.new(valuation_params)
+    @valuation.company = @company
     puts "Valuation:"
     puts valuation_params
     puts @valuation

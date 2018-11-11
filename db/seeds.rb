@@ -2,6 +2,7 @@ include FactoryBot::Syntax::Methods
 
 require 'csv'
 
+Valuation.destroy_all
 Criterium.destroy_all
 Role.destroy_all
 PositionType.destroy_all

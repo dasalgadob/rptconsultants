@@ -9,4 +9,5 @@ class Valuation < ApplicationRecord
   belongs_to :area_impact, class_name: "Criterium"
   belongs_to :influence, class_name: "Criterium"
   belongs_to :degree
+  belongs_to :company
 end
