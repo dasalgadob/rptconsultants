@@ -29,6 +29,11 @@
       <%= f.label "Confirmacion de password" %>
       <%= f.password_field :password_confirmation ,class: 'form-control'%>
     </div>
+
+    <%= f.label :is_admin, class: "checkbox inline" do %>
+      <%= f.check_box :is_admin %>
+      <span>Dar permisos de administrador</span>
+    <% end %>
   <div class="form-group">
     <%= f.submit locals[:submit_string], class: 'btn btn-success' %>
   </div>

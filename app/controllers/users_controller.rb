@@ -15,8 +15,6 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    @person = Person.new
-    @document_types = DocumentType.all
   end
 
   # GET /users/1/edit
@@ -73,6 +71,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation, :person_id)
+      params.require(:user).permit(:username, :password, :password_confirmation, :is_admin)
     end
 end
