@@ -1,3 +1,6 @@
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Empresas',companies_path],[@company.name,company_path(@company)], ["Valoraciones", company_valuations_path(@company)]]%>
+
+
 <h1>Nuevo valoración</h1>
 
 <%= render 'form', valuation: @valuation, locals: { submit_string: 'Crear'} %>

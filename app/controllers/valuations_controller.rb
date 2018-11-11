@@ -1,16 +1,21 @@
 class ValuationsController < ApplicationController
   before_action :set_valuation, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction
+  has_scope :degree, :score, :position_type
   load_and_authorize_resource
   # GET /valuations
   # GET /valuations.json
   def index
+    @position_types = PositionType.all
+    @degrees = Degree.all
     @company = Company.find(params[:company_id])
-    @valuations = Valuation.where(company_id: @company)
+    @valuations = apply_scopes(Valuation).load_valuations(@company, params[:page], params[:per_page]).order(sort_column + " " + sort_direction)
   end
 
   # GET /valuations/1
   # GET /valuations/1.json
   def show
+    @company = @valuation.job_title.area.company
   end
 
   # GET /valuations/new
@@ -89,6 +94,15 @@ class ValuationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_valuation
       @valuation = Valuation.find(params[:id])
+    end
+
+
+    def sort_column
+      Valuation.column_names.concat(["job_titles.name", "position_types.name", "degrees.number"]).include?(params[:sort]) ? params[:sort] : "created_at"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

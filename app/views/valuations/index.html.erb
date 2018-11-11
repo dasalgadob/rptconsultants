@@ -1,13 +1,31 @@
 <p id="notice"><%= notice %></p>
-<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path]]%>
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Empresas',companies_path],[@company.name,company_path(@company)]]%>
+
+<%= form_tag(company_valuations_path(params[:company_id]), method: :get) do %>
+  <div class="form-group">
+  <%= label_tag "Tipo de posición:" %>
+  <%= select_tag :position_type,  options_from_collection_for_select(@position_types, "id", "name",params[:position_type]), options = {:include_blank => true, class: 'form-control'} %>
+  </div>
+  <div class="form-group">
+  <%= label_tag "Puntaje:" %>
+  <%= text_field_tag :score,params[:score], class: "form-control" %>
+  </div>
+  <div class="form-group">
+  <%= label_tag "Grado:" %>
+  <%= select_tag :degree,  options_from_collection_for_select(@degrees, "id", "number",params[:degree]), options = {:include_blank => true, class: 'form-control'} %>
+  </div>
+  <%= submit_tag 'Buscar', class: 'btn btn-success' %>
+<% end %>
 
 <h1>Valoraciones</h1>
 
-<table class="table table-hover">
+<table class="pretty table table-hover">
   <thead>
     <tr>
-      <th>Cargo</th>
-      <th>Tipo de posición</th>
+      <th>Area</th>
+      <th><%= sortable "job_titles.name", "Cargo ", params%></th>
+      <!-- <th>Cargo</th> -->
+      <th><%= sortable "position_types.name", "Tipo de posición", params%></th>
       <th>Amplitud y profundidad del conocimiento aplicado</th>
       <th>Actuación (Habilidades)</th>
       <th>Definiciones y Supervisión</th>
@@ -15,8 +33,8 @@
       <th>Sostenibilidad (Tiempo)</th>
       <th>Area de Responsabilidad</th>
       <th>Influencia en los resultados</th>
-      <th>Puntaje</th>
-      <th>Grado</th>
+      <th><%= sortable "score", "Puntaje", params%></th>
+      <th><%= sortable "degrees.number", "Grado", params%></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -24,8 +42,9 @@
   <tbody>
     <% @valuations.each do |valuation| %>
       <tr>
+        <td><%= valuation.job_title.area.name %></td>
         <td><%= valuation.job_title.name %></td>
-        <td><%= valuation.position_type.name %></td>
+        <td><%= valuation.position_type.name.upcase %></td>
         <td><%= valuation.knowledge.score %></td>
         <td><%= valuation.skill.score %></td>
         <td><%= valuation.definition_supervision.score %></td>
@@ -42,7 +61,7 @@
     <% end %>
   </tbody>
 </table>
-
+<%= will_paginate @valuations %>
 <br>
 
 <%= link_to 'Nueva valoración', new_company_valuation_path(params[:company_id]) %>
