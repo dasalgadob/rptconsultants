@@ -19,42 +19,41 @@
 
 <h1>Valoraciones</h1>
 
-<table class="pretty table table-hover">
+<table class="pretty table  table-striped table-bordered table-sm" id="valuationsTable">
   <thead>
     <tr>
-      <th>Area</th>
-      <th><%= sortable "job_titles.name", "Cargo ", params%></th>
+      <th class="col-sm-1">Area</th>
+      <th class="col-sm-1"><%= sortable "job_titles.name", "Cargo ", params%></th>
       <!-- <th>Cargo</th> -->
-      <th><%= sortable "position_types.name", "Tipo de posición", params%></th>
-      <th>Amplitud y profundidad del conocimiento aplicado</th>
-      <th>Actuación (Habilidades)</th>
-      <th>Definiciones y Supervisión</th>
-      <th>Riesgos asumidos y nivel de decisiones</th>
-      <th>Sostenibilidad (Tiempo)</th>
-      <th>Area de Responsabilidad</th>
-      <th>Influencia en los resultados</th>
-      <th><%= sortable "score", "Puntaje", params%></th>
-      <th><%= sortable "degrees.number", "Grado", params%></th>
-      <th colspan="3"></th>
+      <th class="col-sm-1"><%= sortable "position_types.name", "Tipo de posición", params%></th>
+      <th class="col-sm-1">Amplitud y profundidad del conocimiento aplicado</th>
+      <th class="col-sm-1">Actuación (Habilidades)</th>
+      <th class="col-sm-1">Definiciones y Supervisión</th>
+      <th class="col-sm-1">Riesgos asumidos y nivel de decisiones</th>
+      <th class="col-sm-1">Sostenibilidad (Tiempo)</th>
+      <th class="col-sm-1">Area de Responsabilidad</th>
+      <th class="col-sm-1">Influencia en los resultados</th>
+      <th class="col-sm-1"><%= sortable "score", "Puntaje", params%></th>
+      <th class="col-sm-1"><%= sortable "degrees.number", "Grado", params%></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @valuations.each do |valuation| %>
       <tr>
-        <td><%= valuation.job_title.area.name %></td>
-        <td><%= valuation.job_title.name %></td>
-        <td><%= valuation.position_type.name.upcase %></td>
-        <td><%= valuation.knowledge.score %></td>
-        <td><%= valuation.skill.score %></td>
-        <td><%= valuation.definition_supervision.score %></td>
-        <td><%= valuation.risk_decision.score %></td>
-        <td><%= valuation.sustainability.score %></td>
-        <td><%= valuation.area_impact.score %></td>
-        <td><%= valuation.influence.score %></td>
-        <td><%= valuation.score %></td>
-        <td><%= valuation.degree.number %></td>
-        <td><%= link_to 'Ver', valuation %></td>
+        <td class="col-sm-1"><%= valuation.job_title.area.name %></td>
+        <td class="col-sm-1"><%= valuation.job_title.name %></td>
+        <td class="col-sm-1"><%= valuation.position_type.name.upcase %></td>
+        <td class="col-sm-1"><%= valuation.knowledge.score %></td>
+        <td class="col-sm-1"><%= valuation.skill.score %></td>
+        <td class="col-sm-1"><%= valuation.definition_supervision.score %></td>
+        <td class="col-sm-1"><%= valuation.risk_decision.score %></td>
+        <td class="col-sm-1"><%= valuation.sustainability.score %></td>
+        <td class="col-sm-1"><%= valuation.area_impact.score %></td>
+        <td class="col-sm-1"><%= valuation.influence.score %></td>
+        <td class="col-sm-1"><%= valuation.score %></td>
+        <td class="col-sm-1"><%= valuation.degree.number %></td>
         <td><%= link_to 'Editar', edit_valuation_path(valuation) %></td>
         <td><%= link_to 'Eliminar', valuation, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
       </tr>

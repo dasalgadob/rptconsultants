@@ -173,9 +173,11 @@ div .pagination {
   background-image: url(/images/up_arrow.gif);
 }
 
-hide {
-  display: none;
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
 }
+
 
 
 @import "bootstrap-sprockets";

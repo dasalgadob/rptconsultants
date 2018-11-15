@@ -3,6 +3,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>Tipo de posición:</strong>
+  <%= @criterium.position_type.name.upcase %>
+</p>
+
+<p>
   <strong>Tipo de criterio:</strong>
   <%= @criterium.criteria_type %>
 </p>
@@ -16,6 +21,13 @@
   <strong>Grado:</strong>
   <%= @criterium.degree.number %>
 </p>
+
+
+<p>
+  <strong>Descripción:</strong>
+  <%= @criterium.description %>
+</p>
+
 
 <%= link_to 'Editar', edit_criterium_path(@criterium) %> |
 <%= link_to 'Volver', criteria_path %>
