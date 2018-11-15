@@ -80,3 +80,6 @@ gem 'fast_jsonapi'
 
 #Gem to add authorization
 gem 'cancancan', '~> 2.0'
+
+#vulnerability with precompile assets
+gem 'sprockets', '~>3.7.2'
