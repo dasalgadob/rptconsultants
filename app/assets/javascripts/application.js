@@ -16,6 +16,7 @@
 //= require jquery-ui/widgets/autocomplete
 //= require autocomplete-rails
 //= require valuations
+//= require criteria
 
 //code to enable input fields to modifiy in a list
 
@@ -52,6 +53,6 @@ $(document).ready(function(){
     });
 
 
-    
+
 });
 //= require_tree .

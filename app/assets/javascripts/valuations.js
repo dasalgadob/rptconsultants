@@ -89,7 +89,7 @@ $(function(){
   }).change();
 
 
-});
+});//End onLoad
 
 //Funcion llamada por cada criterio para alteral sus valores posibles
 function changeCriteriaValues(position_type_id, criteria_type_id, criteria_html_id){

@@ -173,6 +173,10 @@ div .pagination {
   background-image: url(/images/up_arrow.gif);
 }
 
+hide {
+  display: none;
+}
+
 
 @import "bootstrap-sprockets";
 @import "bootstrap";

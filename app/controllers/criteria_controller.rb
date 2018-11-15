@@ -82,7 +82,7 @@ class CriteriaController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def criterium_params
-      params.require(:criterium).permit(:criteria_type, :score, :degree_id, :degree)
+      params.require(:criterium).permit(:criteria_type, :score, :degree_id, :degree, :description)
     end
 
     def sort_column
