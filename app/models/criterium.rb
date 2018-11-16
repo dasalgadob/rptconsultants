@@ -15,16 +15,23 @@ class Criterium < ApplicationRecord
   def self.import(file)
     xlsx = Roo::Excelx.new(file.path())
     #puts xlsx.info
-    hoja = xlsx.sheet('criteria')
-    hoja.each(clase: 'CLASE', grupo: 'GRUPO',  cuenta: 'CUENTA', denominacion: "NOMBRE O DENOMINACION") do |hash|
-      puts hash.inspect
-      numero =Integer(clase) rescue nil
-      if hash.clase!= nil &&  numero != nil
-        puts hash.inspect
-        #Clase.create(number: hash.clase, name: hash.denominacion)
-      #elsif grupo != nil
+    hoja = xlsx.sheet('Criteria')
+    hoja.each(id: 'id', score: 'Puntaje',  degree: 'Grado', criteria_type: "TipoCriterio", position_type: "TipoPosición", description: "Descripción") do |hash|
+      logger.debug hash.inspect
+      if hash[:id] == "id"
+        next
       end
-      # => { id: 1, name: 'John Smith' }
+      c = Criterium.find(hash[:id])
+      if c!= nil
+        #actualizar
+        g = Degree.find(hash[:degree])
+        c.update( score: hash[:score],  degree: g, description: hash[:description] )
+        logger.debug "update"
+      else
+        logger.debug "create"
+      end
+      #Clase.create(number: hash.clase, name: hash.denominacion)
     end
-  end
-end
+  end #End import
+
+end #End Class

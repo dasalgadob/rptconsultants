@@ -83,3 +83,7 @@ gem 'cancancan', '~> 2.0'
 
 #vulnerability with precompile assets
 gem 'sprockets', '~>3.7.2'
+
+gem 'rubyzip', '>= 1.2.1'
+gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
+gem 'axlsx_rails'

@@ -1,7 +1,8 @@
 <p id="notice"><%= notice %></p>
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Tablas de referencia', references_tables_path], ["Criterios", criteria_path]]%>
-
+<div class="form-group">
 <a href="#" id="searchLink">Hacer busqueda </a>
+</div>
 <div class="" id="searchForm" style="display:none;">
 <%= form_tag(criteria_path, method: :get) do %>
   <div class="form-group">
@@ -18,15 +19,15 @@
 
 
 
-<%= form_tag import_criteria_path, multipart: true, class: 'form-inline' do %>
-    <%= link_to 'Download as .xlsx', clases_path(format: :xlsx) %>
+<%= form_tag import_criteria_path, multipart: true, class: 'form' do %>
+    <%= link_to 'Download as .xlsx', criteria_path(format: :xlsx) %>
 
-    <div class="form-group">
-      <%= file_field_tag :file, class: '' %>
+    <div class="field form-group">
+      <%= file_field_tag :file, {class: '', required: "true" }%>
     </div>
 
-    <div class="form-group">
-      <%= submit_tag "Import xlsx", class: 'btn btn-info' %>
+    <div class="field form-group">
+      <%= submit_tag "Importar xlsx", class: 'btn btn-info' %>
     </div>
 <% end %>
 
@@ -60,7 +61,7 @@
   </tbody>
 </table>
 <nav>
-<%= will_paginate @posts %>
+<%= will_paginate @criteria %>
 
 </nav>
 <br>

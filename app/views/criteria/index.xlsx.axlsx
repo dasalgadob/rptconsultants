@@ -1,0 +1,13 @@
+# app/views/users/index.xlsx.axlsx
+
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Criteria") do |sheet|
+  # this is the head row of your spreadsheet
+  sheet.add_row %w(id Puntaje Grado TipoCriterio TipoPosición Descripción)
+
+  # each user is a row on your spreadsheet
+  @criterias.each do |crit|
+    sheet.add_row [crit.id, crit.score, crit.degree.number, crit.criteria_type, crit.position_type.name, crit.description]
+  end
+end

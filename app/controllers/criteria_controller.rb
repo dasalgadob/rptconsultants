@@ -12,9 +12,19 @@ class CriteriaController < ApplicationController
       format.html
       json_string = CriteriaSerializer.new(@criteria).serialized_json
       format.json {render json: json_string}
-      #format.xlsx
+      @criterias = apply_scopes(Criterium).order(sort_column + " " + sort_direction)
+      format.xlsx
     end
     #render json: @criteria, root: "data"
+  end
+
+  def import
+    begin
+    Criterium.import(params[:file])
+      redirect_to criteria_path, notice:  "Criterios actualizados"
+    rescue Roo::HeaderRowNotFoundError => e
+      redirect_to criteria_path, notice:  "Error en la cabecera de excel"
+    end
   end
 
   # GET /criteria/1
