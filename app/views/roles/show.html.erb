@@ -9,12 +9,12 @@
 
 <p>
   <strong>Grado:</strong>
-  <%= @role.degree %>
+  <%= @role.degree.number %>
 </p>
 
 <p>
   <strong>Tipo de posición:</strong>
-  <%= @role.position_type %>
+  <%= @role.position_type.name.upcase %>
 </p>
 
 <%= link_to 'Editar', edit_role_path(@role) %> |

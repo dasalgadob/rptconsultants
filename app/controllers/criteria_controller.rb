@@ -12,6 +12,7 @@ class CriteriaController < ApplicationController
       format.html
       json_string = CriteriaSerializer.new(@criteria).serialized_json
       format.json {render json: json_string}
+      #format.xlsx
     end
     #render json: @criteria, root: "data"
   end

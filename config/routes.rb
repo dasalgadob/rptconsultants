@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   resources :roles
   resources :position_types
-  resources :criteria
+  resources :criteria do
+    collection {post :import}
+  end
   resources :degrees
   resources :companies do
     resources :areas, shallow: true do

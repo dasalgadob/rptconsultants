@@ -1,6 +1,10 @@
 <p id="notice"><%= notice %></p>
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Empresas',companies_path],[@company.name,company_path(@company)]]%>
 
+
+<a href="#" id="searchLink">Hacer busqueda </a>
+
+<div id="searchForm" style="display:none;">
 <%= form_tag(company_valuations_path(params[:company_id]), method: :get) do %>
   <div class="form-group">
   <%= label_tag "Tipo de posición:" %>
@@ -16,6 +20,7 @@
   </div>
   <%= submit_tag 'Buscar', class: 'btn btn-success' %>
 <% end %>
+</div>
 
 <h1>Valoraciones</h1>
 

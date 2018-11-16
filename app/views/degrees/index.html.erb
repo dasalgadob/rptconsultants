@@ -17,11 +17,11 @@
   <tbody>
     <% @degrees.each do |degree| %>
       <tr class="row">
-        <td><%= degree.number %></td>
+        <td><%= link_to degree.number, degree %></td>
         <td><%= degree.minimum %></td>
         <td><%= degree.median %></td>
         <td><%= degree.maximun %></td>
-        <td><%= link_to 'Ver', degree %></td>
+
         <td><%= link_to 'Editar', edit_degree_path(degree) %></td>
         <td><%= link_to 'Eliminar', degree, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
       </tr>

@@ -1,5 +1,5 @@
 
-<h1>Job Titles</h1>
+<h1>Cargos</h1>
 
 <table class="table table-hover">
   <thead>
@@ -12,8 +12,7 @@
   <tbody>
     <% job_titles.each do |job_title| %>
       <tr>
-        <td><%= job_title.name %></td>
-        <td><%= link_to 'Ver', job_title %></td>
+        <td><%= link_to job_title.name, job_title %></td>
         <td><%= link_to 'Editar', edit_job_title_path(job_title) %></td>
         <td><%= link_to 'Eliminar', job_title, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
       </tr>
