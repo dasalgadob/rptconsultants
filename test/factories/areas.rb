@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :area do
-    name "MyString"
-    company nil
+    name "Consultoria"
+    company
   end
 end

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :job_title do
-    name "MyString"
-    area nil
+    name "Gerencia"
+    area 
   end
 end

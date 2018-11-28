@@ -13,6 +13,9 @@ class Criterium < ApplicationRecord
 
 
   def self.import(file)
+    grados = Degree.all
+    grados_hash = {}
+    grados.each {|grado| grados_hash[grado["number"]] = grado}
     xlsx = Roo::Excelx.new(file.path())
     #puts xlsx.info
     hoja = xlsx.sheet('Criteria')
@@ -24,9 +27,16 @@ class Criterium < ApplicationRecord
       c = Criterium.find(hash[:id])
       if c!= nil
         #actualizar
-        g = Degree.find(hash[:degree])
-        c.update( score: hash[:score],  degree: g, description: hash[:description] )
-        logger.debug "update"
+        #g = Degree.find(hash[:degree])
+        c.score =hash[:score]
+        c.degree_id = grados_hash[hash[:degree]]["id"]
+        c.description = hash[:description]
+        #c.update( score: ,  degree: , description:  )
+        if c.changed?
+          logger.debug "update"
+          c.update
+        end
+
       else
         logger.debug "create"
       end

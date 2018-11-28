@@ -22,6 +22,19 @@
 <% end %>
 </div>
 
+
+<%= form_tag import_company_valuations_path(@company), multipart: true, class: 'form' do %>
+    <%= link_to 'Download as .xlsx', company_valuations_path(@company, format: :xlsx) %>
+
+    <div class="field form-group">
+      <%= file_field_tag :file, {class: '', required: "true" }%>
+    </div>
+
+    <div class="field form-group">
+      <%= submit_tag "Importar xlsx", class: 'btn btn-info' %>
+    </div>
+<% end %>
+
 <h1>Valoraciones</h1>
 
 <table class="pretty table  table-striped table-bordered table-sm" id="valuationsTable">

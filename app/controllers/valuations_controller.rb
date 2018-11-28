@@ -6,10 +6,24 @@ class ValuationsController < ApplicationController
   # GET /valuations
   # GET /valuations.json
   def index
-    @position_types = PositionType.all
-    @degrees = Degree.all
+    respond_to do |format|
+      @position_types = PositionType.all
+      @degrees = Degree.all
+      @company = Company.find(params[:company_id])
+      @valuations = apply_scopes(Valuation).load_valuations(@company, params[:page], params[:per_page]).order(sort_column + " " + sort_direction)
+      format.html
+      format.xlsx
+    end
+  end
+
+  def import
     @company = Company.find(params[:company_id])
-    @valuations = apply_scopes(Valuation).load_valuations(@company, params[:page], params[:per_page]).order(sort_column + " " + sort_direction)
+    begin
+    Valuation.import(params[:file], params[:company_id])
+      redirect_to company_valuations_path(@company), notice:  "Valoraciones actualizadas"
+    rescue Roo::HeaderRowNotFoundError => e
+      redirect_to company_valuations_path(@company), notice:  "Error en la cabecera de excel"
+    end
   end
 
   # GET /valuations/1

@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     resources :areas, shallow: true do
       resources :job_titles, shallow: true
     end
-    resources :valuations, shallow: true
+    resources :valuations, shallow: true do
+      collection {post :import}
+    end
   end
 
   get    '/login',   to: 'session#new'
