@@ -1,0 +1,38 @@
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Empresas',companies_path],[@company.name,company_path(@company)], ["Reportes", "/companies/#{@company.id}/reports"]]%>
+<table class="table-striped table-bordered table-sm">
+  <thead>
+    <tr>
+      <th colspan="2"></th>
+      <th colspan="<%= @areas.count%>"><h1>Areas</h1></th>
+    </tr>
+    <tr>
+      <th>Grado</th>
+      <th>Puntaje</th>
+      <% @areas.each do |area| %>
+      <th><%=area.name %></th>
+      <% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% is_first_degree = true %>
+    <% last_degree= 0 %>
+    <% @valuations.each do |valuation| %>
+    <tr>
+      <% if last_degree != valuation.degree_id %>
+        <% last_degree = valuation.degree_id %>
+        <td rowspan="<%= @valuations.where(degree_id:last_degree ).count%>"><%= valuation.degree.number %></td>
+      <% end %>
+        <td><%=valuation.score %></td>
+        <% @areas.each do |area| %>
+          <% if area.name == valuation.job_title.area.name %>
+            <td><%=valuation.job_title.name %></td>
+          <% else %>
+            <td></td>
+          <% end %>
+        <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

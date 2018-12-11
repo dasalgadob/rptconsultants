@@ -1,6 +1,21 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: [:show, :edit, :update, :destroy]
+  before_action :set_company, only: [:show, :edit, :update, :destroy, :report_matrix_simple]
   load_and_authorize_resource
+
+  def report_matrix_simple
+    @valuations = Valuation.where(company_id: @company.id).order(:degree_id, score: :desc )
+    @areas = Area.where(company_id: @company.id).order(:name)
+    #@areas_hash = Area.area_hash_by_name(@company.id)
+  end
+
+  def report_matrix_complex
+    @valuations = Valuation.where(company_id: @company.id).order(:degree_id, score: :desc )
+    @areas = Area.where(company_id: @company.id).order(:name)
+    #@areas_hash = Area.area_hash_by_name(@company.id)
+  end
+
+  def reports
+  end
   # GET /companies
   # GET /companies.json
   def index

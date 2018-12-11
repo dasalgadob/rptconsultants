@@ -21,7 +21,9 @@ Rails.application.routes.draw do
 
   resources :users
 
-
+  get '/companies/:id/report_matrix_simple', to: 'companies#report_matrix_simple'
+  get '/companies/:id/report_matrix_complex', to: 'companies#report_matrix_complex'
+  get '/companies/:id/reports', to: 'companies#reports'
   get '/home', to: 'static_pages#home'
   get '/help', to: 'static_pages#help'
   get '/about', to: 'static_pages#about'

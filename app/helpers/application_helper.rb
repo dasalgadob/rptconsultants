@@ -11,9 +11,10 @@ module ApplicationHelper
     params.each do |key, value|
       if key != 'sort' && key != 'direction'
           parameters[key]= value
-      end
-    end
-  end
+      end#end if
+    end# end each
+  end #end if
   link_to title, parameters, {:class => css_class}
-end
+end #end sortable
+
 end
