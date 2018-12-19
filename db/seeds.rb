@@ -12,7 +12,7 @@ xlsx = Roo::Excelx.new('test/xlsx/tablas_referencia.xlsx')
 ## Se agrega hoja de grados
 hoja = xlsx.sheet('grado')
 
-hoja.each( grado: 'grado', minimo: 'minimo',medio: 'medio', maximo: 'maximo') do |hash|
+hoja.each( grado: 'grado', minimo: 'minimo',medio: 'medio', maximo: 'maximo', hay: "hay", ggs: "ggs") do |hash|
   if hash[:grado] == "grado" || hash[:minimo] == "minimo"
     next
   end
@@ -21,13 +21,12 @@ hoja.each( grado: 'grado', minimo: 'minimo',medio: 'medio', maximo: 'maximo') do
     #puts "values"
     puts  hash[:grado].to_s + " " + hash[:minimo].to_s + " " + hash[:medio].to_s + " " + hash[:maximo].to_s
     #puts "after"
-    Degree.create(number: hash[:grado], minimum: hash[:minimo], median: hash[:medio], maximun: hash[:maximo])
+    Degree.create(number: hash[:grado], minimum: hash[:minimo], median: hash[:medio], maximun: hash[:maximo], hay: hash[:hay], ggs: hash[:ggs])
   end
 
-end
+end ## ENd for importing degrees
 
-
-
+Degree.update_all ""
 
 
 PositionType.create(name: "apoyo administrativo")

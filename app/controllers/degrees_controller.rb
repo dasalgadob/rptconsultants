@@ -5,7 +5,7 @@ class DegreesController < ApplicationController
   # GET /degrees.json
   def index
     respond_to do |format|
-      @degrees = Degree.all
+      @degrees = Degree.order(number: :desc)
       format.html
       json_string = DegreeSerializer.new(@degrees).serialized_json
       format.json {render json: json_string}

@@ -10,6 +10,8 @@
       <th>Minimo</th>
       <th>Medio</th>
       <th>Maximo</th>
+      <th>Grados HAY</th>
+      <th>Grados GGS</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -21,7 +23,8 @@
         <td><%= degree.minimum %></td>
         <td><%= degree.median %></td>
         <td><%= degree.maximun %></td>
-
+        <td><%= degree.hay %></td>
+        <td><%= degree.ggs %></td>
         <td><%= link_to 'Editar', edit_degree_path(degree) %></td>
         <td><%= link_to 'Eliminar', degree, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
       </tr>
