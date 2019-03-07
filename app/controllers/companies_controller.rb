@@ -19,7 +19,10 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.all
+    #### Just the admin receives all the companies available, otherwise just the own company is retorned
+    if current_user.is_admin?
+      @companies = Company.all
+    end
   end
 
   # GET /companies/1

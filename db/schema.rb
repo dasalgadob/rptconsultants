@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181219184042) do
+ActiveRecord::Schema.define(version: 20190307060949) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -244,6 +244,8 @@ ActiveRecord::Schema.define(version: 20181219184042) do
     t.datetime "updated_at",      null: false
     t.string   "remember_digest"
     t.boolean  "is_admin"
+    t.integer  "company_id"
+    t.index ["company_id"], name: "index_users_on_company_id", using: :btree
     t.index ["person_id"], name: "index_users_on_person_id", using: :btree
   end
 
@@ -308,6 +310,7 @@ ActiveRecord::Schema.define(version: 20181219184042) do
   add_foreign_key "services", "cost_centres"
   add_foreign_key "states", "countries"
   add_foreign_key "subaccounts", "accounts"
+  add_foreign_key "users", "companies"
   add_foreign_key "users", "people"
   add_foreign_key "valuations", "companies"
   add_foreign_key "valuations", "criteria", column: "area_impact_id"

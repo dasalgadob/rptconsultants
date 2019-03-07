@@ -30,10 +30,17 @@
       <%= f.password_field :password_confirmation ,class: 'form-control'%>
     </div>
 
-    <%= f.label :is_admin, class: "checkbox inline" do %>
-      <%= f.check_box :is_admin %>
+    <div class="form-group">
+      <%= f.label "Empresa" %>
+      <%= f.select :company_id, options_for_select(@companies.map{ |pt| [pt.name.upcase, pt.id]}),{ :include_blank => true },{ class: 'form-control'} %>
+    </div>
+
+<div class="form-group">
+    <%= f.label :is_admin, class: "checkbox-inline" do %>
+      <%= f.check_box :is_admin  %>
       <span>Dar permisos de administrador</span>
     <% end %>
+</div>
   <div class="form-group">
     <%= f.submit locals[:submit_string], class: 'btn btn-success' %>
   </div>

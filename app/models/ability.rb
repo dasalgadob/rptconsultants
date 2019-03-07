@@ -4,7 +4,11 @@ class Ability
   def initialize(user)
 
     if user.present?  # additional permissions for logged in users (they can manage their posts)
-      can :manage, :all
+      can :manage, User, id: user.id
+      can [:update, :read], Company, id: user.company_id
+      if user.is_admin?  # additional permissions for administrators
+        can :manage, :all
+      end
     end
     # Define abilities for the passed in user here. For example:
     #
