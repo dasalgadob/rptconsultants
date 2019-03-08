@@ -1,6 +1,10 @@
 class AreasController < ApplicationController
   before_action :set_area, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  ## This way the company is loaded and can be used to load and authorize the area even though they are defined
+  ## on the ability file. This is the right way to authorize nested resources.
+  load_and_authorize_resource :company
+  load_and_authorize_resource :area, through: :company
+  #skip_authorize_resource :only => :new
   # GET /areas
   # GET /areas.json
   def index

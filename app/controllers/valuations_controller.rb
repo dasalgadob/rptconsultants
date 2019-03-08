@@ -2,7 +2,8 @@ class ValuationsController < ApplicationController
   before_action :set_valuation, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
   has_scope :degree, :score, :position_type
-  load_and_authorize_resource
+  load_and_authorize_resource :company
+  load_and_authorize_resource :valuation, through: :company
   # GET /valuations
   # GET /valuations.json
   def index

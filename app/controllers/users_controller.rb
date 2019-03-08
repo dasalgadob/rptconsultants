@@ -22,6 +22,9 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @companies = Company.all
+    if @user.company_id != nil
+      @company = Company.find( @user.company_id)
+    end
   end
 
   # POST /users

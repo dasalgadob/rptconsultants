@@ -5,7 +5,16 @@ class Ability
 
     if user.present?  # additional permissions for logged in users (they can manage their posts)
       can :manage, User, id: user.id
-      can [:update, :read], Company, id: user.company_id
+      can :manage, Company, id: user.company_id
+      can :manage, Area, company: { id: user.company_id}
+      can :manage, Valuation, company: { id: user.company_id}
+      can :manage, JobTitle, area: { company: {id: user.company_id}}
+      ### Needed to do valuations
+      can :read, PositionType
+      can :read, Criterium
+      can :read, Degree
+      can :read, Role
+      
       if user.is_admin?  # additional permissions for administrators
         can :manage, :all
       end
