@@ -29,10 +29,10 @@
       <%= f.label "Confirmacion de password" %>
       <%= f.password_field :password_confirmation ,class: 'form-control'%>
     </div>
-
+<% if current_user.is_admin? %>
     <div class="form-group">
       <%= f.label "Empresa" %>
-      <%= f.select :company_id, options_for_select(@companies.map{ |pt| [pt.name.upcase, pt.id]}),{ :include_blank => true },{ class: 'form-control'} %>
+      <%= f.select :company_id, options_for_select(@companies.map{ |pt| [pt.name.upcase, pt.id]}, selected: user.company_id),{ :include_blank => true },{ class: 'form-control'} %>
     </div>
 
 <div class="form-group">
@@ -41,6 +41,7 @@
       <span>Dar permisos de administrador</span>
     <% end %>
 </div>
+<% end %>
   <div class="form-group">
     <%= f.submit locals[:submit_string], class: 'btn btn-success' %>
   </div>

@@ -4,7 +4,9 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if current_user.is_admin?
+      @users = User.all
+    end
   end
 
   # GET /users/1
@@ -34,7 +36,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        log_in @user
+        ### Not login when signup due that the admin is the one creating users
+        #log_in @user
         flash[:success] = "Registro de usuario exitoso!"
         format.html { redirect_to @user, notice: 'Usuario creado exitosamente.' }
         format.json { render :show, status: :created, location: @user }
