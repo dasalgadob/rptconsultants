@@ -35,12 +35,34 @@
       <%= f.select :company_id, options_for_select(@companies.map{ |pt| [pt.name.upcase, pt.id]}, selected: user.company_id),{ :include_blank => true },{ class: 'form-control'} %>
     </div>
 
-<div class="form-group">
+    <div class="form-group">
     <%= f.label :is_admin, class: "checkbox-inline" do %>
       <%= f.check_box :is_admin  %>
       <span>Dar permisos de administrador</span>
     <% end %>
-</div>
+    </div>
+    <h4>Permisos de Usuario</h4>
+    <div class="form-group">
+    <%= f.label :evaluate, class: "checkbox-inline" do %>
+      <%= f.check_box :evaluate  %>
+      <span>Valorar</span>
+    <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :review, class: "checkbox-inline" do %>
+        <%= f.check_box :review  %>
+        <span>Revisar</span>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :approve, class: "checkbox-inline" do %>
+        <%= f.check_box :approve  %>
+        <span>Aprobar</span>
+      <% end %>
+    </div>
+
 <% end %>
   <div class="form-group">
     <%= f.submit locals[:submit_string], class: 'btn btn-success' %>

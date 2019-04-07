@@ -51,6 +51,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    @companies = Company.all
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'Usuario fue actualizado exitosamente.' }
@@ -80,6 +81,9 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation)
+      ## Delete password from params when is not updated
+      params[:user].delete(:password) if params[:user][:password].blank?
+      params.require(:user).permit(:username, :password, :password_confirmation,
+        :is_admin, :company_id, :evaluate, :review, :approve)
     end
 end
