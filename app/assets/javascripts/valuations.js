@@ -3,6 +3,7 @@
 //# You can use CoffeeScript in this file: http://coffeescript.org/
 
 //console.log("valuations.js");
+// descriptions that are used when a criteria is change individually
 var descriptions = {}
 var totalScore=0;
 var currentValuation = {};
@@ -98,6 +99,13 @@ function changeCriteriaValues(position_type_id, criteria_type_id, criteria_html_
   //console.log("criteria_html_id:" + criteria_html_id);
   //Options values are deleted because new ones are going to replace them
   $('#'+ criteria_html_id).empty();
+
+  //Get position_types to be able to setup max_degree and min_degree for the style
+  // of the criteria that are going to be shown.
+  // $.get("/position_types/position_type_id.json").done(function(data){
+  
+//})
+
   //Get Request to the criterias for that position and type of criteria.
   $.get( "/criteria.json?criteria_type_id="+ criteria_type_id +"&position_type_id=" + position_type_id)
       .done(function( data ) {
