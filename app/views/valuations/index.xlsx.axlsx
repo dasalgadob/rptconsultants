@@ -4,13 +4,13 @@ wb = xlsx_package.workbook
 
 wb.add_worksheet(name: "Valoración") do |sheet|
   # this is the head row of your spreadsheet
-  sheet.add_row %w(id Cargo TipoPosición Conocimiento Habilidades Supervisión Riesgos Sostenibilidad Responsabilidad Influencia)
+  sheet.add_row %w(id Cargo TipoPosición Conocimiento Habilidades Supervisión Riesgos Sostenibilidad Responsabilidad Influencia Puntaje Grado)
 
   # each user is a row on your spreadsheet
   @valuations.each do |val|
     sheet.add_row [val.id, val.job_title.name, val.position_type.name,
      val.knowledge.score, val.skill.score, val.definition_supervision.score,
      val.risk_decision.score, val.sustainability.score, val.area_impact.score,
-     val.influence.score]
+     val.influence.score, val.score, val.degree.number]
   end
 end

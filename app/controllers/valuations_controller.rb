@@ -8,12 +8,17 @@ class ValuationsController < ApplicationController
   # GET /valuations.json
   def index
     respond_to do |format|
-      @position_types = PositionType.all
-      @degrees = Degree.all
       @company = Company.find(params[:company_id])
-      @valuations = apply_scopes(Valuation).load_valuations(@company, params[:page], params[:per_page]).order(sort_column + " " + sort_direction)
-      format.html
-      format.xlsx
+      format.html {
+        @position_types = PositionType.all
+        @degrees = Degree.all
+        @valuations = apply_scopes(Valuation).load_valuations(@company, params[:page], params[:per_page]).order(sort_column + " " + sort_direction)
+      }
+      format.xlsx{
+        @valuations = Valuation.load_all_valuations(@company)
+        ##Ajustar nombre del archivo, con nombre de la empresa y fecha del dia de descarga
+        response.headers['Content-Disposition'] = 'attachment; filename="Valoraciones '+@company.name+ ' '+Time.now.strftime("%Y/%m/%d") +'.xlsx"'
+       }
     end
   end
 

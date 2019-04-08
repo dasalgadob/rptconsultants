@@ -21,6 +21,10 @@ class Valuation < ApplicationRecord
       .paginate(:page => page, :per_page => per_page).where(company_id: company.id)
   end
 
+  def self.load_all_valuations(company)
+    joins(:degree, :company, :position_type, :job_title).where(company_id: company.id)
+  end
+
   ##Import valuations record from excel, reading record by record
   def self.import(file, company_id)
 
