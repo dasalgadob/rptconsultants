@@ -15,9 +15,12 @@ class Valuation < ApplicationRecord
   scope :score, ->(s) {where score: s}
   scope :degree, ->(d) {where degree: d}
   scope :position_type, ->(pt) {where position_type: pt}
+  scope :job_title, ->(jt) { joins(:job_title).where("job_titles.name ilike ?", '%' +jt + '%')}
+  scope :area, ->(a) {where("areas.id = ?", a)}
+  #  .where( "job_titles.name like ?", "#{jt}")}
 
   def self.load_valuations(company,page=1, per_page=20)
-    joins(:degree, :company, :position_type, :job_title)
+    joins(:degree, :company, :position_type, :job_title).joins("INNER JOIN areas on job_titles.area_id = areas.id")
       .paginate(:page => page, :per_page => per_page).where(company_id: company.id)
   end
 

@@ -6,18 +6,34 @@
 
 <div id="searchForm" style="display:none;">
 <%= form_tag(company_valuations_path(params[:company_id]), method: :get) do %>
-  <div class="form-group">
+
+  <div class="form-group col-sm-6">
+  <%= label_tag "Cargo:" %>
+  <%= text_field_tag :job_title,params[:job_title], class: "form-control" %>
+  </div>
+
+  <div class="form-group col-sm-6">
+  <%= label_tag "Area:" %>
+  <%= select_tag :area,  options_from_collection_for_select(@areas, "id", "name",params[:area]), options = {:include_blank => true, class: 'form-control'} %>
+  </div>
+
+  <div class="form-group col-sm-6">
   <%= label_tag "Tipo de posición:" %>
   <%= select_tag :position_type,  options_from_collection_for_select(@position_types, "id", "name",params[:position_type]), options = {:include_blank => true, class: 'form-control'} %>
   </div>
-  <div class="form-group">
+
+  <div class="form-group col-sm-6">
   <%= label_tag "Puntaje:" %>
   <%= text_field_tag :score,params[:score], class: "form-control" %>
   </div>
-  <div class="form-group">
+
+  <div class="form-group col-sm-6">
   <%= label_tag "Grado:" %>
   <%= select_tag :degree,  options_from_collection_for_select(@degrees, "id", "number",params[:degree]), options = {:include_blank => true, class: 'form-control'} %>
   </div>
+
+
+
   <%= submit_tag 'Buscar', class: 'btn btn-success' %>
 <% end %>
 </div>
