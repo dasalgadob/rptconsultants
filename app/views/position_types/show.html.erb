@@ -6,5 +6,15 @@
   <%= @position_type.name %>
 </p>
 
+<p>
+  <strong>Mínimo grado:</strong>
+  <%= @position_type.minimum_degree %>
+</p>
+
+<p>
+  <strong>Máximo grado:</strong>
+  <%= @position_type.maximum_degree %>
+</p>
+
 <%= link_to 'Editar', edit_position_type_path(@position_type) %> |
 <%= link_to 'Volver', position_types_path %>

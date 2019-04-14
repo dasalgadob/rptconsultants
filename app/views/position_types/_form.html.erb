@@ -17,6 +17,15 @@
     <%= f.text_field :name, class: 'form-control' %>
   </div>
 
+  <div class="field form-group">
+    <%= f.label "Mínimo grado" %>
+    <%= f.text_field :minimum_degree, class: 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label "Máximo grado" %>
+    <%= f.text_field :maximum_degree, class: 'form-control' %>
+  </div>
   <div class="actions">
     <%= f.submit locals[:submit_string], class: 'btn btn-success'%>
   </div>

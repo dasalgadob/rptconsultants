@@ -15,6 +15,8 @@
   <thead>
     <tr>
       <th><%= sortable "name", "Nombre "%></th>
+      <th>Mínimo grado</th>
+      <th>Máximo grado</th>
       <th colspan="2">Opciones</th>
     </tr>
   </thead>
@@ -23,6 +25,8 @@
     <% @position_types.each do |position_type| %>
       <tr>
         <td><%= link_to position_type.name.upcase, position_type %></td>
+        <td><%=  position_type.minimum_degree %></td>
+        <td><%= position_type.maximum_degree %></td>
         <td><%= link_to 'Editar', edit_position_type_path(position_type) %></td>
         <td><%= link_to 'Eliminar', position_type, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
       </tr>
