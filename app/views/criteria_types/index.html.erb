@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tipos de Criterio</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @criteria_types.each do |criteria_type| %>
+      <tr>
+        <td><%= criteria_type.name %></td>
+        <td><%= link_to 'Ver', criteria_type %></td>
+        <td><%= link_to 'Editar', edit_criteria_type_path(criteria_type) %></td>
+        <td><%= link_to 'Eliminar', criteria_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nuevo tipo de criterio', new_criteria_type_path %>

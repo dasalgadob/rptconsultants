@@ -9,9 +9,12 @@ class PositionTypesController < ApplicationController
   # GET /position_types
   # GET /position_types.json
   def index
+    respond_to do |format|
     @position_types = apply_scopes(PositionType).order(sort_column + " " + sort_direction)
-    #@search = PositionType.search(params[:search])
-    #@position_types = @search.all
+    format.html
+    json_string = PositionTypeSerializer.new(@position_types).serialized_json
+    format.json {render json: json_string}
+    end
   end
 
   # GET /position_types/1

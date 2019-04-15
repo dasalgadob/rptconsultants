@@ -54,7 +54,7 @@
     <% @criteria.each do |criterium| %>
       <tr>
         <td><%= criterium.position_type.name.upcase %></td>
-        <td><%= criterium.criteria_type %></td>
+        <td><%= criterium.criteria_type.name %></td>
         <td><%= criterium.score %></td>
         <td><%= criterium.degree.number %></td>
         <td><%= criterium.description %></td>

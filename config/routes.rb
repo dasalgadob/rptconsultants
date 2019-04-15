@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :criteria_types
   resources :roles
   resources :position_types
   resources :criteria do

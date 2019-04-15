@@ -8,12 +8,14 @@ var descriptions = {}
 var totalScore=0;
 var currentValuation = {};
 var degree = [];
+var position_types = [];
 var area = [];
 var valuation = null;
 $(function(){
 
   //On Ready se cargan los datos de degrees
   loadDegreesValues();
+  loadPositionTypesValues();
 
   /*Funcion para actualizar las posiciones de acuerdo al area escogida */
   $('#area').change(function(){
@@ -100,23 +102,22 @@ function changeCriteriaValues(position_type_id, criteria_type_id, criteria_html_
   //Options values are deleted because new ones are going to replace them
   $('#'+ criteria_html_id).empty();
 
-  //Get position_types to be able to setup max_degree and min_degree for the style
-  // of the criteria that are going to be shown.
-  // $.get("/position_types/position_type_id.json").done(function(data){
-  
-//})
 
   //Get Request to the criterias for that position and type of criteria.
-  $.get( "/criteria.json?criteria_type_id="+ criteria_type_id +"&position_type_id=" + position_type_id)
+  var url_request = "/criteria.json?criteria_type_id="+ criteria_type_id +"&position_type_id=" + position_type_id+ "&sort=degrees.number";
+  console.log("Url request:" + url_request);
+  $.get( url_request)
       .done(function( data ) {
         //console.log("Data length:" + data['data'].length);
         //Iterate through the result bringed.
         for(var i=0; i<data['data'].length; i++){
           //console.log(data['data'][i]);
+          var criteria_json= data['data'][i]['attributes'];
           var id_criteria= data['data'][i]['attributes']['id'];
           var description = data['data'][i]['attributes']['description'];
           var score = data['data'][i]['attributes']['score'];
           var criteria_type_id = data['data'][i]['attributes']['criteria_type_id'];
+          var degree_criteria = criteria_json['degree']['number'];
           descriptions[id_criteria] ={};
           descriptions[id_criteria]['score']= score;
           descriptions[id_criteria]['description']= description;
@@ -131,11 +132,22 @@ function changeCriteriaValues(position_type_id, criteria_type_id, criteria_html_
             currentValuation[criteria_type_id]= descriptions[id_criteria]['score'];
           }
 
+          //When the degree of the criteria is in the proper range no background-color is added
+          //Othrewise if the degree of criteria out of range bg-color is setup to red
+          var option_string ="" ;
+          console.log("Criteria json degree number:" +criteria_json['degree']['number']);
+          console.log("Criteria json maximum degree:" +criteria_json['position_type']['maximum_degree']);
+          console.log("Criteria json minimum degree:" +criteria_json['position_type']['minimum_degree']);
+          if(criteria_json['degree']['number'] > criteria_json['position_type']['maximum_degree']
+              || criteria_json['degree']['number'] < criteria_json['position_type']['minimum_degree']){
+                option_string = ' Valor fuera de rango normal.';
+              }
+
           //get request for degree_id
-          $('#'+ criteria_html_id).append($('<option>', {
+          $('#'+ criteria_html_id).append($("<option>", {
             //descriptions[data['data'][i]['attributes']['id']]=
             value: id_criteria,
-            text: data['data'][i]['attributes']['degree']['number']
+            text: data['data'][i]['attributes']['degree']['number'] + option_string
           }));
           //solo cambiar la description para el primer item
           if(i==0){
@@ -160,6 +172,17 @@ function loadDegreesValues(){
         }
       });//End done
 }//End loadDegreesValues()
+
+function loadPositionTypesValues(){
+  $.get( "/position_types.json")
+      .done(function( data ) {
+        console.log("loading PositionTypes values...");
+        for(var i=0; i<data['data'].length; i++){
+          position_types[i] = data['data'][i]['attributes'];
+          //console.log(data['data'][i]);
+        }
+  });//End done
+}
 
 function updateDegree(){
   console.log("update Degree");

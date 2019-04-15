@@ -9,10 +9,16 @@ class CriteriaController < ApplicationController
     @degrees = Degree.all
     @position_types = PositionType.all
     respond_to do |format|
-      @criteria = apply_scopes(Criterium).order(sort_column + " " + sort_direction).load_criteria(params[:page], params[:per_page])
-      format.html
-      json_string = CriteriaSerializer.new(@criteria).serialized_json
-      format.json {render json: json_string}
+
+      format.html {@criteria = apply_scopes(Criterium).order(sort_column + " " + sort_direction).load_criteria(params[:page], params[:per_page])}
+
+      format.json {
+        ##This way the degrees are shown in order to be seen that way on the valuations
+        ##section. It is neccesary the join with degree before applying order. 
+        @criteria = apply_scopes(Criterium).joins( :degree).order('degrees.number')
+        json_string = CriteriaSerializer.new(@criteria).serialized_json
+        render json: json_string
+      }
       @criterias = apply_scopes(Criterium).order(sort_column + " " + sort_direction)
       format.xlsx
     end
@@ -39,17 +45,29 @@ class CriteriaController < ApplicationController
 
   # GET /criteria/new
   def new
+    @criteria_types = CriteriaType.all
+    @degrees = Degree.order(:number)
+    @position_types = PositionType.all
     @criterium = Criterium.new
   end
 
   # GET /criteria/1/edit
   def edit
+    @position_types = PositionType.all
+    @criteria_types = CriteriaType.all
+    @degrees = Degree.order(:number)
   end
 
   # POST /criteria
   # POST /criteria.json
   def create
+    @criteria_types = CriteriaType.all
+    @position_types = PositionType.all
+    @degrees = Degree.order(:number)
     @criterium = Criterium.new(criterium_params)
+    #@position_type = PositionType.where(id: params[:position_type_id])
+    puts "Position Type chosen"
+    puts @position_type
 
     respond_to do |format|
       if @criterium.save
@@ -65,6 +83,9 @@ class CriteriaController < ApplicationController
   # PATCH/PUT /criteria/1
   # PATCH/PUT /criteria/1.json
   def update
+    @position_types = PositionType.all
+    @criteria_types = CriteriaType.all
+    @degrees = Degree.order(:number)
     respond_to do |format|
       if @criterium.update(criterium_params)
         format.html { redirect_to @criterium, notice: 'Criterio fue actualizado exitosamente.' }
@@ -94,11 +115,11 @@ class CriteriaController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def criterium_params
-      params.require(:criterium).permit(:criteria_type, :score, :degree_id, :degree, :description)
+      params.require(:criterium).permit(:criteria_type, :score, :degree_id, :degree, :description, :position_type_id, :criteria_type_id)
     end
 
     def sort_column
-      Criterium.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+      Criterium.column_names.concat([ "degrees.number"]).include?(params[:sort]) ? params[:sort] : "created_at"
     end
 
     def sort_direction
