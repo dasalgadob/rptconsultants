@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190414173453) do
+ActiveRecord::Schema.define(version: 20190415165534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,18 @@ ActiveRecord::Schema.define(version: 20190414173453) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["clase_id"], name: "index_grupos_on_clase_id", using: :btree
+  end
+
+  create_table "historics", force: :cascade do |t|
+    t.string   "clase"
+    t.integer  "user_id"
+    t.integer  "valuation_id"
+    t.string   "previous_fields"
+    t.string   "new_fields"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["user_id"], name: "index_historics_on_user_id", using: :btree
+    t.index ["valuation_id"], name: "index_historics_on_valuation_id", using: :btree
   end
 
   create_table "invoice_services", force: :cascade do |t|
@@ -305,6 +317,8 @@ ActiveRecord::Schema.define(version: 20190414173453) do
   add_foreign_key "criteria", "degrees"
   add_foreign_key "criteria", "position_types"
   add_foreign_key "grupos", "clases"
+  add_foreign_key "historics", "users"
+  add_foreign_key "historics", "valuations"
   add_foreign_key "invoice_services", "invoices"
   add_foreign_key "invoice_services", "services"
   add_foreign_key "invoices", "people"

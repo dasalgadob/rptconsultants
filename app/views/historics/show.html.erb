@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @historic.clase %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @historic.user %>
+</p>
+
+<p>
+  <strong>Valuation:</strong>
+  <%= @historic.valuation %>
+</p>
+
+<p>
+  <strong>Previous fields:</strong>
+  <%= @historic.previous_fields %>
+</p>
+
+<p>
+  <strong>New fields:</strong>
+  <%= @historic.new_fields %>
+</p>
+
+<%= link_to 'Edit', edit_historic_path(@historic) %> |
+<%= link_to 'Back', historics_path %>

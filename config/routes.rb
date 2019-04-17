@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   resources :criteria_types
   resources :roles
   resources :position_types
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
       resources :job_titles, shallow: true
     end
     resources :valuations, shallow: true do
+      resources :historics
       collection {post :import}
     end
   end

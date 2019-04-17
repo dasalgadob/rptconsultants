@@ -73,6 +73,8 @@ class ValuationsController < ApplicationController
     puts @valuation
     respond_to do |format|
       if @valuation.save
+        #Create hictoric record of creation of valuation
+        Historic.create(clase: "Creación", user_id: current_user.id, valuation_id: @valuation.id, new_fields: @valuation.to_s )
         format.html { redirect_to company_valuations_path(@company), notice: 'Valoración fue creada exitosamente.' }
         format.json { render :show, status: :created, location: @valuation }
       else
@@ -91,7 +93,10 @@ class ValuationsController < ApplicationController
   # PATCH/PUT /valuations/1.json
   def update
     respond_to do |format|
+      @old_valuation = @valuation.dup
       if @valuation.update(valuation_params)
+        #create historic record of valaution modified.
+        Historic.create(clase: "actualización", user_id: current_user.id, valuation_id: @valuation.id,previous_fields: @old_valuation.to_s, new_fields: @valuation.to_s )
         format.html { redirect_to @valuation, notice: 'Valoración fue actualizada exitosamente.' }
         format.json { render :show, status: :ok, location: @valuation }
       else

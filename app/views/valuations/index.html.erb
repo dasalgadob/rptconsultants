@@ -81,6 +81,7 @@
       <th class="col-sm-1">Grados GGS</th>
       <th class="col-sm-1">Creación</th>
       <th class="col-sm-1">Última actualización</th>
+      <th class="col-sm-1">Histórico</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -104,6 +105,7 @@
         <td class="col-sm-1"><%= valuation.degree.ggs %></td>
         <td><%= valuation.created_at.strftime("%d/%m/%Y %R") %></td>
         <td><%=valuation.updated_at.strftime("%d/%m/%Y %R") %></td>
+        <td><%= link_to 'Histórico', valuation_historics_path(valuation), target: "_blank" %></td>
         <td><%= link_to 'Editar', edit_valuation_path(valuation) %></td>
         <td><%= link_to 'Eliminar', valuation, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
       </tr>

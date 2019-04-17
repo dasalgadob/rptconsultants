@@ -11,6 +11,7 @@ class Valuation < ApplicationRecord
   belongs_to :influence, class_name: "Criterium"
   belongs_to :degree
   belongs_to :company
+  has_many :hictorics
 
   scope :score, ->(s) {where score: s}
   scope :degree, ->(d) {where degree: d}
@@ -114,6 +115,21 @@ class Valuation < ApplicationRecord
     valuation.degree_id = degree.id
     return valuation
     ##do nothing
+  end
+
+  ##Method to_s is going to show a resume of all the fields of the object
+  def to_s
+    result = "Cargo: #{self.job_title.name} Rol: #{self.position_type.name}, "+
+    "Amplitud y profundidad del conocimiento aplicado: #{Criterium.find( self.knowledge_id).degree.number}, "+
+    "Actuación (Habilidades): #{Criterium.find( self.skill_id).degree.number}, "+
+    "Definiciones y Supervisión: #{Criterium.find( self.definition_supervision_id).degree.number}, "+
+    "Riesgos asumidos y nivel de decisiones: #{Criterium.find(self.risk_decision_id).degree.number}, "+
+    "Sostenibilidad (Tiempo): #{Criterium.find( self.sustainability_id).degree.number}, "+
+    "Area de Responsabilidad: #{Criterium.find( self.area_impact_id).degree.number}, "+
+    "Influencia en los resultados: #{Criterium.find( self.influence_id).degree.number}, "+
+    "Puntaje: #{self.score}, "+
+    "Grado: #{self.degree.number}"
+
   end
 
 end

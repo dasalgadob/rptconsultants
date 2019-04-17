@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Empresas',companies_path],[@company.name,company_path(@company)], ['Valoraciones',company_valuations_path(@company)]]%>
+
+<h1>Histórico</h1>
+
+<table class="pretty table  table-striped table-bordered table-sm">
+  <thead>
+    <tr>
+      <th>Tipo</th>
+      <th>Usuario</th>
+      <th>Valoración</th>
+      <th>Campos Anteriores</th>
+      <th>Nuevos Campos</th>
+      <!--<th colspan="1"></th> -->
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @historics.each do |historic| %>
+      <tr>
+        <td><%= historic.clase %></td>
+        <td><%= historic.user.username %></td>
+        <td><%= historic.valuation %></td>
+        <td><%= historic.previous_fields %></td>
+        <td><%= historic.new_fields %></td>
+        <!-- <td><%= link_to 'Show', historic %></td> -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
