@@ -11,7 +11,7 @@ class Valuation < ApplicationRecord
   belongs_to :influence, class_name: "Criterium"
   belongs_to :degree
   belongs_to :company
-  has_many :hictorics
+  has_many :historics
 
   scope :score, ->(s) {where score: s}
   scope :degree, ->(d) {where degree: d}

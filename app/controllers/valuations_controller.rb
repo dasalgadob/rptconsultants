@@ -96,7 +96,8 @@ class ValuationsController < ApplicationController
       @old_valuation = @valuation.dup
       if @valuation.update(valuation_params)
         #create historic record of valaution modified.
-        Historic.create(clase: "actualización", user_id: current_user.id, valuation_id: @valuation.id,previous_fields: @old_valuation.to_s, new_fields: @valuation.to_s )
+        clase = Historic.set_clase_string(@old_valuation.review, @old_valuation.approve, @valuation.review, @valuation.approve)
+        Historic.create(clase: clase, user_id: current_user.id, valuation_id: @valuation.id,previous_fields: @old_valuation.to_s, new_fields: @valuation.to_s )
         format.html { redirect_to @valuation, notice: 'Valoración fue actualizada exitosamente.' }
         format.json { render :show, status: :ok, location: @valuation }
       else
@@ -119,7 +120,7 @@ class ValuationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_valuation
-      @valuation = Valuation.find(params[:id])
+      @valuation = Valuation.joins(:job_title).joins("INNER JOIN areas on job_titles.area_id = areas.id").joins(:company).includes(:job_title, :company,:position_type ).find(params[:id])
     end
 
 
@@ -133,6 +134,7 @@ class ValuationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def valuation_params
-      params.require(:valuation).permit(:job_title_id, :position_type_id, :knowledge_id, :skill_id, :definition_supervision_id, :risk_decision_id, :sustainability_id, :area_impact_id, :influence_id, :score, :degree_id, :area)
+      params.require(:valuation).permit(:job_title_id, :position_type_id, :knowledge_id, :skill_id, :definition_supervision_id,
+         :risk_decision_id, :sustainability_id, :area_impact_id, :influence_id, :score, :degree_id, :area, :review, :approve)
     end
 end

@@ -182,6 +182,10 @@ div .pagination {
   background-color: red;
 }
 
+table th {
+    width: auto !important;
+}
+
 
 @import "bootstrap-sprockets";
 @import "bootstrap";

@@ -139,7 +139,23 @@
     <%= f.label "Grado" %>
     <%= f.select :degree_id,options_for_select(@degrees.map{ |d| [d.number, d.id]}),{ :include_blank => true },{ class: 'form-control', readonly: 'true'} %>
   </div>
+  <% if current_user.review || current_user.is_admin %>
+  <div class="form-group">
+    <%= f.label :review, class: "checkbox-inline" do %>
+      <%= f.check_box :review  %>
+      <span>Revisar</span>
+    <% end %>
+  </div>
+  <% end %>
 
+  <% if current_user.approve || current_user.is_admin %>
+  <div class="form-group">
+    <%= f.label :approve, class: "checkbox-inline" do %>
+      <%= f.check_box :approve  %>
+      <span>Aprobar</span>
+    <% end %>
+  </div>
+  <% end %>
   <div class="actions">
     <%= f.submit locals[:submit_string], class: 'btn btn-success', id: 'submit'%>
   </div>
