@@ -5,6 +5,9 @@ class JobTitlesController < ApplicationController
   #load_and_authorize_resource :job_title, through: :area
   load_and_authorize_resource :company
   load_and_authorize_resource :job_title, through: :company
+
+  skip_authorize_resource :only => :index
+  skip_authorize_resource :post, :only => :index
   # GET /job_titles
   # GET /job_titles.json
   def index
@@ -17,6 +20,7 @@ class JobTitlesController < ApplicationController
         json_string = JobTitleSerializer.new(@job_titles).serialized_json
         format.json {render json: json_string}
       else
+        @company = Company.find(params[:company_id])
           @job_titles = JobTitle.where(company_id: params[:company_id])
           format.html
           json_string = JobTitleSerializer.new(@job_titles).serialized_json
@@ -77,9 +81,10 @@ class JobTitlesController < ApplicationController
   # DELETE /job_titles/1.json
   def destroy
     @area = @job_title.area
+    @company = @job_title.company
     @job_title.destroy
     respond_to do |format|
-      format.html { redirect_to @area, notice: 'Cargo fue eliminado exitosamente.' }
+      format.html { redirect_to company_job_titles_path(@company), notice: 'Cargo fue eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end

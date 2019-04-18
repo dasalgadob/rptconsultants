@@ -35,7 +35,7 @@
       </ul>
     </div>
   <% end %>
-
+  <input type="hidden" name="company_id" id="company_id" value="<%= @company.id%>">
   <div class="field form-group col-sm-3">
     <%= f.label "Area" %>
     <%= select_tag "area", options_from_collection_for_select(@areas, "id", "name", !@valuation.new_record? ? @valuation.job_title.area.id: ""), options = {:include_blank => true, class: '', style: "width: 100%;"} %>
@@ -95,7 +95,7 @@
 
   <div class="field form-group col-sm-1">
     <%= f.label "Grado" %>
-    <%= f.select :degree_id,options_for_select(@degrees.map{ |d| [d.number, d.id]}),{ :include_blank => true },{ class: '', readonly: 'true', style: "width: 100%;"} %>
+    <%= f.select :degree_id,options_for_select(@degrees.map{ |d| [d.number, d.id]}),{ :include_blank => true },{ class: '', readonly: 'true', style: "width: 100%;", disabled: "disabled"} %>
   </div>
 
 

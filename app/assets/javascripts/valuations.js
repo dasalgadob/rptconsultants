@@ -204,8 +204,9 @@ function updateDegree(){
 
 
 function changeJobTitlesByArea(){
-  console.log("Url:" + "/areas/" + $('#area').val()+ "/job_titles.json");
-  $.get( "/areas/" + $('#area').val()+ "/job_titles.json")
+  var url  ="/companies/" + $('#company_id').val()+ "/job_titles.json?area_id="+$('#area').val() ;
+  console.log("Url:" + url);
+  $.get( url )
       .done(function( data ) {
         area = [];
         console.log("loading JobTitles values...");
