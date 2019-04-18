@@ -54,10 +54,11 @@
 <h1>Valoraciones</h1>
 
 <table class="pretty   table-striped table-bordered table-sm" id="valuationsTable">
-  
+
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <!-- <%=number_of_columns %> when may be needed to just show to the one that has permission-->
+      <th colspan="5"></th>
       <th colspan="2">CONOCIMIENTOS Y HABILIDADES</th>
       <th colspan="2">MARCO DE TRABAJO</th>
       <th colspan="3">RESULTADOS</th>
@@ -68,15 +69,18 @@
       <th class="">Area</th>
       <th class=""><%= sortable "job_titles.name", "Cargo ", params%></th>
       <!-- <th>Cargo</th> -->
+      <!-- to rotate letters if needed style="-webkit-transform: rotate(-90deg);-->
       <th class=""><%= sortable "position_types.name", "Tipo de posición", params%></th>
+      <th class="" ">Revisado</th>
+      <th class="" ">Aprobado</th>
       <th class="">Amplitud y profundidad del conocimiento aplicado</th>
-      <th class="">Actuación (Habilidades)</th>
+      <th class="" ">Actuación (Habilidades)</th>
       <th class="">Definiciones y Supervisión</th>
       <th class="">Riesgos asumidos y nivel de decisiones</th>
-      <th class="">Sostenibilidad (Tiempo)</th>
-      <th class="">Area de Responsabilidad</th>
+      <th class="" ">Sostenibilidad (Tiempo)</th>
+      <th class="" ">Area de Responsabilidad</th>
       <th class="">Influencia en los resultados</th>
-      <th class=""><%= sortable "score", "Puntaje", params%></th>
+      <th class="" "><%= sortable "score", "Puntaje", params%></th>
       <th class=""><%= sortable "degrees.number", "Grados RPT", params%></th>
       <th class="">Grados HAY</th>
       <th class="">Grados GGS</th>
@@ -91,8 +95,10 @@
     <% @valuations.each do |valuation| %>
       <tr>
         <td class=""><%= valuation.job_title.area.name %></td>
-        <td class=""><%= valuation.job_title.name %></td>
-        <td class=""><%= valuation.position_type.name.upcase %></td>
+        <td class=""><%=link_to valuation.job_title.name,edit_valuation_path(valuation)  %><%=  %></td>
+        <td class="">  <%= valuation.position_type.name.upcase %></td>
+        <td class=""><input type="checkbox" disabled <%= valuation.review ? "checked":"" %>></td>
+        <td class=""><input type="checkbox" disabled <%= valuation.approve ? "checked":"" %>></td>
         <td class=""><%= valuation.knowledge.score %></td>
         <td class=""><%= valuation.skill.score %></td>
         <td class=""><%= valuation.definition_supervision.score %></td>

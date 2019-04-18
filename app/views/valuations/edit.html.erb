@@ -1,12 +1,13 @@
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Empresas',companies_path],[@company.name,company_path(@company)], ["Valoraciones", company_valuations_path(@company)]]%>
 
 
-<h1>Editando valoración</h1>
+<h3>Editando valoración</h3>
 
 <%= render 'form', valuation: @valuation, locals: { submit_string: 'Editar'} %>
-
+<div class="col-sm-12">
 <%= link_to 'Ver', @valuation %> |
 <%= link_to 'Volver', company_valuations_path(@valuation.job_title.area.company) %>
+</div>
 <script type="text/javascript">
     var job_titles = null;
     job_titles = <%= JobTitleSerializer.new(@job_titles).serialized_json %>;

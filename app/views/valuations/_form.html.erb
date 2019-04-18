@@ -23,7 +23,7 @@
   <% end %>
 
 
-<%= form_for(form_var) do |f| %>
+<%= form_for(form_var, html: {style: "font-size: 13px;"}) do |f| %>
   <% if @valuation.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@valuation.errors.count, "error", plural="errores") %> impidieron a esta valoración de ser guaradada:</h2>
@@ -36,15 +36,15 @@
     </div>
   <% end %>
 
-  <div class="field form-group">
+  <div class="field form-group col-sm-3">
     <%= f.label "Area" %>
-    <%= select_tag "area", options_from_collection_for_select(@areas, "id", "name", !@valuation.new_record? ? @valuation.job_title.area.id: ""), options = {:include_blank => true, class: 'form-control'} %>
+    <%= select_tag "area", options_from_collection_for_select(@areas, "id", "name", !@valuation.new_record? ? @valuation.job_title.area.id: ""), options = {:include_blank => true, class: '', style: "width: 100%;"} %>
   </div>
 
 
-  <div class="field form-group">
+  <div class="field form-group col-sm-3">
     <%= f.label "Cargo" %>
-    <%= f.select :job_title_id , options_for_select([]),{ :include_blank => true },{ class: 'form-control'} %>
+    <%= f.select :job_title_id , options_for_select([]),{ :include_blank => true },{ class: '',  style: "width: 100%;"} %>
     <% if locals[:submit_string] == 'Editar' %>
     <script type="text/javascript">
       var job_title= null;
@@ -60,9 +60,9 @@
 
 
 
-  <div class="field form-group">
+  <div class="field form-group col-sm-3">
     <%= f.label "Tipo de posición" %>
-    <%= f.select :position_type_id, options_for_select(@position_types.map{ |pt| [pt.name.upcase, pt.id]}),{ :include_blank => true, selected: @valuation.position_type },{ class: 'form-control'} %>
+    <%= f.select :position_type_id, options_for_select(@position_types.map{ |pt| [pt.name.upcase, pt.id]}),{ :include_blank => true, selected: @valuation.position_type },{ class: '' , style: "width: 100%;"} %>
   </div>
   <% if locals[:submit_string] == 'Editar' %>
   <script type="text/javascript">
@@ -88,59 +88,76 @@
   </script>
   <% end %>
 
-  <div class="field form-group">
-    <%= f.label "Amplitud y profundidad del conocimiento aplicado" %>
-    <%= f.select :knowledge_id, options_for_select([]),{ :include_blank => true },{ class: 'form-control valuation_criteria'} %>
-    <p id="valuation_knowledge_id_text"></p>
-  </div>
-
-  <div class="field form-group">
-    <%= f.label "Actuación (Habilidades)" %>
-    <%= f.select :skill_id, options_for_select([]),{ :include_blank => true },{ class: 'form-control valuation_criteria'} %>
-    <p id="valuation_skill_id_text"></p>
-  </div>
-
-  <div class="field form-group">
-    <%= f.label "Definiciones y Supervisión" %>
-    <%= f.select :definition_supervision_id, options_for_select([]),{ :include_blank => true },{ class: 'form-control valuation_criteria'} %>
-    <p id="valuation_definition_supervision_id_text"></p>
-  </div>
-
-  <div class="field form-group">
-    <%= f.label "Riesgos asumidos y nivel de decisiones" %>
-    <%= f.select :risk_decision_id, options_for_select([]),{ :include_blank => true },{ class: 'form-control valuation_criteria'} %>
-    <p id="valuation_risk_decision_id_text"></p>
-  </div>
-
-  <div class="field form-group">
-    <%= f.label "Sostenibilidad (Tiempo)" %>
-    <%= f.select :sustainability_id, options_for_select([]),{ :include_blank => true },{ class: 'form-control valuation_criteria'} %>
-    <p id="valuation_sustainability_id_text"></p>
-  </div>
-
-  <div class="field form-group">
-    <%= f.label "Area de Responsabilidad" %>
-    <%= f.select :area_impact_id, options_for_select([]),{ :include_blank => true },{ class: 'form-control valuation_criteria'} %>
-    <p id="valuation_area_impact_id_text"></p>
-  </div>
-
-  <div class="field form-group">
-    <%= f.label "Influencia en los resultados" %>
-    <%= f.select :influence_id, options_for_select([]),{ :include_blank => true },{ class: 'form-control valuation_criteria'} %>
-    <p id="valuation_influence_id_text"></p>
-  </div>
-
-  <div class="field form-group">
+  <div class="field form-group col-sm-2">
     <%= f.label "Puntaje" %>
-    <%= f.number_field :score, {class: 'form-control', readonly: 'true'} %>
+    <%= f.number_field :score, {class: '', readonly: 'true', style: "width: 100%;"} %>
   </div>
 
-  <div class="field form-group">
+  <div class="field form-group col-sm-1">
     <%= f.label "Grado" %>
-    <%= f.select :degree_id,options_for_select(@degrees.map{ |d| [d.number, d.id]}),{ :include_blank => true },{ class: 'form-control', readonly: 'true'} %>
+    <%= f.select :degree_id,options_for_select(@degrees.map{ |d| [d.number, d.id]}),{ :include_blank => true },{ class: '', readonly: 'true', style: "width: 100%;"} %>
   </div>
+
+
+<div class="col-sm-12">
+  <div class="field form-group col-sm-2">
+    <%= f.label "Amplitud y profundidad del conocimiento aplicado" %>
+    <%= f.select :knowledge_id, options_for_select([]),{ :include_blank => true },{ class: ' valuation_criteria col-sm-6'} %>
+  </div>
+  <p class="col-sm-10" id="valuation_knowledge_id_text"></p>
+</div>
+<div class="col-sm-12">
+  <div class="field form-group  col-sm-2">
+    <%= f.label "Actuación (Habilidades)" %>
+    <%= f.select :skill_id, options_for_select([]),{ :include_blank => true },{ class: ' valuation_criteria'} %>
+  </div>
+  <p class="col-sm-10"id="valuation_skill_id_text"></p>
+</div>
+
+<div class="col-sm-12">
+  <div class="field form-group  col-sm-2">
+    <%= f.label "Definiciones y Supervisión" %>
+    <%= f.select :definition_supervision_id, options_for_select([]),{ :include_blank => true },{ class: ' valuation_criteria'} %>
+
+  </div>
+ <p class="col-sm-10"id="valuation_definition_supervision_id_text"></p>
+</div>
+
+<div class="col-sm-12">
+  <div class="field form-group col-sm-2">
+    <%= f.label "Riesgos asumidos y nivel de decisiones" %>
+    <%= f.select :risk_decision_id, options_for_select([]),{ :include_blank => true },{ class: ' valuation_criteria'} %>
+  </div>
+  <p class="col-sm-10"id="valuation_risk_decision_id_text"></p>
+</div>
+
+<div class="col-sm-12">
+  <div class="field form-group col-sm-2">
+    <%= f.label "Sostenibilidad (Tiempo)" %>
+    <%= f.select :sustainability_id, options_for_select([]),{ :include_blank => true },{ class: ' valuation_criteria'} %>
+  </div>
+  <p class="col-sm-10"id="valuation_sustainability_id_text"></p>
+</div>
+
+<div class="col-sm-12">
+  <div class="field form-group col-sm-2">
+    <%= f.label "Area de Responsabilidad" %>
+    <%= f.select :area_impact_id, options_for_select([]),{ :include_blank => true },{ class: ' valuation_criteria'} %>
+  </div>
+  <p class="col-sm-10"id="valuation_area_impact_id_text"></p>
+</div>
+
+<div class="col-sm-12">
+  <div class="field form-group col-sm-2">
+    <%= f.label "Influencia en los resultados" %>
+    <%= f.select :influence_id, options_for_select([]),{ :include_blank => true },{ class: ' valuation_criteria'} %>
+  </div>
+  <p class="col-sm-10"id="valuation_influence_id_text"></p>
+</div>
+
+
   <% if current_user.review || current_user.is_admin %>
-  <div class="form-group">
+  <div class="form-group col-sm-12">
     <%= f.label :review, class: "checkbox-inline" do %>
       <%= f.check_box :review  %>
       <span>Revisar</span>
@@ -149,14 +166,17 @@
   <% end %>
 
   <% if current_user.approve || current_user.is_admin %>
-  <div class="form-group">
+  <div class="form-group col-sm-12">
     <%= f.label :approve, class: "checkbox-inline" do %>
       <%= f.check_box :approve  %>
       <span>Aprobar</span>
     <% end %>
   </div>
   <% end %>
-  <div class="actions">
+
+  <% if editable_valuation %>
+  <div class="actions col-sm-12">
     <%= f.submit locals[:submit_string], class: 'btn btn-success', id: 'submit'%>
   </div>
+  <% end %>
 <% end %>

@@ -120,7 +120,7 @@ class ValuationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_valuation
-      @valuation = Valuation.joins(:job_title).joins("INNER JOIN areas on job_titles.area_id = areas.id").joins(:company).includes(:job_title, :company,:position_type ).find(params[:id])
+      @valuation = Valuation.includes( :company,:position_type ).find(params[:id])
     end
 
 
