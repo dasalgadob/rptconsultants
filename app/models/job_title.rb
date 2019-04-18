@@ -1,6 +1,8 @@
 class JobTitle < ApplicationRecord
-  belongs_to :area
+  has_one :valuation, dependent: :destroy
+  belongs_to :area, optional: true
   validates :name, presence: true
+  belongs_to :company
 
   def self.job_titles_hash_by_name(company_id)
     job_titles_hash={}

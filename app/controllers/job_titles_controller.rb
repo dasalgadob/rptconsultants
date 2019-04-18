@@ -1,16 +1,27 @@
 class JobTitlesController < ApplicationController
   before_action :set_job_title, only: [:show, :edit, :update, :destroy]
   #load_and_authorize_resource
-  load_and_authorize_resource :area
-  load_and_authorize_resource :job_title, through: :area
+  #load_and_authorize_resource :area
+  #load_and_authorize_resource :job_title, through: :area
+  load_and_authorize_resource :company
+  load_and_authorize_resource :job_title, through: :company
   # GET /job_titles
   # GET /job_titles.json
   def index
     respond_to do |format|
-      @job_titles = JobTitle.where(area_id: params[:area_id])
-      format.html
-      json_string = JobTitleSerializer.new(@job_titles).serialized_json
-      format.json {render json: json_string}
+      puts "params[:area_id]"   +"end"
+      puts(params[:area_id]==nil)
+      if params[:area_id] != nil && params[:area_id] != ""
+        @job_titles = JobTitle.where(area_id: params[:area_id])
+        format.html
+        json_string = JobTitleSerializer.new(@job_titles).serialized_json
+        format.json {render json: json_string}
+      else
+          @job_titles = JobTitle.where(company_id: params[:company_id])
+          format.html
+          json_string = JobTitleSerializer.new(@job_titles).serialized_json
+          format.json {render json: json_string}
+      end
     end
 
   end
@@ -81,6 +92,6 @@ class JobTitlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def job_title_params
-      params.require(:job_title).permit(:name, :area_id)
+      params.require(:job_title).permit(:name, :area_id, :company_id)
     end
 end

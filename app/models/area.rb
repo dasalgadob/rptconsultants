@@ -1,6 +1,7 @@
 class Area < ApplicationRecord
   belongs_to :company
-  has_many  :job_titles
+  ##Allows that the foreign key to be setup null when area is destroyed
+  has_many  :job_titles, dependent: :nullify
 
   validates :name, presence: true
   #has_many :valuations, through: :job_title

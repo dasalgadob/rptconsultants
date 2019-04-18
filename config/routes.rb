@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
   resources :degrees
   resources :companies do
+    resources :job_titles
     resources :areas, shallow: true do
       resources :job_titles, shallow: true
     end

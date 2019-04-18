@@ -14,7 +14,7 @@
     <% @job_titles.each do |job_title| %>
       <tr>
         <td><%= job_title.name %></td>
-        <td><%= job_title.area %></td>
+        <td><%= get_job_title_area_name(job_title) %></td>
         <td><%= link_to 'Ver', job_title %></td>
         <td><%= link_to 'Editar', edit_job_title_path(job_title) %></td>
         <td><%= link_to 'Eliminar', job_title, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
@@ -25,4 +25,4 @@
 
 <br>
 
-<%= link_to 'Nuevo cargo', new_job_title_path %>
+<%= link_to 'Nuevo cargo', new_company_job_title_path %>

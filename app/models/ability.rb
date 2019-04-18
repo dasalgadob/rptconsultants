@@ -8,16 +8,18 @@ class Ability
       can :manage, Company, id: user.company_id
       can :manage, Area, company: { id: user.company_id}
       can :manage, Valuation, company: { id: user.company_id}
-      can :manage, JobTitle, area: { company: {id: user.company_id}}
+      #can :manage, JobTitle, area: { company: {id: user.company_id}}
+      can :manage, JobTitle, company: { id: user.company_id}
       ### Needed to do valuations
       can :read, PositionType
       can :read, Criterium
       can :read, Degree
       can :read, Role
-      
       if user.is_admin?  # additional permissions for administrators
         can :manage, :all
       end
+
+
     end
     # Define abilities for the passed in user here. For example:
     #

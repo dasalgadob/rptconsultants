@@ -21,9 +21,17 @@
     </li>
 
     <li>
+      <a href='<%= company_job_titles_path(@company) %>' class="">
+
+        <i class="fa fa-briefcase fa-5x icon-brown" aria-hidden="true"></i>
+        <h4><span class="glyphicon-class icon-brown">Cargos</span></h4>
+      </a>
+    </li>
+
+    <li>
       <a href="<%= company_valuations_path(@company)%>" class="">
 
-        <i class="fa fa-briefcase fa-5x icon-blue" aria-hidden="true"></i>
+        <i class="fa fa-calculator fa-5x icon-blue" aria-hidden="true"></i>
         <h4><span class="glyphicon-class icon-blue">Valoraciones</span></h4>
       </a>
     </li>
@@ -31,7 +39,7 @@
     <li>
       <a href="/companies/<%= @company.id%>/reports" class="">
 
-        <i class="fa fa-briefcase fa-5x icon-gray" aria-hidden="true"></i>
+        <i class="fa fa-table fa-5x icon-gray" aria-hidden="true"></i>
         <h4><span class="glyphicon-class icon-gray">Mapas</span></h4>
       </a>
     </li>

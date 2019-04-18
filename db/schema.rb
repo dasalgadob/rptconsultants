@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190417222809) do
+ActiveRecord::Schema.define(version: 20190418175707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,7 +164,9 @@ ActiveRecord::Schema.define(version: 20190417222809) do
     t.integer  "area_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "company_id"
     t.index ["area_id"], name: "index_job_titles_on_area_id", using: :btree
+    t.index ["company_id"], name: "index_job_titles_on_company_id", using: :btree
   end
 
   create_table "locations", force: :cascade do |t|
@@ -325,6 +327,7 @@ ActiveRecord::Schema.define(version: 20190417222809) do
   add_foreign_key "invoice_services", "services"
   add_foreign_key "invoices", "people"
   add_foreign_key "job_titles", "areas"
+  add_foreign_key "job_titles", "companies"
   add_foreign_key "locations", "cities"
   add_foreign_key "locations", "people"
   add_foreign_key "people", "document_types"

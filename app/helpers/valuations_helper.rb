@@ -1,5 +1,6 @@
 module ValuationsHelper
 
+  #Determine if a valuation can be edited based on the user that is accessing the app
   def editable_valuation
     if !@valuation.new_record?
       ##Check if current_user has the role of the state of the valuation
@@ -32,5 +33,10 @@ module ValuationsHelper
     end
     return n_columns
   end#end of function
+
+  #return the string or null if there is no area for the job_title
+  def get_valuation_area_string(valuation)
+    return valuation.job_title.area == nil ? "" :  valuation.job_title.area.name
+  end
 
 end ##End module

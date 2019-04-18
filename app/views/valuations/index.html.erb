@@ -94,7 +94,7 @@
   <tbody>
     <% @valuations.each do |valuation| %>
       <tr>
-        <td class=""><%= valuation.job_title.area.name %></td>
+        <td class=""><%= get_valuation_area_string(valuation) %></td>
         <td class=""><%=link_to valuation.job_title.name,edit_valuation_path(valuation)  %><%=  %></td>
         <td class="">  <%= valuation.position_type.name.upcase %></td>
         <td class=""><input type="checkbox" disabled <%= valuation.review ? "checked":"" %>></td>

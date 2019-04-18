@@ -21,7 +21,7 @@ class Valuation < ApplicationRecord
   #  .where( "job_titles.name like ?", "#{jt}")}
 
   def self.load_valuations(company,page=1, per_page=20)
-    joins(:degree, :company, :position_type, :job_title).joins("INNER JOIN areas on job_titles.area_id = areas.id")
+    joins(:degree, :company, :position_type, :job_title).joins("LEFT OUTER JOIN areas on job_titles.area_id = areas.id")
       .paginate(:page => page, :per_page => per_page).where(company_id: company.id)
   end
 
