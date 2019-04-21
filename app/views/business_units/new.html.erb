@@ -1,0 +1,8 @@
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Grupos Empresariales', companies_path], [@company.name,company_path(@company)], ['Unidades de negocio', company_business_units_path(@company)]]%>
+
+
+<h2>Nueva Unidad de Negocio</h2>
+
+<%= render 'form', business_unit: @business_unit, locals: { submit_string: 'Crear'} %>
+
+<%= link_to 'Back', company_business_units_path %>

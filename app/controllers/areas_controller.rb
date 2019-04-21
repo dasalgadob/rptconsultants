@@ -20,17 +20,21 @@ class AreasController < ApplicationController
   # GET /areas/new
   def new
     @company = Company.find(params[:company_id])
+    @business_units = @company.business_units
     @area = Area.new
   end
 
   # GET /areas/1/edit
   def edit
+    @company = @area.company
+    @business_units = @company.business_units
   end
 
   # POST /areas
   # POST /areas.json
   def create
     @company = Company.find(params[:company_id])
+    @business_units = @company.business_units
     @area = Area.new(area_params)
     @area.company = @company
 
@@ -48,6 +52,8 @@ class AreasController < ApplicationController
   # PATCH/PUT /areas/1
   # PATCH/PUT /areas/1.json
   def update
+    @company = @area.company
+    @business_units = @company.business_units
     respond_to do |format|
       if @area.update(area_params)
         format.html { redirect_to @area, notice: 'Area fue actualizada exitosamente.' }
@@ -77,6 +83,6 @@ class AreasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def area_params
-      params.require(:area).permit(:name, :company_id)
+      params.require(:area).permit(:name, :company_id, :business_unit_id)
     end
 end

@@ -1,0 +1,32 @@
+
+<% case locals[:submit_string] %>
+<% when "Crear"%>
+<% form_var = [@company, @business_unit] %>
+<% when "Editar"%>
+<% form_var = @business_unit %>
+<% end %>
+<%= form_for(form_var) do |f| %>
+
+
+  <% if business_unit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(business_unit.errors.count, "error") %> prohibited this business_unit from being saved:</h2>
+
+      <ul>
+      <% business_unit.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= f.label "Nombre" %>
+    <%= f.text_field :name, class: 'form-control' %>
+  </div>
+
+  <input type="hidden" name="business_unit[company_id]" id="business_unit_name" value="<%=  @company.id %>">
+  <div class="actions">
+    <%= f.submit locals[:submit_string], class: 'btn btn-success' %>
+  </div>
+<% end %>

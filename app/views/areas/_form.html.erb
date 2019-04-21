@@ -1,4 +1,12 @@
-<%= form_for([@company, @area]) do |f| %>
+<% case locals[:submit_string] %>
+<% when "Crear"%>
+<% form_var = [@company, @area] %>
+<% when "Editar"%>
+<% form_var = @area %>
+<% end %>
+
+
+<%= form_for(form_var) do |f| %>
   <% if area.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(area.errors.count, "error", plural="errores") %> impidieron esta Area de ser guardada:</h2>
@@ -12,8 +20,13 @@
   <% end %>
 
   <div class="field form-group">
-    <%= f.label "Nombre" %>
+    <%= f.label "Nombre Area" %>
     <%= f.text_field :name, class: 'form-control', required: "required" %>
+  </div>
+
+  <div class="field form-group">
+    <%= f.label "Unidad de Negocio" %>
+    <%= f.select :business_unit_id, options_for_select(@business_units.map{ |bu| [bu.name.upcase, bu.id]}),{ :include_blank => true, selected: @area.business_unit },{ class: 'form-control' } %>
   </div>
 
   <div class="actions">

@@ -1,0 +1,9 @@
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Grupos Empresariales', companies_path], [@company.name,company_path(@company)],['Unidades de negocio', company_business_units_path(@company)]]%>
+
+
+<h2>Editando unidad Empresarial</h2>
+
+<%= render 'form', business_unit: @business_unit, locals: { submit_string: 'Editar'} %>
+
+<%= link_to 'Ver', business_unit_path( @business_unit) %> |
+<%= link_to 'Volver', company_business_units_path(@business_unit.company) %>

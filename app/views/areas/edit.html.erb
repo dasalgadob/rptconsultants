@@ -1,4 +1,5 @@
-<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path]]%>
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Empresas', companies_path], [@area.company.name, company_path(@area.company)],['Areas', company_areas_path(@area.company)]]%>
+
 <h1>Editando Area</h1>
 
 <%= render 'form', area: @area, locals: { submit_string: 'Editar'} %>

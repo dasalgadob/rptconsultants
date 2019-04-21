@@ -2,11 +2,12 @@
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Empresas',companies_path],[@company.name,company_path(@company)]]%>
 <h1>Areas</h1>
 
-<p><b>Empresa:</b> <%= @company.name%></p>
+<p><b>Grupo Empresarial:</b> <%= @company.name%></p>
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Nombre</th>
+      <th>Nombre Area</th>
+      <th>Unidad de Negocio</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -15,6 +16,7 @@
     <% @areas.each do |area| %>
       <tr>
         <td><%= link_to area.name , area %></td>
+        <td><%=   get_business_unit_string(area) %></td>
         <td><%= link_to 'Editar', edit_area_path(area) %></td>
         <td><%= link_to 'Eliminar', area, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
       </tr>

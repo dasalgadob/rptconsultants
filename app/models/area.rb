@@ -1,5 +1,6 @@
 class Area < ApplicationRecord
   belongs_to :company
+  belongs_to :business_unit, optional: true
   ##Allows that the foreign key to be setup null when area is destroyed
   has_many  :job_titles, dependent: :nullify
 

@@ -1,0 +1,31 @@
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Grupos Empresariales', companies_path], [@company.name,company_path(@company)]]%>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Unidades de Negocio</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre Unidad Empresarial</th>
+      <th>Grupo Empresarial</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @business_units.each do |business_unit| %>
+      <tr>
+        <td><%= business_unit.name %></td>
+        <td><%= business_unit.company.name %></td>
+        <td><%= link_to 'Ver', business_unit_path(business_unit, business_unit) %></td>
+        <td><%= link_to 'Editar', edit_business_unit_path(business_unit) %></td>
+        <td><%= link_to 'Eliminar', business_unit_path(business_unit), method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Nueva Unidad de Negocio', new_company_business_unit_path %>

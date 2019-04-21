@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-
   resources :criteria_types
   resources :roles
   resources :position_types
@@ -9,6 +7,7 @@ Rails.application.routes.draw do
   end
   resources :degrees
   resources :companies do
+    resources :business_units, shallow: true
     resources :job_titles
     resources :areas, shallow: true do
       resources :job_titles, shallow: true

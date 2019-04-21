@@ -1,0 +1,17 @@
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Grupos Empresariales', companies_path], [@company.name,company_path(@company)], ['Unidades de negocio', company_business_units_path(@company)]]%>
+
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre:</strong>
+  <%= @business_unit.name %>
+</p>
+
+<p>
+  <strong>Grupo Empresarial:</strong>
+  <%= @business_unit.company.name %>
+</p>
+
+<%= link_to 'Edit', edit_business_unit_path(@business_unit) %> |
+<%= link_to 'Back', company_business_units_path(@business_unit.company) %>
