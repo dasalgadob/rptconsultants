@@ -36,7 +36,7 @@ class ValuationsController < ApplicationController
   # GET /valuations/1
   # GET /valuations/1.json
   def show
-    @company = @valuation.job_title.area.company
+    @company = @valuation.company
   end
 
   # GET /valuations/new
@@ -52,11 +52,11 @@ class ValuationsController < ApplicationController
 
   # GET /valuations/1/edit
   def edit
-    @company = @valuation.job_title.area.company
+    @company = @valuation.company
     @area = @valuation.job_title.area
     @areas = @company.areas
     @job_title = @valuation.job_title
-    @job_titles = @valuation.job_title.area.job_titles
+    @job_titles = Area.where(company_id: @company.id)
     @position_type = @valuation.position_type
     @position_types = PositionType.all
     @degrees = Degree.all

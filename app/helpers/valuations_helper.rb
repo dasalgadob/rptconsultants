@@ -39,4 +39,13 @@ module ValuationsHelper
     return valuation.job_title.area == nil ? "" :  valuation.job_title.area.name
   end
 
+ #It choose the company name when business unit is not assigned to the valuation
+  def get_business_unit_string(valuation)
+    if valuation.job_title.area == nil || valuation.job_title.area.business_unit == nil
+      return valuation.company.name
+    else
+      valuation.job_title.area.business_unit.name
+    end  #end if
+  end #End function
+
 end ##End module

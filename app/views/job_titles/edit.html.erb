@@ -1,9 +1,17 @@
 
-
-<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Companies',companies_path],[@job_title.area.company.name,company_path(@job_title.area.company)], ['Areas', company_areas_path(@job_title.area.company)], [@job_title.area.name, area_path(@job_title.area)]]%>
+ <% if @job_title.area != nil %>
+ <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Companies',companies_path],[@job_title.area.company.name,company_path(@job_title.area.company)], ['Areas', company_areas_path(@job_title.area.company)], [@job_title.area.name, area_path(@job_title.area)]]%>
+<% else %>
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Companies',companies_path], ["Roles", company_job_titles_path(@company)]]%>
+<% end %>
 <h1>Editando cargo</h1>
 
 <%= render 'form', job_title: @job_title, locals: { submit_string: 'Editar'} %>
 
-<%= link_to 'Ver', @job_title %> |
-<%= link_to 'Volver', area_path(@job_title.area.id) %>
+<%= link_to 'Ver', @job_title %>
+<%# The route of return is setup based on if it hash an area or not%>
+<% if @job_title.area != nil %>
+  <%= link_to 'Volver', area_path(@job_title.area.id) %>
+<% else %>
+  <%= link_to 'Volver', company_job_titles_path(@job_title.company.id) %>
+<% end %>

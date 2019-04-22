@@ -16,7 +16,7 @@
     <% @areas.each do |area| %>
       <tr>
         <td><%= link_to area.name , area %></td>
-        <td><%=   get_business_unit_string(area) %></td>
+        <td><%=   get_area_business_unit_string(area) %></td>
         <td><%= link_to 'Editar', edit_area_path(area) %></td>
         <td><%= link_to 'Eliminar', area, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
       </tr>

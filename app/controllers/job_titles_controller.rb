@@ -1,13 +1,13 @@
 class JobTitlesController < ApplicationController
   before_action :set_job_title, only: [:show, :edit, :update, :destroy]
   #load_and_authorize_resource
-  #load_and_authorize_resource :area
-  #load_and_authorize_resource :job_title, through: :area
+  load_and_authorize_resource :area
+  load_and_authorize_resource :job_title, through: :area, shallow: true
   load_and_authorize_resource :company
   load_and_authorize_resource :job_title, through: :company
 
-  skip_authorize_resource :only => :index
-  skip_authorize_resource :post, :only => :index
+  skip_authorize_resource :only => [:index, :new]
+  skip_authorize_resource :post, :only => [:index, :new]
   # GET /job_titles
   # GET /job_titles.json
   def index
@@ -39,18 +39,26 @@ class JobTitlesController < ApplicationController
   def new
     @area = Area.find(params[:area_id])
     @company = @area.company
+    @areas = Area.where(company: @company)
     @job_title = JobTitle.new
+    @job_title.company = @company
+    @job_title.area = @area
   end
 
   # GET /job_titles/1/edit
   def edit
+    @company = @job_title.company
+    ##Area is not passed to avoid damaging the automatic url
+    @areas = Area.where(company_id: @company.id)
   end
 
   # POST /job_titles
   # POST /job_titles.json
   def create
-    @area = Area.find(params[:area_id])
     @job_title = JobTitle.new(job_title_params)
+    @area = @job_title.area
+    @company = @job_title.area.company
+    @areas = Area.where(company_id: @company.id)
     @job_title.area = @area
     respond_to do |format|
       if @job_title.save
@@ -66,6 +74,8 @@ class JobTitlesController < ApplicationController
   # PATCH/PUT /job_titles/1
   # PATCH/PUT /job_titles/1.json
   def update
+    @company = @job_title.company
+    @areas = Area.where(company_id: @company.id)
     respond_to do |format|
       if @job_title.update(job_title_params)
         format.html { redirect_to @job_title.area, notice: 'Cargo fue actualizado exitosamente.' }

@@ -66,6 +66,7 @@
       <th colspan="2">FECHAS</th>
     </tr>
     <tr>
+      <th class="">Empresa</th>
       <th class="">Area</th>
       <th class=""><%= sortable "job_titles.name", "Cargo ", params%></th>
       <!-- <th>Cargo</th> -->
@@ -94,6 +95,7 @@
   <tbody>
     <% @valuations.each do |valuation| %>
       <tr>
+        <td class=""><%= get_business_unit_string(valuation) %></td>
         <td class=""><%= get_valuation_area_string(valuation) %></td>
         <td class=""><%=link_to valuation.job_title.name,edit_valuation_path(valuation)  %><%=  %></td>
         <td class="">  <%= valuation.position_type.name.upcase %></td>

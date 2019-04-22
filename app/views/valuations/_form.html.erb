@@ -38,7 +38,7 @@
   <input type="hidden" name="company_id" id="company_id" value="<%= @company.id%>">
   <div class="field form-group col-sm-3">
     <%= f.label "Area" %>
-    <%= select_tag "area", options_from_collection_for_select(@areas, "id", "name", !@valuation.new_record? ? @valuation.job_title.area.id: ""), options = {:include_blank => true, class: '', style: "width: 100%;"} %>
+    <%= select_tag "area", options_from_collection_for_select(@areas, "id", "name", !@valuation.new_record? && @valuation.job_title.area != nil ? @valuation.job_title.area.id: ""), options = {:include_blank => true, class: '', style: "width: 100%;"} %>
   </div>
 
 
@@ -95,7 +95,7 @@
 
   <div class="field form-group col-sm-1">
     <%= f.label "Grado" %>
-    <%= f.select :degree_id,options_for_select(@degrees.map{ |d| [d.number, d.id]}),{ :include_blank => true },{ class: '', readonly: 'true', style: "width: 100%;", disabled: "disabled"} %>
+    <%= f.select :degree_id,options_for_select(@degrees.map{ |d| [d.number, d.id]}),{ :include_blank => true },{ class: '', readonly: 'true', style: "width: 100%;"} %>
   </div>
 
 
@@ -160,7 +160,7 @@
   <div class="form-group col-sm-12">
     <%= f.label :review, class: "checkbox-inline" do %>
       <%= f.check_box :review  %>
-      <span>Revisar</span>
+      <span>Revisado</span>
     <% end %>
   </div>
   <% end %>
@@ -169,7 +169,7 @@
   <div class="form-group col-sm-12">
     <%= f.label :approve, class: "checkbox-inline" do %>
       <%= f.check_box :approve  %>
-      <span>Aprobar</span>
+      <span>Aprobado</span>
     <% end %>
   </div>
   <% end %>
