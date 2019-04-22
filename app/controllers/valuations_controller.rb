@@ -43,7 +43,7 @@ class ValuationsController < ApplicationController
   def new
     #@areas = Company.find()
     @company = Company.find(params[:company_id])
-    @areas = @company.areas
+    @areas = @company.areas.order(:name)
     @valuation = Valuation.new
     #@knowledge = Criterium.where(criteria_type_id: 1, position_type_id: params[:position_type_id])
     @position_types = PositionType.all
