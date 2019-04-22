@@ -5,6 +5,7 @@ class BusinessUnitsController < ApplicationController
   # GET /business_units.json
   def index
     @company = Company.find(params[:company_id])
+    @business_units = BusinessUnit.where(company_id: @company.id)
   end
 
   # GET /business_units/1
