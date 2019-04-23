@@ -21,6 +21,8 @@ class RolesController < ApplicationController
 
   # GET /roles/1/edit
   def edit
+    @degrees = Degree.order(:number)
+    @position_types = PositionType.all
   end
 
   # POST /roles

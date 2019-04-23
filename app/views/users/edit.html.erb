@@ -1,3 +1,6 @@
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ["Configuración", settings_path], ["Usuarios", users_path]]%>
+
+
 <h1>Editing User</h1>
 
 <%= render 'form', user: @user, locals: { submit_string: 'Editar'} %>

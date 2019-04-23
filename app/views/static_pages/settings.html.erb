@@ -10,7 +10,15 @@
         <h4><span class="glyphicon-class icon-black">Usuarios</span></h4>
       </a>
     </li>
-  </ul>
+    <% if current_user.is_admin? %>
+    <li>
+      <a href="/references_tables" class="">
 
+        <i class="fa fa-book fa-5x icon-purple" aria-hidden="true"></i>
+        <h4><span class="glyphicon-class icon-purple">Tablas de Referencia</span></h4>
+      </a>
+    </li>
+  </ul>
+  <%end %>
 
 </div>

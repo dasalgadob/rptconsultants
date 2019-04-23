@@ -18,12 +18,12 @@
 
   <div class="field form-group">
     <%= f.label "Grado" %>
-    <%= f.select :degree_id, options_for_select(@degrees.map{ |d| [d.number, d.id]}),{ :include_blank => true, selected: @role.degree_id },{ class: 'form-control'} %>
+    <%= f.select :degree_id, options_for_select(@degrees.map{ |d| [d.number, d.id]}, selected: @role.degree_id),{ :include_blank => true },{ class: 'form-control'} %>
   </div>
 
   <div class="field form-group">
     <%= f.label "Tipo de posición" %>
-    <%= f.select  :position_type_id, options_for_select(@position_types.map{ |pt| [pt.name.upcase, pt.id]}),{ :include_blank => true, selected: @role.position_type_id },{ class: 'form-control'} %>
+    <%= f.select  :position_type_id, options_for_select(@position_types.map{ |pt| [pt.name.upcase, pt.id]}, selected: @role.position_type_id),{ :include_blank => true },{ class: 'form-control'} %>
   </div>
 
   <div class="actions">

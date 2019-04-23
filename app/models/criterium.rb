@@ -9,7 +9,7 @@ class Criterium < ApplicationRecord
 
   def self.load_criteria(page=1, per_page=20)
     includes(:degree, :position_type)
-      .paginate(:page => page, :per_page => per_page).order('degrees.number')
+      .paginate(:page => page, :per_page => per_page)
   end
 
 
