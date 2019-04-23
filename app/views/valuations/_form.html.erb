@@ -61,7 +61,7 @@
 
 
   <div class="field form-group col-sm-3">
-    <%= f.label "Tipo de posición" %>
+    <%= f.label "Rol" %>
     <%= f.select :position_type_id, options_for_select(@position_types.map{ |pt| [pt.name.upcase, pt.id]}),{ :include_blank => true, selected: @valuation.position_type },{ class: '' , style: "width: 100%;"} %>
   </div>
   <% if locals[:submit_string] == 'Editar' %>
