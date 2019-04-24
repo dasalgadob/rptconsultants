@@ -126,7 +126,7 @@ class ValuationsController < ApplicationController
 
 
     def sort_column
-      Valuation.column_names.concat(["job_titles.name", "position_types.name", "degrees.number"]).include?(params[:sort]) ? params[:sort] : "created_at"
+      Valuation.column_names.concat(["job_titles.name", "position_types.name", "degrees.number", "areas.name", "business_units.name"]).include?(params[:sort]) ? params[:sort] : "created_at"
     end
 
     def sort_direction
