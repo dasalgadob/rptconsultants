@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
+    @companies = Company.all
     respond_to do |format|
       if @user.save
         ### Not login when signup due that the admin is the one creating users
