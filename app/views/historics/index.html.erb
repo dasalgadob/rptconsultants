@@ -8,6 +8,7 @@
     <tr>
       <th>Tipo</th>
       <th>Usuario</th>
+      <th>Fecha</th>
       <th>Valoración</th>
       <th>Campos Anteriores</th>
       <th>Nuevos Campos</th>
@@ -20,6 +21,7 @@
       <tr>
         <td><%= historic.clase %></td>
         <td><%= historic.user.username %></td>
+        <td><%= historic.created_at.strftime("%d/%m/%Y %R") %></td>
         <td><%= historic.valuation %></td>
         <td><%= historic.previous_fields %></td>
         <td><%= historic.new_fields %></td>
