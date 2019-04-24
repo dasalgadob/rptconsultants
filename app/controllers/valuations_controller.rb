@@ -1,7 +1,7 @@
 class ValuationsController < ApplicationController
   before_action :set_valuation, only: [:show, :edit, :update, :destroy]
   helper_method :sort_column, :sort_direction
-  has_scope :degree, :score, :position_type, :job_title, :area
+  has_scope :degree, :score, :position_type, :job_title, :area, :business_unit
   load_and_authorize_resource :company
   load_and_authorize_resource :valuation, through: :company
   # GET /valuations
@@ -11,6 +11,7 @@ class ValuationsController < ApplicationController
       @company = Company.find(params[:company_id])
       format.html {
         @areas = Area.where(company: @company).order(:name)
+        @business_units = BusinessUnit.where(company: @company).order(:name)
         @position_types = PositionType.all
         @degrees = Degree.all
         @valuations = apply_scopes(Valuation).load_valuations(@company, params[:page], params[:per_page]).order(sort_column + " " + sort_direction)
@@ -135,6 +136,6 @@ class ValuationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def valuation_params
       params.require(:valuation).permit(:job_title_id, :position_type_id, :knowledge_id, :skill_id, :definition_supervision_id,
-         :risk_decision_id, :sustainability_id, :area_impact_id, :influence_id, :score, :degree_id, :area, :review, :approve)
+         :risk_decision_id, :sustainability_id, :area_impact_id, :influence_id, :score, :degree_id, :area, :review, :approve, :business_unit)
     end
 end

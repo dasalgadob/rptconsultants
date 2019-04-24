@@ -13,6 +13,11 @@
   </div>
 
   <div class="form-group col-sm-6">
+  <%= label_tag "Unidad de Negocio:" %>
+  <%= select_tag :business_unit,  options_from_collection_for_select(@business_units, "id", "name_to_upcase",params[:business_unit]), options = {:include_blank => true, class: 'form-control'} %>
+  </div>
+
+  <div class="form-group col-sm-6">
   <%= label_tag "Area:" %>
   <%= select_tag :area,  options_from_collection_for_select(@areas, "id", "name",params[:area]), options = {:include_blank => true, class: 'form-control'} %>
   </div>
