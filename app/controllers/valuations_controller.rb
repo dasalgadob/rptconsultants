@@ -57,7 +57,7 @@ class ValuationsController < ApplicationController
     @area = @valuation.job_title.area
     @areas = @company.areas
     @job_title = @valuation.job_title
-    @job_titles = Area.where(company_id: @company.id)
+    @job_titles = JobTitle.where(company_id: @company.id)
     @position_type = @valuation.position_type
     @position_types = PositionType.all
     @degrees = Degree.all
@@ -98,7 +98,8 @@ class ValuationsController < ApplicationController
       if @valuation.update(valuation_params)
         #create historic record of valaution modified.
         clase = Historic.set_clase_string(@old_valuation.review, @old_valuation.approve, @valuation.review, @valuation.approve)
-        Historic.create(clase: clase, user_id: current_user.id, valuation_id: @valuation.id,previous_fields: @old_valuation.to_s, new_fields: @valuation.to_s )
+        values_changed = Valuation.get_changed_values(@old_valuation, @valuation)
+        Historic.create(clase: clase, user_id: current_user.id, valuation_id: @valuation.id, previous_fields: values_changed[0], new_fields: values_changed[1] )
         format.html { redirect_to @valuation, notice: 'Valoración fue actualizada exitosamente.' }
         format.json { render :show, status: :ok, location: @valuation }
       else
@@ -136,6 +137,6 @@ class ValuationsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def valuation_params
       params.require(:valuation).permit(:job_title_id, :position_type_id, :knowledge_id, :skill_id, :definition_supervision_id,
-         :risk_decision_id, :sustainability_id, :area_impact_id, :influence_id, :score, :degree_id, :area, :review, :approve, :business_unit)
+         :risk_decision_id, :sustainability_id, :area_impact_id, :influence_id, :score, :degree_id, :area, :review, :approve, :business_unit, :company_id)
     end
 end

@@ -2,8 +2,6 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-
-    if user.present?  # additional permissions for logged in users (they can manage their posts)
       can :manage, User, id: user.id
       can :manage, Company, id: user.company_id
       can :manage, Area, company: { id: user.company_id}
@@ -22,8 +20,6 @@ class Ability
       if user.is_admin?  # additional permissions for administrators
         can :manage, :all
       end
-
-
     end
     # Define abilities for the passed in user here. For example:
     #
@@ -51,5 +47,4 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
-  end
 end

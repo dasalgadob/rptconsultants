@@ -22,9 +22,9 @@
         <td><%= historic.clase %></td>
         <td><%= historic.user.username %></td>
         <td><%= historic.created_at.strftime("%d/%m/%Y %R") %></td>
-        <td><%= historic.valuation %></td>
-        <td><%= historic.previous_fields %></td>
-        <td><%= historic.new_fields %></td>
+        <td><%= raw historic.valuation.job_title.name %></td>
+        <td><%= raw historic.previous_fields %></td>
+        <td><%= raw historic.new_fields %></td>
         <!-- <td><%= link_to 'Show', historic %></td> -->
       </tr>
     <% end %>

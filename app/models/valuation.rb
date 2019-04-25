@@ -120,7 +120,7 @@ class Valuation < ApplicationRecord
 
   ##Method to_s is going to show a resume of all the fields of the object
   def to_s
-    result = "Cargo: #{self.job_title.name} Rol: #{self.position_type.name}, "+
+    result = "Cargo: #{self.job_title.name} Rol: #{self.position_type.name}, <br>"+
     "Amplitud y profundidad del conocimiento aplicado: #{Criterium.find( self.knowledge_id).degree.number}, "+
     "Actuación (Habilidades): #{Criterium.find( self.skill_id).degree.number}, "+
     "Definiciones y Supervisión: #{Criterium.find( self.definition_supervision_id).degree.number}, "+
@@ -132,5 +132,62 @@ class Valuation < ApplicationRecord
     "Grado: #{self.degree.number}"
 
   end
+
+  #Methods of the class
+  class <<self
+    ##This methods returns two string in an array
+    ##The first one get the field with its values before they were altered
+    ##The second element of the array gets just the new values that were changed
+    def get_changed_values(valuation_old, valuation_new)
+      result_old=""
+      result_new =""
+      if valuation_old.job_title_id != valuation_new.job_title_id
+        result_old+= "Cargo: #{valuation_old.job_title.name}<br>"
+        result_new+= "Cargo: #{valuation_new.job_title.name}<br>"
+      end
+      if valuation_old.position_type_id != valuation_new.position_type_id
+        result_old+= "Rol: #{valuation_old.position_type.name}<br>"
+        result_new+= "Rol: #{valuation_new.position_type.name}<br>"
+      end
+      if valuation_old.knowledge_id != valuation_new.knowledge_id
+        result_old+= "Amplitud y profundidad del conocimiento aplicado: #{Criterium.find( valuation_old.knowledge_id).degree.number}<br>"
+        result_new+= "Amplitud y profundidad del conocimiento aplicado: #{Criterium.find( valuation_new.knowledge_id).degree.number}<br>"
+      end
+      if valuation_old.skill_id != valuation_new.skill_id
+        result_old+= "Actuación (Habilidades): #{Criterium.find( valuation_old.skill_id).degree.number}<br>"
+        result_new+= "Actuación (Habilidades): #{Criterium.find( valuation_new.skill_id).degree.number}<br>"
+      end
+      if valuation_old.definition_supervision_id != valuation_new.definition_supervision_id
+        result_old+= "Definiciones y Supervisión: #{Criterium.find( valuation_old.definition_supervision_id).degree.number}<br>"
+        result_new+= "Definiciones y Supervisión: #{Criterium.find( valuation_new.definition_supervision_id).degree.number}<br>"
+      end
+      if valuation_old.risk_decision_id != valuation_new.risk_decision_id
+        result_old+= "Riesgos asumidos y nivel de decisiones: #{Criterium.find( valuation_old.risk_decision_id).degree.number}<br>"
+        result_new+= "Riesgos asumidos y nivel de decisiones: #{Criterium.find( valuation_new.risk_decision_id).degree.number}<br>"
+      end
+      if valuation_old.sustainability_id != valuation_new.sustainability_id
+        result_old+= "Sostenibilidad (Tiempo): #{Criterium.find( valuation_old.sustainability_id).degree.number}<br>"
+        result_new+= "Sostenibilidad (Tiempo): #{Criterium.find( valuation_new.sustainability_id).degree.number}<br>"
+      end
+      if valuation_old.area_impact_id != valuation_new.area_impact_id
+        result_old+= "Area de Responsabilidad: #{Criterium.find( valuation_old.area_impact_id).degree.number}<br>"
+        result_new+= "Area de Responsabilidad: #{Criterium.find( valuation_new.area_impact_id).degree.number}<br>"
+      end
+      if valuation_old.influence_id != valuation_new.influence_id
+        result_old+= "Influencia en los resultados: #{Criterium.find( valuation_old.influence_id).degree.number}<br>"
+        result_new+= "Influencia en los resultados: #{Criterium.find( valuation_new.influence_id).degree.number}<br>"
+      end
+      if valuation_old.score != valuation_new.score
+        result_old += "Puntaje: #{valuation_old.score}<br>"
+        result_new += "Puntaje: #{valuation_new.score}<br>"
+      end
+      if valuation_old.degree_id != valuation_new.degree_id
+        result_old += "Grado: #{valuation_old.degree.number}<br>"
+        result_new += "Grado: #{valuation_new.degree.number}<br>"
+      end
+      return [result_old, result_new]
+    end##End comparison function
+
+  end#End class methods
 
 end

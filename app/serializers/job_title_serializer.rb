@@ -1,4 +1,5 @@
 class JobTitleSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :id, :name, :area_id
+  attributes :id, :name
+  attribute  :area_id
 end
