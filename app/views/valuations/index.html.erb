@@ -23,7 +23,7 @@
   </div>
 
   <div class="form-group col-sm-6">
-  <%= label_tag "Tipo de posición:" %>
+  <%= label_tag "Rol:" %>
   <%= select_tag :position_type,  options_from_collection_for_select(@position_types, "id", "name",params[:position_type]), options = {:include_blank => true, class: 'form-control'} %>
   </div>
 
