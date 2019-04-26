@@ -100,7 +100,7 @@ class ValuationsController < ApplicationController
         clase = Historic.set_clase_string(@old_valuation.review, @old_valuation.approve, @valuation.review, @valuation.approve)
         values_changed = Valuation.get_changed_values(@old_valuation, @valuation)
         Historic.create(clase: clase, user_id: current_user.id, valuation_id: @valuation.id, previous_fields: values_changed[0], new_fields: values_changed[1] )
-        format.html { redirect_to @valuation, notice: 'Valoración fue actualizada exitosamente.' }
+        format.html { redirect_to edit_valuation_path(@valuation), notice: 'Valoración fue actualizada exitosamente.' }
         format.json { render :show, status: :ok, location: @valuation }
       else
         format.html { render :edit }

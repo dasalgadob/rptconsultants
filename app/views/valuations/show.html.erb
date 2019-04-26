@@ -70,5 +70,11 @@
   <input type="checkbox" disabled <%= @valuation.approve ? "checked":"" %>>
 </p>
 
+<p>
+  <%= link_to 'Histórico', valuation_historics_path(@valuation), target: "_blank" %>
+</p>
+
+
+
 <%= link_to 'Editar', edit_valuation_path(@valuation) %> |
 <%= link_to 'Volver', company_valuations_path(@valuation.company) %>
