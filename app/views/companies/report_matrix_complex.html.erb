@@ -1,4 +1,4 @@
-<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Empresas',companies_path],[@company.name,company_path(@company)], ["Reportes", "/companies/#{@company.id}/reports"]]%>
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Empresas',companies_path],[@company.name,company_path(@company)], [I18n.t('maps'), "/companies/#{@company.id}/reports"]]%>
 <table class="table-striped table-bordered table-sm">
   <thead>
     <tr>
