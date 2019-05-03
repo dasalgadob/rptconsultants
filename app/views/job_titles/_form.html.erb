@@ -1,4 +1,4 @@
-<%= form_for([@area, @job_title]) do |f| %>
+<%= form_for(get_form_for_parameter(locals[:submit_string], @job_title, @area)) do |f| %>
   <% if job_title.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@job_title.errors.count, "error", plural="errores") %> impidieron a este cargo ser guardado:</h2>

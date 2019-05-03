@@ -1,10 +1,7 @@
 
-<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path],
- ['Companies',companies_path],[@company.name,company_path(@company)],
-  ['Areas', company_areas_path(@company)],
-   [@area.name, area_path(@area)]]%>
+<%= render 'layouts/breadcrumb', titles: get_breadcrumb_for_job_title(@job_title)%>
 <h1>Nuevo cargo</h1>
 
 <%= render 'form', job_title: @job_title, locals: { submit_string: 'Crear'} %>
 
-<%= link_to 'Volver', area_path(params[:area_id]) %>
+<%= link_to 'Volver', get_path_for_return_job_title(@job_title) %>

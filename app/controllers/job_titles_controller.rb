@@ -37,8 +37,13 @@ class JobTitlesController < ApplicationController
 
   # GET /job_titles/new
   def new
-    @area = Area.find(params[:area_id])
-    @company = @area.company
+    if params[:area_id]
+      @area = Area.find(params[:area_id])
+      @company = @area.company
+    else
+      @area = nil
+      @company = Company.find(params[:company_id])
+    end
     @areas = Area.where(company: @company)
     @job_title = JobTitle.new
     @job_title.company = @company
@@ -56,13 +61,14 @@ class JobTitlesController < ApplicationController
   # POST /job_titles.json
   def create
     @job_title = JobTitle.new(job_title_params)
+
     @area = @job_title.area
-    @company = @job_title.area.company
+    @company = @job_title.company
     @areas = Area.where(company_id: @company.id)
     @job_title.area = @area
     respond_to do |format|
       if @job_title.save
-        format.html { redirect_to @area, notice: 'Cargo fue creado exitosamente.' }
+        format.html { redirect_to @job_title.area ? @job_title.area : @job_title, notice: 'Cargo fue creado exitosamente.' }
         format.json { render :show, status: :created, location: @job_title }
       else
         format.html { render :new }
@@ -78,7 +84,7 @@ class JobTitlesController < ApplicationController
     @areas = Area.where(company_id: @company.id)
     respond_to do |format|
       if @job_title.update(job_title_params)
-        format.html { redirect_to @job_title.area, notice: 'Cargo fue actualizado exitosamente.' }
+        format.html { redirect_to @job_title.area ? @job_title.area: @job_title, notice: 'Cargo fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @job_title }
       else
         format.html { render :edit }
