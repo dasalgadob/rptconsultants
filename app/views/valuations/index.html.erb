@@ -63,7 +63,7 @@
   <thead>
     <tr>
       <!-- <%=number_of_columns %> when may be needed to just show to the one that has permission-->
-      <th colspan="5"></th>
+      <th colspan="6"></th>
       <th colspan="2">CONOCIMIENTOS Y HABILIDADES</th>
       <th colspan="2">MARCO DE TRABAJO</th>
       <th colspan="3">RESULTADOS</th>
@@ -120,8 +120,12 @@
         <td><%= valuation.created_at.strftime("%d/%m/%Y %R") %></td>
         <td><%=valuation.updated_at.strftime("%d/%m/%Y %R") %></td>
         <td><%= link_to 'Histórico', valuation_historics_path(valuation), target: "_blank" %></td>
-        <td><%= link_to 'Editar', edit_valuation_path(valuation) %></td>
-        <td><%= link_to 'Eliminar', valuation, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+        <td><%= link_to 'Editar', edit_valuation_path(valuation) %>
+        </td>
+        <td>  <%= link_to 'Eliminar', valuation, method: :delete, data: { confirm: 'Estas seguro?' } %>
+          <!-- <a href="#delete-confirm" data-id="<%= valuation.id %>" class="delete-confirm btn btn-danger">Eliminar <i class="fas fa-trash-alt fa-xs icon-white"> </i></a> -->
+
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -130,3 +134,22 @@
 <br>
 
 <%= link_to 'Nueva valoración', new_company_valuation_path(params[:company_id]) %>
+
+<%# Modal code  for confirmation delete%>
+<div class="modal fade" tabindex="-1" id="delete-confirm" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Borrar Valoración</h3>
+      </div>
+      <div class="modal-body">
+        <p>Estas seguro?</p>
+      </div>
+      <div class="modal-footer">
+        <%= link_to 'Borrar', valuation_path(0), method: :delete, :class => 'btn btn-danger' %>
+        <a href="#" data-dismiss="modal" class="btn">Cancelar</a>
+      </div>
+    </div>
+  </div>
+</div>
