@@ -112,9 +112,10 @@ class ValuationsController < ApplicationController
   # DELETE /valuations/1
   # DELETE /valuations/1.json
   def destroy
+    @company = @valuation.company
     @valuation.destroy
     respond_to do |format|
-      format.html { redirect_to valuations_url, notice: 'Valoración fue eliminada exitosamente.' }
+      format.html { redirect_to company_valuations_path(@company), notice: 'Valoración fue eliminada exitosamente.' }
       format.json { head :no_content }
     end
   end
