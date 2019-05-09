@@ -1,4 +1,4 @@
-include FactoryBot::Syntax::Methods
+#include FactoryBot::Syntax::Methods
 
 require 'csv'
 
