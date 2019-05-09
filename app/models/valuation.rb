@@ -118,6 +118,75 @@ class Valuation < ApplicationRecord
     ##do nothing
   end
 
+  ##Sanitiza sql executed directly to the database NOT build by ActiveRecord
+  def self.execute_sql(*sql_array)
+   connection.execute(send(:sanitize_sql_array, sql_array))
+  end
+
+  ##Function that return a hash that has as the key the area_id,
+  ## and its values are
+  ##count_high: Number of valuations for the company_id, with degree_id for the higher range
+  ##records: The records of that area_id
+  ## No element to the resulting hash is added if there area no records for that area
+  def self.get_hash_records_by_degree_range_high(degree_id, company_id)
+    result = execute_sql("
+    select job_titles.area_id,
+    count(job_titles.area_id) filter(where valuations.score between degrees.median + 1 and degrees.maximun ) as count_high
+    from valuations
+    join job_titles on  job_titles.id = valuations.job_title_id
+    join degrees on valuations.degree_id = degrees.id
+    where valuations.degree_id=? and valuations.company_id =?
+    group by job_titles.area_id",degree_id, company_id )
+    result_hash = {}
+    result.each{
+      |r|
+      if r["count_high"]>0 then
+        result_hash[r["area_id"]]=
+            ##Second term of the hash it hash the count and the records that were returned
+            [r["count_high"],
+             Valuation
+             .joins("join job_titles on valuations.job_title_id = job_titles.id
+                     join degrees on valuations.degree_id = degrees.id")
+             .where(" area_id = ? and valuations.company_id=? and degree_id = ?
+                     and valuations.score between degrees.median + 1 and degrees.maximun ",
+                      r["area_id"], company_id, degree_id) ]
+      end
+    }
+    return result_hash
+  end
+
+  ##Function that return a hash that has as the key the area_id,
+  ## and its values are
+  ##count_high: Number of valuations for the company_id, with degree_id for the higher range
+  ##records: The records of that area_id
+  ## No element to the resulting hash is added if there area no records for that area
+  def self.get_hash_records_by_degree_range_low(degree_id, company_id)
+    result = execute_sql("
+    select job_titles.area_id,
+    count(job_titles.area_id) filter(where valuations.score between degrees.minimum and degrees.median ) as count_low
+    from valuations
+    join job_titles on  job_titles.id = valuations.job_title_id
+    join degrees on valuations.degree_id = degrees.id
+    where valuations.degree_id=? and valuations.company_id =?
+    group by job_titles.area_id",degree_id, company_id )
+    result_hash = {}
+    result.each{
+      |r|
+      if r["count_low"]>0 then
+        result_hash[r["area_id"]]=
+            ##Second term of the hash it hash the count and the records that were returned
+            [r["count_low"],
+             Valuation
+             .joins("join job_titles on valuations.job_title_id = job_titles.id
+                     join degrees on valuations.degree_id = degrees.id")
+             .where(" area_id = ? and valuations.company_id=? and degree_id = ?
+                     and valuations.score between degrees.minimum and degrees.median ",
+                      r["area_id"], company_id, degree_id) ]
+      end
+    }
+    return result_hash
+  end
+
   ##Method to_s is going to show a resume of all the fields of the object
   def to_s
     result = "Cargo: #{self.job_title.name} Rol: #{self.position_type.name}, <br>"+

@@ -1,0 +1,77 @@
+<%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Empresas',companies_path],[@company.name,company_path(@company)], [I18n.t('maps'), "/companies/#{@company.id}/reports"]]%>
+<table class="table-striped table-bordered table-sm">
+  <thead>
+    <tr>
+      <th colspan="4"></th>
+      <th colspan="<%= @areas.count%>"><h1>Areas</h1></th>
+    </tr>
+    <tr>
+      <th>Grado</th>
+      <th>Rango</th>
+      <% @areas.each do |area| %>
+      <th><%=area.name %></th>
+      <% end %>
+    </tr>
+  </thead>
+
+
+  <tbody>
+    <% @degrees.each do |d| %>
+      <% rs  = Company.get_maximum_valuations_group_by_area_by_degree(d.id, @company.id)%>
+      <% rs.each do |r| %>
+
+
+          <% if r['count_high'] + r['count_low'] > 0 %>
+            <tr>
+              <td rowspan="<%= (r['count_high'] + r['count_low']) %>"> <%= d.number%></td>
+
+            <!-- Hacer 2 iteraciones para consultar grados por rango alto y por rango bajo-->
+            <% if r["count_high"] != 0 %>
+              <td rowspan="<%= r["count_high"]%>">
+                (<%= d.median + 1 %> - <%= d.maximun%>)
+                <br>
+                Rango Alto
+              </td>
+              <!-- Iterate over records with degree high -->
+              <% rs  = Valuation.get_hash_records_by_degree_range_high(d.id, @company.id)%>
+              <% for i in 0..r["count_high"]-1%>
+                <% @areas.each do |area| %>
+                  <% if rs.key?(area.id)%>
+                    <td><%= rs[area.id][1][i] ? "#{rs[area.id][1][i].job_title.name} (#{rs[area.id][1][i].score})" : "" %></td>
+                  <% else %>
+                    <td></td>
+                  <% end %>
+                <% end %>
+                </tr>
+              <% end %>
+              <% rs.each do |r| %>
+
+              <% end #End areas iteration%>
+            <% end  #End if count high%>
+            <% if r["count_low"] != 0 %>
+              <td rowspan="<%= r["count_low"]%>">
+                (<%= d.minimum%> - <%= d.median%>)
+                <br>
+                Rango Bajo
+              </td>
+              <!-- Iterate over records with degree low -->
+              <% rs  = Valuation.get_hash_records_by_degree_range_low(d.id, @company.id)%>
+              <% for i in 0..r["count_low"]-1%>
+                <% @areas.each do |area| %>
+                  <% if rs.key?(area.id)%>
+                    <td><%= rs[area.id][1][i] ? "#{rs[area.id][1][i].job_title.name} (#{rs[area.id][1][i].score})" : "" %></td>
+                  <% else %>
+                    <td></td>
+                  <% end #End if area in result%>
+                <% end #End iteration over areas%>
+                </tr>
+              <% end #End for loop %>
+            <% end #End if count low != 0 %>
+
+          <% end #End if the sum of both is greater that 0%>
+
+
+      <% end #End of result set loop%>
+    <% end #End of degrees loop %>
+    </tbody>
+</table>

@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: [:show, :edit, :update, :destroy, :report_matrix_simple]
+  before_action :set_company, only: [:show, :edit, :update, :destroy, :report_matrix_simple, :report_matrix_complex, :map_detailed]
   load_and_authorize_resource
 
   def report_matrix_simple
@@ -8,7 +8,8 @@ class CompaniesController < ApplicationController
     #@areas_hash = Area.area_hash_by_name(@company.id)
   end
 
-  def report_matrix_complex
+  def map_detailed
+    @degrees = Degree.order(number: :desc)
     @valuations = Valuation.where(company_id: @company.id).order(:degree_id, score: :desc )
     @areas = Area.where(company_id: @company.id).order(:name)
     #@areas_hash = Area.area_hash_by_name(@company.id)
