@@ -26,7 +26,7 @@ hoja.each( grado: 'grado', minimo: 'minimo',medio: 'medio', maximo: 'maximo', ha
 
 end ## ENd for importing degrees
 
-Degree.update_all ""
+#Degree.update_all ""
 
 
 PositionType.create(name: "apoyo administrativo")
