@@ -52,10 +52,10 @@ hoja.each( grado: 'grado', abb: 'abb',rol: 'rol', tipo_rol: 'tipo_rol') do |hash
   if hash[:grado] != nil && hash[:grado] != ''
     grado = Degree.find_by_number(hash[:grado])
     tipo_posicion = PositionType.find_by_name(hash[:tipo_rol].downcase)
-    puts "values"
-    puts grado.number.to_s + " " + tipo_posicion.id.to_s
-    puts "after"
-    puts  hash[:grado].to_s + " " + hash[:abb].to_s + " " + hash[:rol].to_s + " " + hash[:tipo_rol].to_s
+    #puts "values"
+    #puts grado.number.to_s + " " + tipo_posicion.id.to_s
+    #puts "after"
+    #puts  hash[:grado].to_s + " " + hash[:abb].to_s + " " + hash[:rol].to_s + " " + hash[:tipo_rol].to_s
     Role.create(position_type_id: tipo_posicion.id, name: hash[:rol], abbreviation: hash[:abb], degree_id: grado.id)
   end
 
@@ -64,6 +64,16 @@ end
 
 #xlsx = Roo::Excelx.new('test/xlsx/tablas_referencia.xlsx')
 #### Import of Criteria
+CriteriaType.destroy_all
+CriteriaType.create(id: 1,name: 'Amplitud y profundidad del conocimiento aplicado')
+CriteriaType.create(id: 2, name: 'Actuación (Habilidades)')
+CriteriaType.create(id: 3, name: 'Definiciones y Supervisión')
+CriteriaType.create(id: 4, name: 'Riesgos asumidos y nivel de decisiones')
+CriteriaType.create(id: 5, name: 'Sostenibilidad (Tiempo)')
+CriteriaType.create(id: 6, name: 'Area de Responsabilidad')
+CriteriaType.create(id: 7, name: 'Influencia en los resultados')
+
+
 hoja = xlsx.sheet('criterio')
 
 hoja.each( score: 'puntaje', tipo: 'tipo', degree: 'degree',description: 'description', position_type: 'position_type', tipo_id: 'tipo_id') do |hash|
@@ -76,13 +86,13 @@ hoja.each( score: 'puntaje', tipo: 'tipo', degree: 'degree',description: 'descri
     tipo_posicion = PositionType.find_by_name(hash[:position_type].downcase)
     puts grado.number.to_s + " " + tipo_posicion.id.to_s
     puts  hash[:score].to_s + " " + hash[:tipo].to_s + " " + hash[:description].to_s + " " + hash[:position_type].to_s
-    Criterium.create(criteria_type: hash[:tipo], criteria_type_id: hash[:tipo_id], score: hash[:score], degree_id: grado.id, description: hash[:description], position_type_id: tipo_posicion.id)
+    Criterium.create(criteria_type_id: hash[:tipo_id], score: hash[:score], degree_id: grado.id, description: hash[:description], position_type_id: tipo_posicion.id)
   end
 
 end
 
 User.destroy_all
-User.create(username: "admin", password: "123456", password_confirmation:"123456")
+User.create(username: "admin", password: "123456", password_confirmation:"123456", is_admin: true)
 #f.close
 JobTitle.destroy_all
 Area.destroy_all
@@ -107,6 +117,6 @@ hoja.each(area: "area", cargo: "cargo") do |hash|
       a = Area.create(name: hash[:area], company_id: c.id)
     end
     #Crear Position type con el area indicada
-    JobTitle.create(name: hash[:cargo], area_id: a.id)
+    JobTitle.create(name: hash[:cargo], area_id: a.id, company_id: c.id)
   end
 end

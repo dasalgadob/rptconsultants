@@ -1,7 +1,3 @@
-CriteriaType.create(id: 1,name: 'Amplitud y profundidad del conocimiento aplicado')
-CriteriaType.create(id: 2, name: 'Actuación (Habilidades)')
-CriteriaType.create(id: 3, name: 'Definiciones y Supervisión')
-CriteriaType.create(id: 4, name: 'Riesgos asumidos y nivel de decisiones')
-CriteriaType.create(id: 5, name: 'Sostenibilidad (Tiempo)')
-CriteriaType.create(id: 6, name: 'Area de Responsabilidad')
-CriteriaType.create(id: 7, name: 'Influencia en los resultados')
+#Criterium.create(criteria_type_id: 1, score: 0,
+#   degree_id: 1, description: "Pendiente de criterio",
+#    position_type_id: 1)
