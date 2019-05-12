@@ -149,7 +149,7 @@ class Valuation < ApplicationRecord
                      join degrees on valuations.degree_id = degrees.id")
              .where(" area_id = ? and valuations.company_id=? and degree_id = ?
                      and valuations.score between degrees.median + 1 and degrees.maximun ",
-                      r["area_id"], company_id, degree_id) ]
+                      r["area_id"], company_id, degree_id).order(score: :desc) ]
       end
     }
     return result_hash
@@ -181,7 +181,7 @@ class Valuation < ApplicationRecord
                      join degrees on valuations.degree_id = degrees.id")
              .where(" area_id = ? and valuations.company_id=? and degree_id = ?
                      and valuations.score between degrees.minimum and degrees.median ",
-                      r["area_id"], company_id, degree_id) ]
+                      r["area_id"], company_id, degree_id).order(score: :desc) ]
       end
     }
     return result_hash

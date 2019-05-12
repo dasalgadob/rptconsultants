@@ -27,3 +27,5 @@
 /public/assets/*
 
 #/test/xlsx/*
+
+/app/assets/.DS_Store
