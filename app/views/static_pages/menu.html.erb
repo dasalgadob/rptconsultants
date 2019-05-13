@@ -1,11 +1,11 @@
 <% provide(:title, "Menu") %>
 <p id="notice"><%= notice %></p>
-
-<h1>Menu </h1>
+<div data-step="1" data-intro="Bienvenido a la página de inicio.  Sigue el tutorial para aprender a usar el software de valoración." data-position="bottom">
+<h1  id="menu">Menu  <i class="fas fa-question-circle" id="question" data-step="2" data-intro ="Cuando veas este icono en alguna página podras ver explicaciones de como funciona esa sección."></i></h1>
 <div class="bs-glyphicons">
   <ul class="bs-glyphicons-list">
-    <li>
-      <a href="/companies" class="">
+    <li data-step="4" data-intro="Desde aquí podras ver la información de la empresa a la que tienes acceso y sus respectivos datos." data-position='right'>
+      <a href="/companies" class="" id="companies" >
 
         <i class="fa fa-city fa-5x icon-black" aria-hidden="true"></i>
         <h4><span class="glyphicon-class icon-black"> <%= I18n.t('companies') %>
@@ -13,11 +13,23 @@
       </a>
     </li>
 
-    <li>
-      <a href="/settings">
+    <li data-step="3" data-intro="Desde configuración podras ver tus datos de usuario y hacer cambio de contraseña." data-position='right'>
+      <a href="/settings" id="settings" >
         <i class="fa fa-cogs fa-5x icon-gray" aria-hidden="true"></i>
         <h4><span class="glyphicon-class icon-gray">Configuración</span></h4>
       </a>
     </li>
   </ul>
 </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.js">
+</script>
+<script>
+  $(function(){
+    introJs().setOption('showProgress', true).setOption('doneLabel', 'Ir a Empresas').start().oncomplete(function() {
+          window.location.href = 'companies?multipage=true';
+        });
+  });//End onLoad
+</script>

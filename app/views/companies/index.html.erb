@@ -1,28 +1,39 @@
 <p id="notice"><%= notice %></p>
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path]]%>
+<div   data-intro="Desde aqui podras ver la empresa a la que tienes acceso. En caso de no haber ninguna consulta con el administrador del sistema. Dale click al nombre de empresa para ver su menu." data-position="auto">
+  <h1> <%= I18n.t('companies') %> <i class="fas fa-question-circle fa-xs" ></i></h1>
 
-<h1> <%= I18n.t('companies') %></h1>
-
-<table class="table table-over">
-  <thead>
-    <tr>
-      <th>Nombre</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @companies.each do |company| %>
+  <table class="table table-over">
+    <thead>
       <tr>
-        <td><%= link_to company.name, company %></td>
-        <td><%= link_to 'Editar', edit_company_path(company) %></td>
-        <td><%= link_to 'Eliminar', company, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+        <th>Nombre</th>
+        <th colspan="2"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
+    <tbody>
+      <% @companies.each do |company| %>
+        <tr>
+          <td><%= link_to company.name, company %></td>
+          <td><%= link_to 'Editar', edit_company_path(company) %></td>
+          <td><%= link_to 'Eliminar', company, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
 <br>
 <% if current_user.is_admin? %>
   <%= link_to 'Nueva Empresa', new_company_path %>
 <% end %>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.9.3/intro.js"></script>
+<script>
+  $(function(){
+      if (RegExp('multipage', 'gi').test(window.location.search)) {
+        introJs().start();
+      }
+    //End onLoad
+  });
+</script>
