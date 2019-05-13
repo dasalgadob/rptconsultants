@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Empresas',companies_path],[@company.name,company_path(@company)], ['Valoraciones',company_valuations_path(@company)], [@valuation.job_title.name, edit_valuation_path(@valuation)]]%>
 
-<h1>Histórico</h1>
+<h1>Histórico <a href="#"><i class="fas fa-question-circle fa-xs icon-blue-question" ></i></a></h1>
 
 <table class="pretty table  table-striped table-bordered table-sm">
   <thead>
