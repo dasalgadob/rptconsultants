@@ -95,7 +95,7 @@
 
   <div class="field form-group col-sm-1">
     <%= f.label "Grado" %>
-    <%= f.select :degree_id,options_for_select(@degrees.map{ |d| [d.number, d.id]}),{ :include_blank => true },{ class: '', readonly: 'true', style: "width: 100%;"} %>
+    <%= f.select :degree_id,options_for_select(@degrees.map{ |d| [d.number, d.id]}),{ :include_blank => true },{ class: '', readonly: 'true', style: "width: 100%;", required: "required"} %>
   </div>
 
 
