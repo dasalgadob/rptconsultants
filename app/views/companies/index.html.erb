@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path]]%>
 <div   data-intro="Desde aqui podras ver la empresa a la que tienes acceso. En caso de no haber ninguna consulta con el administrador del sistema. Dale click al nombre de empresa para ver su menu." data-position="auto">
-  <h1> <%= I18n.t('companies') %> <a href="#"><i class="fas fa-question-circle fa-xs icon-blue-question" ></i></a> </h1>
+  <h1> <%= I18n.t('companies') %> <a href="#" id="tutorial"><i class="fas fa-question-circle fa-xs icon-blue-question" ></i></a> </h1>
 
   <table class="table table-over">
     <thead>

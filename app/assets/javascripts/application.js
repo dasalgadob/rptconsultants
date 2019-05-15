@@ -64,6 +64,13 @@ $(document).ready(function(){
       $('#delete-confirm').data('id', $(this).data('id')).modal('show');
     });
 
+    $('#tutorial').click(
+      function(e){
+        e.preventDefault();
+        console.log("Click tutorial.");
+        introJs().start();
+      }
+    );
 
 
 });
