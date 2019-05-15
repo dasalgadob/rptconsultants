@@ -10,6 +10,7 @@ class ValuationsController < ApplicationController
     respond_to do |format|
       @company = Company.find(params[:company_id])
       format.html {
+        @tz = TZInfo::Timezone.get('America/Bogota')
         @areas = Area.where(company: @company).order(:name)
         @business_units = BusinessUnit.where(company: @company).order(:name)
         @position_types = PositionType.all
@@ -71,7 +72,7 @@ class ValuationsController < ApplicationController
     @valuation.company = @company
     puts "Valuation:"
     puts valuation_params
-    puts @valuation
+    #puts @valuation
     respond_to do |format|
       if @valuation.save
         #Create hictoric record of creation of valuation

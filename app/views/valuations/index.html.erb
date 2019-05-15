@@ -117,8 +117,8 @@
         <td class=""><%= valuation.degree.number %></td>
         <td class=""><%= valuation.degree.hay %></td>
         <td class=""><%= valuation.degree.ggs %></td>
-        <td><%= valuation.created_at.strftime("%d/%m/%Y %R") %></td>
-        <td><%=valuation.updated_at.strftime("%d/%m/%Y %R") %></td>
+        <td><%= @tz.utc_to_local(valuation.created_at).strftime("%d/%m/%Y %R") %></td>
+        <td><%= @tz.utc_to_local(valuation.updated_at).strftime("%d/%m/%Y %R") %></td>
         <td><%= link_to 'Histórico', valuation_historics_path(valuation), target: "_blank" %></td>
         <td><%= link_to 'Editar', edit_valuation_path(valuation) %>
         </td>

@@ -4,6 +4,7 @@ class HistoricsController < ApplicationController
   # GET /historics
   # GET /historics.json
   def index
+    @tz = TZInfo::Timezone.get('America/Bogota')
     @valuation = Valuation.find(params[:valuation_id])
     @company = Company.find(@valuation.company  )   
     @historics = Historic.where("valuation_id = ?", params[:valuation_id]).order(:created_at)
