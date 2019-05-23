@@ -1,8 +1,8 @@
 class Company < ApplicationRecord
-  has_many :areas
-  has_many :valuations
-  has_many :job_titles
-  has_many :business_units, dependent: :nullify
+  has_many :areas, dependent: :destroy
+  has_many :valuations, dependent: :destroy
+  has_many :job_titles, dependent: :destroy
+  has_many :business_units, dependent: :destroy
 
   validates :name, presence: true
 

@@ -3,7 +3,7 @@
 <h1>Areas <a href="#" id="tutorial"><i class="fas fa-question-circle fa-xs icon-blue-question" ></i></a></h1>
 
 <p><b>Grupo Empresarial:</b> <%= @company.name%></p>
-<table class="table table-hover">
+<table class="table table-hover" data-step="1" data-intro="Cadena de texto tabla areas." data-position="top">
   <thead>
     <tr>
       <th>Nombre Area</th>
@@ -25,5 +25,4 @@
 </table>
 
 <br>
-
-<%= link_to 'Nueva Area', new_company_area_path %>
+<a href="<%new_company_area_path %>" data-step="2" data-intro="Cadena de texto nueva area." data-position="top">Nueva Area</a>

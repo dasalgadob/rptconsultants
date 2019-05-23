@@ -30,3 +30,5 @@
 
 /app/assets/.DS_Store
 /test/.DS_Store
+#All .idea folder
+/.idea/*

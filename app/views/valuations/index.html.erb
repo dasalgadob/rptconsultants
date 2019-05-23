@@ -2,7 +2,7 @@
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Empresas',companies_path],[@company.name,company_path(@company)], ['Valoraciones',company_valuations_path(@company)]]%>
 
 
-<a href="#" id="searchLink">Hacer busqueda </a>
+<a href="#" id="searchLink" data-step="1" data-intro="Cadena de texto sección de búsqueda." data-position="bottom">Hacer busqueda </a>
 
 <div id="searchForm" style="display:none;">
 <%= form_tag(company_valuations_path(params[:company_id]), method: :get) do %>
@@ -45,7 +45,7 @@
 
 
 <%= form_tag import_company_valuations_path(@company), multipart: true, class: 'form' do %>
-    <%= link_to 'Download as .xlsx', company_valuations_path(@company, format: :xlsx) %>
+    <a href="<%=company_valuations_path(@company, format: :xlsx) %>" data-step="2" data-intro="Cadena de texto sección de descarga." data-position="bottom">Download as .xlsx</a>
 
     <div class="field form-group">
       <%= file_field_tag :file, {class: '', required: "true" }%>
@@ -58,20 +58,23 @@
 
 <h2>Valoraciones <a href="#" id="tutorial"><i class="fas fa-question-circle fa-sm icon-blue-question" ></i></a></h2>
 
-<table class="pretty   table-striped table-bordered table-sm" id="valuationsTable" style="font-size: 13px;">
+<table class="pretty   table-striped table-bordered table-sm" id="valuationsTable" style="font-size: 13px;" data-step="3" data-intro="Cadena de texto tabla valoraciones." data-position="top">
 
   <thead>
     <tr>
       <!-- <%=number_of_columns %> when may be needed to just show to the one that has permission-->
-      <th colspan="6"></th>
-      <th colspan="2">CONOCIMIENTOS Y HABILIDADES</th>
-      <th colspan="2">MARCO DE TRABAJO</th>
-      <th colspan="3">RESULTADOS</th>
-      <th colspan="4">VALORACIÓN</th>
-      <th colspan="2">FECHAS</th>
+      <th colspan="6" ></th>
+
+        <th colspan="2">CONOCIMIENTOS Y HABILIDADES</th>
+        <th colspan="2">MARCO DE TRABAJO</th>
+        <th colspan="3">RESULTADOS</th>
+        <th colspan="4" data-step="5" data-intro="Resumen de puntaje y grados en distintas metodologias." data-position="top">VALORACIÓN</th>
+        <th colspan="2" data-step="6" data-intro="Fechas de creación y última actualización." data-position="top">FECHAS</th>
+
+
     </tr>
     <tr>
-      <th class=""><%= sortable "business_units.name", "Empresa", params%></th>
+      <th class="" data-step="7" data-intro="Campos pueden ser ordenados por registros que tienen color azul." data-position="top"><%= sortable "business_units.name", "Empresa", params%></th>
       <th class=""><%= sortable "areas.name", "Area", params%> </th>
       <th class=""><%= sortable "job_titles.name", "Cargo ", params%></th>
       <!-- <th>Cargo</th> -->
@@ -92,7 +95,7 @@
       <th class="">Grados GGS</th>
       <th class="">Creación</th>
       <th class="">Última actualización</th>
-      <th class="">Histórico</th>
+      <th class="" data-step="8" data-intro="Información de campos cambiados acciones realizadas y usuarios que han modificado los registros." data-position="top">Histórico</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -132,8 +135,7 @@
 </table>
 <%= will_paginate @valuations %>
 <br>
-
-<%= link_to 'Nueva valoración', new_company_valuation_path(params[:company_id]) %>
+<a href="<%= new_company_valuation_path(params[:company_id])%>" data-step="9" data-intro="Creación de nuevas valoraciones." data-position="top">Nueva valoración</a>
 
 <%# Modal code  for confirmation delete%>
 <div class="modal fade" tabindex="-1" id="delete-confirm" role="dialog">

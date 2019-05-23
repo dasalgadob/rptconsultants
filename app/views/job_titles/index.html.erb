@@ -1,7 +1,7 @@
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Companies',companies_path],[@company.name,company_path(@company)]]%>
 <h1>Cargos <a href="#" id="tutorial"><i class="fas fa-question-circle fa-xs icon-blue-question" ></i></a></h1>
 
-<table class="table table-hover">
+<table class="table table-hover" data-step="1" data-intro="Cadena de texto tabla cargos." data-position="top">
   <thead>
     <tr>
       <th>Nombre</th>
@@ -24,5 +24,5 @@
 </table>
 
 <br>
+<a href="<%new_company_job_title_path %>" data-step="2" data-intro="Cadena de texto nuevo cargo." data-position="top">Nuevo cargo</a>
 
-<%= link_to 'Nuevo cargo', new_company_job_title_path %>
