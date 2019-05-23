@@ -3,7 +3,7 @@ class Company < ApplicationRecord
   has_many :valuations, dependent: :destroy
   has_many :job_titles, dependent: :destroy
   has_many :business_units, dependent: :destroy
-
+  has_many :users, dependent: :nullify
   validates :name, presence: true
 
   def self.execute_sql(*sql_array)
