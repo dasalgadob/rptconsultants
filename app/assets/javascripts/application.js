@@ -17,6 +17,7 @@
 //= require autocomplete-rails
 //= require valuations
 //= require criteria
+//= require users
 
 //code to enable input fields to modifiy in a list
 
