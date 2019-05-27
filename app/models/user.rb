@@ -1,7 +1,16 @@
 class User < ApplicationRecord
   has_secure_password
   before_save {username.downcase!}
-  validates :password, presence: true, length: {minimum: 6}, on: :create
+  validates :password, presence: true, length: {minimum: 8}, format: { with: /(?=.*[a-zA-Z])(?=.*[0-9]).{8,}/,
+                                                                       message: "Debe contener una letra minúscula, una mayúscula, un dígito del 0 al 9 y ser de más de 8 caracteres de largo. " },
+            on: :create
+
+  validates :password,
+            allow_nil: true,
+            length: {minimum: 8}, format: { with: /(?=.*[a-zA-Z])(?=.*[0-9]).{8,}/,
+                                            message: "Debe contener una letra minúscula, una mayúscula, un dígito del 0 al 9 y ser de más de 8 caracteres de largo. " },
+            on: :update
+
   validates :username, presence: true, uniqueness: true
 
   attr_accessor :remember_token
@@ -29,5 +38,11 @@ class User < ApplicationRecord
 
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  def secure_password
+    return false if (password =~ /[a-z]/).blank? #lower letter test
+    return false if (password =~ /[A-Z]/).blank? #upper letter test
+    return false if (password =~ /[0-9]/).blank? #number test
   end
 end
