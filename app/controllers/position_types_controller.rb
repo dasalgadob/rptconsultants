@@ -25,15 +25,18 @@ class PositionTypesController < ApplicationController
   # GET /position_types/new
   def new
     @position_type = PositionType.new
+    @degrees = Degree.all
   end
 
   # GET /position_types/1/edit
   def edit
+    @degrees = Degree.all
   end
 
   # POST /position_types
   # POST /position_types.json
   def create
+    @degrees = Degree.all
     @position_type = PositionType.new(position_type_params)
 
     respond_to do |format|
@@ -50,6 +53,7 @@ class PositionTypesController < ApplicationController
   # PATCH/PUT /position_types/1
   # PATCH/PUT /position_types/1.json
   def update
+    @degrees = Degree.all
     respond_to do |format|
       if @position_type.update(position_type_params)
         format.html { redirect_to @position_type, notice: 'Tipo de posición fue actualizado exitosamente.' }
@@ -79,7 +83,7 @@ class PositionTypesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def position_type_params
-      params.require(:position_type).permit(:name, :by_name)
+      params.require(:position_type).permit(:name, :by_name, :minimum_degree, :maximum_degree)
     end
 
     def sort_params
