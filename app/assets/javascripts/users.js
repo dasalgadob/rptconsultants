@@ -33,6 +33,7 @@ $(function(){
 
     // When the user starts to type something inside the password field
     myInput.onkeyup = function() {
+        disabledSubmitIfNotValid();
         // Validate lowercase letters
         var lowerCaseLetters = /[a-z]/g;
 
@@ -83,6 +84,7 @@ $(function(){
 
     confirmationPassword.onkeyup = function(){
         console.log(myInput.value + " " + confirmationPassword.value);
+        disabledSubmitIfNotValid();
         if(confirmationPassword.value === myInput.value){
             console.log("equal");
             $('#match').text('Los passwords coinciden.');
@@ -117,5 +119,31 @@ function changeClassTo( element, clase){
     }else if(clase === 'invalid-input'){
         $(element).removeClass('valid-input');
         $(element).addClass('invalid-input');
+    }
+}
+
+function validPassword(password){
+    var lowerCaseLetters = /[a-z]/g;
+    var upperCaseLetters = /[A-Z]/g;
+    var numbers = /[0-9]/g;
+    var format = /[ ´¨~^`¿¡!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+    var myInput = document.getElementById("user_password");
+    if(myInput.value.match(lowerCaseLetters) && myInput.value.match(upperCaseLetters)
+        && myInput.value.match(numbers) && myInput.value.match(format) && myInput.value.length >= 8){
+        return true;
+    }
+    return false;
+}
+
+function disabledSubmitIfNotValid(){
+    console.log("disable if");
+    if($('#user_password').val() == '' && $('#user_password_confirmation').val() == ''){
+        $('#submit').removeAttr('disabled');
+    }
+    else if($('#user_password').val() != '' && validPassword($('#user_password').val() )
+        && $('#user_password').val() === $('#user_password_confirmation').val()){
+        $('#submit').removeAttr('disabled');
+    }else{
+        $('#submit').attr('disabled','disabled');
     }
 }
