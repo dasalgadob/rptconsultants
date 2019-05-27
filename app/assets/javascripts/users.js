@@ -14,7 +14,7 @@ $(function(){
 
     // When the user clicks on the password field, show the message box
     myInput.onfocus = function() {
-        console.log("Block");
+        //console.log("Block");
         document.getElementById("message").style.display = "block";
     }
 
@@ -83,17 +83,17 @@ $(function(){
     }//End of myInput on keyup
 
     confirmationPassword.onkeyup = function(){
-        console.log(myInput.value + " " + confirmationPassword.value);
+        //console.log(myInput.value + " " + confirmationPassword.value);
         disabledSubmitIfNotValid();
         if(confirmationPassword.value === myInput.value){
-            console.log("equal");
+            //console.log("equal");
             $('#match').text('Los passwords coinciden.');
             $('#user_password_confirmation').removeClass('invalid-input');
             $('#user_password_confirmation').addClass('valid-input');
             match.classList.remove("invalid");
             match.classList.add("valid");
         }else{
-            console.log("not equal");
+            //console.log("not equal");
             $('#user_password_confirmation').removeClass('valid-input');
             $('#user_password_confirmation').addClass('invalid-input');
             $('#match').text('Los passwords no coinciden.');

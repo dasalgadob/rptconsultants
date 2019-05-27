@@ -17,7 +17,6 @@
 //= require autocomplete-rails
 //= require valuations
 //= require criteria
-//= require users
 
 //code to enable input fields to modifiy in a list
 
@@ -38,7 +37,7 @@ function addClassByClick(button){
 
 
 $(document).ready(function(){
-    //console.log("test");
+    console.log("changing pagination");
     $('.pagination .previous_page').text('«');
     $('.pagination .next_page').text('»');
 
