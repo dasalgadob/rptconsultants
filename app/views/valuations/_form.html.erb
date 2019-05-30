@@ -36,13 +36,13 @@
     </div>
   <% end %>
   <input type="hidden" name="company_id" id="company_id" value="<%= @company.id%>">
-  <div class="field form-group col-sm-3" data-step="1" data-intro="Selección de area del cargo a valorar." data-position="top">
+  <div class="field form-group col-sm-3" data-step="1" data-intro="De la lista desplegable seleccione el área a la que pertenece el cargo que va a valorar." data-position="top">
     <%= f.label "Area" %>
     <%= select_tag "area", options_from_collection_for_select(@areas, "id", "name", !@valuation.new_record? && @valuation.job_title.area != nil ? @valuation.job_title.area.id: ""), options = {:include_blank => true, class: '', style: "width: 100%;"} %>
   </div>
 
 
-  <div class="field form-group col-sm-3" data-step="2" data-intro="Selección de cargo con base al area seleccionada." data-position="top">
+  <div class="field form-group col-sm-3" data-step="2" data-intro="De la lista desplegable seleccione el cargo que va a valorar." data-position="top">
     <%= f.label "Cargo" %>
     <%= f.select :job_title_id , options_for_select([]),{ :include_blank => true },{ class: '',  style: "width: 100%;"} %>
     <% if locals[:submit_string] == 'Editar' %>
@@ -60,7 +60,7 @@
 
 
 
-  <div class="field form-group col-sm-3" data-step="3" data-intro="Luego seleccionar el rol al que pertenece el cargo." data-position="top">
+  <div class="field form-group col-sm-3" data-step="3" data-intro="De la lista desplegable seleccione el rol del cargo que va a valorar. La elección de cada uno de estos, depende del cargo que desea valorar, de su nivel de complejidad, responsabilidad y conocimientos. " data-position="top">
     <%= f.label "Rol" %>
     <%= f.select :position_type_id, options_for_select(@position_types.map{ |pt| [pt.name.upcase, pt.id]}),{ :include_blank => true, selected: @valuation.position_type },{ class: '' , style: "width: 100%;"} %>
   </div>
@@ -88,24 +88,24 @@
   </script>
   <% end %>
 
-  <div class="field form-group col-sm-2 " data-step="3" data-intro="Puntaje que se modifica automaticamente al hacer cambios en los criterios de valoración." data-position="top">
+  <div class="field form-group col-sm-2 " data-step="7" data-intro="Después de valorar los 7 criterios, podrá observar que el sistema le muestra el puntaje final que se le asignó al cargo." data-position="top">
     <%= f.label "Puntaje" %>
     <%= f.number_field :score, {class: '', readonly: 'true', style: "width: 100%;"} %>
   </div>
 
-  <div class="field form-group col-sm-1" data-step="4" data-intro="Grado modificado automaticamente a medida que el puntaje cambioa." data-position="top">
+  <div class="field form-group col-sm-1" data-step="8" data-intro="De igual manera el Grado RPT en el que quedo valorado." data-position="top">
     <%= f.label "Grado" %>
     <%= f.select :degree_id,options_for_select(@degrees.map{ |d| [d.number, d.id]}),{ :include_blank => true },{ class: '', readonly: 'true', style: "width: 100%;", required: "required"} %>
   </div>
 
-  <div class="col-sm-12" data-step="5" data-intro="Cada criterio de evaluación cuenta con un rango y su descriptción se actualiza automaticamente cuando se cambia." data-position="top">
+  <div class="col-sm-12" data-step="4" data-intro="Se activan los criterios que hacen parte del rol escogido en el paso anterior, para comenzar con la valoración. ." data-position="top">
     <div class="field form-group col-sm-2" >
       <%= f.label "Amplitud y profundidad del conocimiento aplicado" %>
       <%= f.select :knowledge_id, options_for_select([]),{ :include_blank => true },{ class: ' valuation_criteria col-sm-6'} %>
     </div>
     <p class="col-sm-10" id="valuation_knowledge_id_text"></p>
   </div>
-  <div class="col-sm-12">
+  <div class="col-sm-12" data-step="5" data-intro="Al darle clic  a cada uno se despliegan los grados RPT que hay disponibles para ese Rol y Cargo que usted desea valorar. " data-position="top">
     <div class="field form-group  col-sm-2">
       <%= f.label "Actuación (Habilidades)" %>
       <%= f.select :skill_id, options_for_select([]),{ :include_blank => true },{ class: ' valuation_criteria'} %>
@@ -113,7 +113,7 @@
     <p class="col-sm-10"id="valuation_skill_id_text"></p>
   </div>
 
-  <div class="col-sm-12">
+  <div class="col-sm-12" data-step="6" data-intro="Escoja un grado RPT para cada criterio y se desplegará la descripción correspondiente a este. ">
     <div class="field form-group  col-sm-2">
       <%= f.label "Definiciones y Supervisión" %>
       <%= f.select :definition_supervision_id, options_for_select([]),{ :include_blank => true },{ class: ' valuation_criteria'} %>
@@ -186,7 +186,7 @@
 
 
   <% if editable_valuation %>
-  <div class="actions col-sm-12"  data-step="8" data-intro="Es necesario explicitamente guardar la información." data-position="top">
+  <div class="actions col-sm-12"  data-step="9" data-intro="Una vez valorado su cargo le da clic en “ crear”." data-position="top">
     <%= f.submit locals[:submit_string], class: 'btn btn-success', id: 'submit'%>
   </div>
   <% end %>

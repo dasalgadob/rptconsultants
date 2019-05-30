@@ -13,14 +13,14 @@
 
 <div class="bs-glyphicons">
   <ul class="bs-glyphicons-list">
-    <li data-step="1" data-intro="Cadena de texto de unidades de negocio." data-position="bottom">
+    <li data-step="1" data-intro="Desde aquí se pueden crear unidades de negocio o consultar las que ya han sido creadas." data-position="bottom">
       <a href='<%= company_business_units_path(@company) %>' class="">
 
         <i class="fa fa-building fa-5x icon-black" aria-hidden="true"></i>
         <h4><span class="glyphicon-class icon-black">Unidades de negocio</span></h4>
       </a>
     </li>
-    <li data-step="2" data-intro="Cadena de texto de areas." data-position="bottom">
+    <li data-step="2" data-intro="Desde aquí se pueden crear áreas o consultar las que ya han sido creadas." data-position="bottom">
       <a href='<%= company_areas_path(@company) %>' class="">
 
         <i class="fa fa-address-card fa-5x icon-black" aria-hidden="true"></i>
@@ -28,7 +28,7 @@
       </a>
     </li>
 
-    <li data-step="3" data-intro="Cadena de texto de cargos." data-position="bottom">
+    <li data-step="3" data-intro="Una vez creadas las áreas de la empresa, se  puede continuar con la creación de cargos para cada área de su empresa. " data-position="bottom">
       <a href='<%= company_job_titles_path(@company) %>' class="">
 
         <i class="fa fa-briefcase fa-5x icon-brown" aria-hidden="true"></i>
@@ -36,7 +36,7 @@
       </a>
     </li>
 
-    <li data-step="4" data-intro="Cadena de texto de valoraciones." data-position="bottom">
+    <li data-step="4" data-intro="Una vez tengamos creados nuestros cargos en cada área se puede proceder a realizar las valoraciones para estos." data-position="bottom">
       <a href="<%= company_valuations_path(@company)%>" class="">
 
         <i class="fa fa-calculator fa-5x icon-blue" aria-hidden="true"></i>
@@ -44,7 +44,7 @@
       </a>
     </li>
 
-    <li data-step="5" data-intro="Cadena de texto de mapas." data-position="bottom">
+    <li data-step="5" data-intro="Además se encuentra la herramienta de mapas para poder visualizar los cargos que han sido creados." data-position="bottom">
       <a href="/companies/<%= @company.id%>/reports" class="">
 
         <i class="fa fa-table fa-5x icon-gray" aria-hidden="true"></i>
