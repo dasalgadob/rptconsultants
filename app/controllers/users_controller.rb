@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  skip_before_action :check_if_user_has_not_change_password, only: [:edit, :update]
+
   load_and_authorize_resource
   # GET /users
   # GET /users.json
@@ -52,7 +54,15 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     @companies = Company.all
+
     respond_to do |format|
+      if user_params.include?('password')
+        @user.is_new=false
+      end
+      if current_user.is_admin && !@user.is_admin
+        @user.is_new=true
+      end
+
       if @user.update(user_params)
         format.html { redirect_to @user, notice: 'Usuario fue actualizado exitosamente.' }
         format.json { render :show, status: :ok, location: @user }

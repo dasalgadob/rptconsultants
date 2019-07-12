@@ -272,15 +272,15 @@ ActiveRecord::Schema.define(version: 20190703224807) do
     t.string   "username"
     t.string   "password_digest"
     t.integer  "person_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "remember_digest"
     t.boolean  "is_admin"
     t.integer  "company_id"
     t.boolean  "evaluate"
     t.boolean  "review"
     t.boolean  "approve"
-    t.boolean  "is_new"
+    t.boolean  "is_new",          default: true
     t.index ["company_id"], name: "index_users_on_company_id", using: :btree
     t.index ["person_id"], name: "index_users_on_person_id", using: :btree
   end
