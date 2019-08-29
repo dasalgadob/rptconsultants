@@ -7,7 +7,10 @@ class SessionController < ApplicationController
 
   def create
     user = User.find_by(username: params[:session][:username].downcase)
-    if user && user.authenticate(params[:session][:password])
+    if user && user.is_blocked
+      flash[:warning] = 'El usuario se encuentra bloqueado consulte al administrador del sistema para hacer cambio de contraseña.'
+      render 'new'
+    elsif user && user.authenticate(params[:session][:password])
       # Log the user in and redirect to the user's show page.
       log_in(user)
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
@@ -17,8 +20,15 @@ class SessionController < ApplicationController
       else
         redirect_to "/menu"
       end
-      
     else
+      ##If user exists change failed attemps and is_blocked state if it applies
+      if user
+        user.failed_attempts = user.failed_attempts + 1
+        if user.failed_attempts >= 3
+          user.is_blocked = true
+        end
+        user.save
+      end
       # Create an error message.
       flash.now[:danger] = 'Invalido usuario o contraseña.'
       render 'new'

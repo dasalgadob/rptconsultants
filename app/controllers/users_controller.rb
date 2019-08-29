@@ -56,10 +56,13 @@ class UsersController < ApplicationController
     @companies = Company.all
 
     respond_to do |format|
+      #If a change of password was made by an user is no longer a new_user that needs to reset its password
       if user_params.include?('password')
         @user.is_new=false
       end
-      if current_user.is_admin && !@user.is_admin
+
+      if current_user.is_admin && !@user.is_admin && user_params.include?('password')
+        @user.is_blocked =false
         @user.is_new=true
       end
 
