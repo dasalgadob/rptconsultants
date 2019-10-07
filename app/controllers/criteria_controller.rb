@@ -56,6 +56,9 @@ class CriteriaController < ApplicationController
     @position_types = PositionType.all
     @criteria_types = CriteriaType.all
     @degrees = Degree.order(:number)
+    @degree = @criterium.degree
+    @position_type = @criterium.position_type
+    @criteria_type = @criterium.criteria_type
   end
 
   # POST /criteria

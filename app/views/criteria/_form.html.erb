@@ -13,12 +13,12 @@
 
   <div class="field form-group">
     <%= f.label "Rol" %>
-    <%= f.select :position_type_id, options_for_select(@position_types.map{ |pt| [pt.name.upcase, pt.id]}),{ :include_blank => false },{ class: 'form-control'} %>
+    <%= f.select :position_type_id, options_for_select(@position_types.map{ |pt| [pt.name.upcase, pt.id]}, selected: @position_type.id),{ :include_blank => false },{ class: 'form-control'} %>
   </div>
 
   <div class="field form-group">
     <%= f.label "Tipo de criterio" %>
-    <%= f.select :criteria_type_id,options_for_select(@criteria_types.map{ |ct| [ct.name, ct.id]}),{ :include_blank => false },{ class: 'form-control'} %>
+    <%= f.select :criteria_type_id,options_for_select(@criteria_types.map{ |ct| [ct.name, ct.id]}, selected: @criteria_type.id),{ :include_blank => false },{ class: 'form-control'} %>
   </div>
 
   <div class="field form-group">
@@ -28,7 +28,7 @@
 
   <div class="field form-group">
     <%= f.label "Grado" %>
-    <%= f.select :degree_id, options_for_select(@degrees.map{ |d| [d.number, d.id]}),{ :include_blank => true },{ class: 'form-control'} %>
+    <%= f.select :degree_id, options_for_select(@degrees.map{ |d| [d.number, d.id]}, selected: @degree.id),{ :include_blank => true },{ class: 'form-control'} %>
   </div>
 
   <div class="field form-group">
