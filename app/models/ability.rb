@@ -7,7 +7,7 @@ class Ability
       can :manage, Area, company: { id: user.company_id}
       can :manage, Valuation, company: { id: user.company_id}
       #can :manage, JobTitle, area: { company: {id: user.company_id}}
-      #can [:new, :create], JobTitle
+      can [:new, :create], JobTitle
       can :manage, JobTitle, area: { company: {id: user.company_id}}
       can :manage, JobTitle, company: { id: user.company_id}
 
