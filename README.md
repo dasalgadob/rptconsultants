@@ -15,6 +15,8 @@ Things you may want to cover:
 
 * Database initialization
   rails db:setup
+
+  rails db:migrate
   #rails db:seed
 
 * How to run the test suite
@@ -22,5 +24,9 @@ Things you may want to cover:
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
+bundle update
+
+Error deleting database
+sudo chmod -R 777 tmp/db/
 
 * ...
