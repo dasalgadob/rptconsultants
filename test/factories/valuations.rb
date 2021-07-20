@@ -9,7 +9,7 @@ FactoryBot.define do
     sustainability nil
     area_impact nil
     influence nil
-    score 1
+    score {1}
     degree nil
   end
 end

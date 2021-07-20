@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :cost_centre do
-    name "MyString"
+    name {"MyString"}
   end
 end

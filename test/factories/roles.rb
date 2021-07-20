@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :role do
-    name "MyString"
+    name {"MyString"}
     degree nil
     position_type nil
   end

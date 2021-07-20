@@ -2,6 +2,6 @@ FactoryBot.define do
   factory :location do
     person nil
     city nil
-    address "MyString"
+    address {"MyString"}
   end
 end
