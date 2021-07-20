@@ -5,11 +5,10 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.6'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.18'
+gem 'pg', '~> 1.2.3'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -90,3 +89,10 @@ gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
 gem 'axlsx_rails' ##To export excel files
 
 gem "seedbank" #Gem to allow execution of custom seeds
+gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f' #To Solve
+#Your bundle is locked to mimemagic (0.3.2), but that version could not be found
+#in any of the sources listed in your Gemfile. If you haven't changed sources,
+#that means the author of mimemagic (0.3.2) has removed it. You'll need to update
+#your bundle to a version other than mimemagic (0.3.2) that hasn't been removed
+#in order to install.
+gem 'concurrent-ruby', '~> 1.1.9'
