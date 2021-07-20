@@ -64,6 +64,7 @@ class UsersController < ApplicationController
       if current_user.is_admin && !@user.is_admin && user_params.include?('password')
         @user.is_blocked =false
         @user.is_new=true
+        @user.failed_attempts=0
       end
 
       if @user.update(user_params)
