@@ -16,6 +16,11 @@
     <%= f.text_field :name , class: 'form-control'%>
   </div>
 
+  <div class="field form-group">
+    <%= f.label "Fecha fin de acceso"%>
+    <%= f.date_field :access_expire_date , class: 'form-control'%>
+  </div>
+
   <div class="actions">
     <%= f.submit locals[:submit_string],class: 'btn btn-success'%>
   </div>

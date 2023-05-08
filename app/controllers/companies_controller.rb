@@ -29,6 +29,12 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
+    @tz = TZInfo::Timezone.get('America/Bogota')
+    if !current_user.is_admin?  && @company.access_expire_date < Time.now.utc
+      #mostrar index y enviar mensaje de notice
+      redirect_to companies_path, notice: "Fecha de acceso a la herramienta expiro el #{@tz.utc_to_local(@company.access_expire_date).strftime("%d/%m/%Y")}, pongase en contacto con soporte para seguir teniendo acceso."
+    end
+
   end
 
   # GET /companies/new
@@ -88,6 +94,6 @@ class CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.require(:company).permit(:name)
+      params.require(:company).permit(:name, :access_expire_date)
     end
 end

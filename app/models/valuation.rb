@@ -21,13 +21,60 @@ class Valuation < ApplicationRecord
   scope :business_unit, ->(bu) {where("business_units.id = ?", bu)}
   #  .where( "job_titles.name like ?", "#{jt}")}
 
+  def get_degrees_range
+    if score <= degree.median
+      "Bajo"
+    else
+      "Alto"
+    end
+  end
+
+  
+  def who_score
+    knowledge.score + skill.score
+  end
+
+  def how_score
+    definition_supervision.score + risk_decision.score
+  end
+
+  def what_score
+    sustainability.score + area_impact.score + influence.score
+  end
+
+  def what_vs_how
+    if how_score == 0
+      0
+    else
+      (what_score.to_f / how_score).round(2)
+    end
+  end
+
+  def profile
+    if what_vs_how <= 0.89
+      -1
+    elsif what_vs_how <= 1.1
+      0
+    elsif what_vs_how <= 1.2
+      1
+    elsif what_vs_how <= 1.4
+      2
+    elsif what_vs_how <= 1.55
+      3
+    else
+      4
+    end
+  end
+
   def self.load_valuations(company,page=1, per_page=20)
     joins(:degree, :company, :position_type, :job_title).joins("LEFT OUTER JOIN areas on job_titles.area_id = areas.id left outer join business_units on business_units.id = areas.business_unit_id")
       .paginate(:page => page, :per_page => per_page).where(company_id: company.id)
   end
 
   def self.load_all_valuations(company)
-    joins(:degree, :company, :position_type, :job_title).where(company_id: company.id)
+    joins(:company)
+      .includes(:degree, :job_title, :position_type, :knowledge, :skill, :definition_supervision, :risk_decision, :sustainability, :area_impact, :influence)
+      .where(company_id: company.id)
   end
 
   ##Import valuations record from excel, reading record by record

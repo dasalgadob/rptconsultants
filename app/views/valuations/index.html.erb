@@ -1,3 +1,5 @@
+
+
 <p id="notice"><%= notice %></p>
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Empresas',companies_path],[@company.name,company_path(@company)], ['Valoraciones',company_valuations_path(@company)]]%>
 
@@ -57,6 +59,11 @@
 <% end %>
 
 <h2>Valoraciones <a href="#" id="tutorial"><i class="fas fa-question-circle fa-sm icon-blue-question" ></i></a></h2>
+<p>Mostrar componentes de valoracion en: 
+<select name="visualization_option" id="visualization_option" onChange="showVisualizationOption(this)">
+  <option value="degree" selected>Grados</option>
+  <option value="score">Puntaje</option>
+</select>
 
 <table class="pretty   table-striped table-bordered table-sm" id="valuationsTable" style="font-size: 13px;" data-step="3" data-intro="En esta tabla se pueden observar las valoraciones que han sido creadas con cada uno de sus atributos." data-position="top">
 
@@ -68,7 +75,7 @@
         <th colspan="2">CONOCIMIENTOS Y HABILIDADES</th>
         <th colspan="2">MARCO DE TRABAJO</th>
         <th colspan="3">RESULTADOS</th>
-        <th colspan="4" >VALORACIÓN</th>
+        <th colspan="10" >VALORACIÓN</th>
         <th colspan="2" >FECHAS</th>
 
 
@@ -91,8 +98,14 @@
       <th class="">Influencia en los resultados</th>
       <th class="" ><%= sortable "score", "Puntaje", params%></th>
       <th class=""><%= sortable "degrees.number", "Grados RPT", params%></th>
+      <th class="">Rango</th>
       <th class="">Grados HAY</th>
       <th class="">Grados GGS</th>
+      <th class="">Puntaje QUIEN</th>
+      <th class="">Puntaje COMO</th>
+      <th class="">Puntaje QUE</th>
+      <th class="">QUE vs COMO</th>
+      <th class="">Perfil</th>
       <th class="">Creación</th>
       <th class="">Última actualización</th>
       <th class="" data-step="4" data-intro="En este cuadro resumen se muestran las opciones del histórico de cambios que se han hecho a la valoración del cargo." data-position="top">Histórico</th>
@@ -109,17 +122,46 @@
         <td class="">  <%= valuation.position_type.name.upcase %></td>
         <td class=""><input type="checkbox" disabled <%= valuation.review ? "checked":"" %>></td>
         <td class=""><input type="checkbox" disabled <%= valuation.approve ? "checked":"" %>></td>
-        <td class=""><%= valuation.knowledge.score %></td>
-        <td class=""><%= valuation.skill.score %></td>
-        <td class=""><%= valuation.definition_supervision.score %></td>
-        <td class=""><%= valuation.risk_decision.score %></td>
-        <td class=""><%= valuation.sustainability.score %></td>
-        <td class=""><%= valuation.area_impact.score %></td>
-        <td class=""><%= valuation.influence.score %></td>
-        <td class=""><%= valuation.score %></td>
+        <td class="">
+          <div class="score"><%= valuation.knowledge.score %></div>
+          <div class="degree"><%= valuation.knowledge.degree.number %></div>
+        </td>
+        <td class="">
+        <div class="score"><%= valuation.skill.score %></div>
+        <div class="degree"><%= valuation.skill.degree.number %></div>
+        </td>
+        <td class="">
+          <div class="score"><%= valuation.definition_supervision.score %></div>
+          <div class="degree"><%= valuation.definition_supervision.degree.number %></div>
+        </td>
+        <td class="">
+          <div class="score"><%= valuation.risk_decision.score %></div>
+          <div class="degree"><%= valuation.risk_decision.degree.number %></div>
+        </td>
+        <td class="">
+          <div class="score"><%= valuation.sustainability.score %></div>
+          <div class="degree"><%= valuation.sustainability.degree.number %></div>
+        </td>
+        <td class="">
+          <div class="score"><%= valuation.area_impact.score %></div>
+          <div class="degree"><%= valuation.area_impact.degree.number %></div>
+        </td>
+        <td class="">
+          <div class="score"><%= valuation.influence.score %></div>
+          <div class="degree"><%= valuation.influence.degree.number %></div>
+        </td>
+        <td class="">
+          <%= valuation.score %>
+        </td>
         <td class=""><%= valuation.degree.number %></td>
+        <td class=""><%= valuation.get_degrees_range %></td>
         <td class=""><%= valuation.degree.hay %></td>
         <td class=""><%= valuation.degree.ggs %></td>
+        <td class=""><%= valuation.who_score %></td>
+        <td class=""><%= valuation.how_score %></td>
+        <td class=""><%= valuation.what_score %></td>
+        <td class=""><%= valuation.what_vs_how %></td>
+        <td class=""><%= valuation.profile %></td>
         <td><%= @tz.utc_to_local(valuation.created_at).strftime("%d/%m/%Y %R") %></td>
         <td><%= @tz.utc_to_local(valuation.updated_at).strftime("%d/%m/%Y %R") %></td>
         <td><%= link_to 'Histórico', valuation_historics_path(valuation), target: "_blank" %></td>

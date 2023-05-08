@@ -91,7 +91,7 @@ $(function(){
 
   }).change();
 
-
+  showOnlyDegreeOnLoad();
 });//End onLoad
 
 //Funcion llamada por cada criterio para alteral sus valores posibles
@@ -222,3 +222,42 @@ function changeJobTitlesByArea(){
         //Cambiar valores de area
       });//End done
 }//End function
+
+function showVisualizationOption(element){
+  
+  var scores = document.getElementsByClassName('score');
+  var degrees = document.getElementsByClassName('degree');
+  if(element.value == 'score'){
+    Array.prototype.forEach.call(scores, function(score) {
+      // Do stuff here
+      score.style.display='block';
+    });
+    Array.prototype.forEach.call(degrees, function(degree) {
+      // Do stuff here
+      degree.style.display='none';
+    });
+  }else {
+    Array.prototype.forEach.call(scores, function(score) {
+      // Do stuff here
+      score.style.display='none';
+    });
+    Array.prototype.forEach.call(degrees, function(degree) {
+      // Do stuff here
+      degree.style.display='block';
+    });
+  }
+  
+}
+
+function showOnlyDegreeOnLoad(){
+  var scores = document.getElementsByClassName('score');
+  var degrees = document.getElementsByClassName('degree');
+  Array.prototype.forEach.call(scores, function(score) {
+    // Do stuff here
+    score.style.display='none';
+  });
+  Array.prototype.forEach.call(degrees, function(degree) {
+    // Do stuff here
+    degree.style.display='block';
+  });
+}

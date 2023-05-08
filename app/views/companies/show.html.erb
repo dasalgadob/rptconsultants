@@ -8,7 +8,14 @@
   <a href="#" id="tutorial"><i class="fas fa-question-circle fa-lg icon-blue-question" ></i></a>
 </p>
 
-<%= link_to 'Editar', edit_company_path(@company) %> |
+<p>
+  <strong>Fecha final de acceso:</strong> 
+  <%= @tz.utc_to_local(@company.access_expire_date).strftime("%d/%m/%Y") %>
+</p>
+
+<% if current_user.is_admin? %>
+  <%= link_to 'Editar', edit_company_path(@company) %> |
+<% end %>
 <%= link_to 'Volver', companies_path %>
 
 <div class="bs-glyphicons">

@@ -23,7 +23,7 @@ class SessionController < ApplicationController
     else
       ##If user exists change failed attemps and is_blocked state if it applies
       if user
-        user.failed_attempts = user.failed_attempts + 1
+        user.failed_attempts = 0
         if user.failed_attempts >= 3
           user.is_blocked = true
         end

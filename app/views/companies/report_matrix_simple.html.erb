@@ -1,5 +1,6 @@
 <%= render 'layouts/breadcrumb', titles: [['Menu',menu_path], ['Empresas',companies_path],[@company.name,company_path(@company)], [I18n.t("maps"), "/companies/#{@company.id}/reports"]]%>
-<table class="table-striped table-bordered table-sm">
+<button onclick="ExportToExcel('xlsx')">Descargar como Excel</button>
+<table class="table-striped table-bordered table-sm" id="general_map">
   <thead>
     <tr>
       <th colspan="2"></th>
@@ -36,3 +37,16 @@
     <% end %>
   </tbody>
 </table>
+
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+<script>
+
+function ExportToExcel(type, fn, dl) {
+    var elt = document.getElementById('general_map');
+    var wb = XLSX.utils.table_to_book(elt, { sheet: "Mapa General" });
+    return dl ?
+        XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }) :
+        XLSX.writeFile(wb, fn || ('MapaGeneral.' + (type || 'xlsx')));
+}
+
+</script>

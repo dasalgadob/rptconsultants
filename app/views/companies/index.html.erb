@@ -15,8 +15,10 @@
       <% @companies.each do |company| %>
         <tr>
           <td><%= link_to company.name, company %></td>
-          <td><%= link_to 'Editar', edit_company_path(company) %></td>
-          <td><%= link_to 'Eliminar', company, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+          <% if current_user.is_admin? %>
+            <td><%= link_to 'Editar', edit_company_path(company) %></td>
+            <td><%= link_to 'Eliminar', company, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
